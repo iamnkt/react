@@ -6,6 +6,17 @@ class Search extends Component<SearchProps> {
     super(props);
   }
 
+  state: { data: string } = {
+    data: '',
+  };
+
+  componentDidMount = () => {
+    const request = localStorage.getItem('request');
+    document.querySelector('input')!.value = request || '';
+    this.setState({ data: request || '' });
+    this.searchCards(request || '');
+  };
+
   private searchCards(name: string): Promise<void> {
     const params = new URLSearchParams({
       page: '1',
@@ -35,12 +46,17 @@ class Search extends Component<SearchProps> {
   public render(): JSX.Element {
     return (
       <div className="search">
-        <input className="input" type={'text'}></input>
+        <input className="input" type={'search'}></input>
         <button
           className="button"
-          onClick={() =>
-            this.searchCards(document.querySelector('input')!.value)
-          }
+          onClick={() => {
+            const request = document.querySelector('input')!.value.trim();
+            this.searchCards(request);
+            if (localStorage.getItem('request')) {
+              localStorage.removeItem('request');
+            }
+            localStorage.setItem('request', request);
+          }}
         >
           Search
         </button>

@@ -13,7 +13,6 @@ class App extends Component {
     this.setState({
       data: items,
     });
-    console.log(this.state.data);
   };
 
   public render(): JSX.Element {
