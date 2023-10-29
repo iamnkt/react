@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Data, ViewProps } from '../../types/types';
 
 class View extends Component<ViewProps, { items: Data[] }> {

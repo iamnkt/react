@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Card, Data, SearchProps } from '../../types/types';
+import ErrorButton from '../error-button/errorButton';
 
 class Search extends Component<SearchProps> {
   constructor(props: SearchProps) {
     super(props);
   }
 
-  state: { data: string } = {
+  public state: { data: string } = {
     data: '',
-  };
-
-  componentDidMount = () => {
-    const request = localStorage.getItem('request');
-    document.querySelector('input')!.value = request || '';
-    this.setState({ data: request || '' });
-    this.searchCards(request || '');
   };
 
   private searchCards(name: string): Promise<void> {
@@ -43,12 +37,19 @@ class Search extends Component<SearchProps> {
       .catch((error) => console.error(error));
   }
 
+  public componentDidMount = () => {
+    const request = localStorage.getItem('request');
+    document.querySelector('input')!.value = request || '';
+    this.setState({ data: request || '' });
+    this.searchCards(request || '');
+  };
+
   public render(): JSX.Element {
     return (
       <div className="search">
         <input className="input" type={'search'}></input>
         <button
-          className="button"
+          className="button button__search"
           onClick={() => {
             const request = document.querySelector('input')!.value.trim();
             this.searchCards(request);
@@ -60,6 +61,7 @@ class Search extends Component<SearchProps> {
         >
           Search
         </button>
+        <ErrorButton />
       </div>
     );
   }
