@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Card, Data, SearchProps } from '../../types/types';
 import ErrorButton from '../error-button/errorButton';
 
@@ -9,6 +9,10 @@ class Search extends Component<SearchProps> {
 
   public state: { data: string } = {
     data: '',
+  };
+
+  private handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ data: e.target.value });
   };
 
   private searchCards(name: string): Promise<void> {
@@ -39,7 +43,6 @@ class Search extends Component<SearchProps> {
 
   public componentDidMount = () => {
     const request = localStorage.getItem('request');
-    document.querySelector('input')!.value = request || '';
     this.setState({ data: request || '' });
     this.searchCards(request || '');
   };
@@ -47,16 +50,20 @@ class Search extends Component<SearchProps> {
   public render(): JSX.Element {
     return (
       <div className="search">
-        <input className="input" type={'search'}></input>
+        <input
+          type="text"
+          className="input"
+          value={this.state.data}
+          onChange={this.handleChange}
+        ></input>
         <button
           className="button button__search"
           onClick={() => {
-            const request = document.querySelector('input')!.value.trim();
+            const request = this.state.data.trim();
             this.searchCards(request);
-            if (localStorage.getItem('request')) {
+            if (localStorage.getItem('request'))
               localStorage.removeItem('request');
-            }
-            localStorage.setItem('request', request);
+            localStorage.setItem('request', this.state.data);
           }}
         >
           Search
