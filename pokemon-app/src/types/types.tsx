@@ -3,13 +3,15 @@ import { ReactNode } from 'react';
 export interface Card {
   id: string;
   name: string;
-  flavorText?: string;
+  images: {
+    large: 'string';
+  };
 }
 
 export interface Data {
   id: string;
   name: string;
-  description: string;
+  image: string;
 }
 
 export interface ErrorProps {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Data, SearchProps } from '../../types/types';
 import ErrorButton from '../error-button/errorButton';
+import './search.css';
 
 class Search extends Component<SearchProps> {
   constructor(props: SearchProps) {
@@ -18,7 +19,7 @@ class Search extends Component<SearchProps> {
   private searchCards(name: string): Promise<void> {
     const params = new URLSearchParams({
       page: '1',
-      pageSize: '8',
+      pageSize: '4',
     });
 
     return fetch(
@@ -28,12 +29,13 @@ class Search extends Component<SearchProps> {
       }
     )
       .then((response) => response.json())
-      .then((res) => {
-        const pokemons: Data[] = res.data.map((item: Card) => {
+      .then((json) => {
+        console.log(json);
+        const pokemons: Data[] = json.data.map((item: Card) => {
           return {
             id: item.id,
             name: item.name,
-            description: item.flavorText,
+            image: item.images.large,
           };
         });
         this.props.setItems(pokemons);
@@ -53,6 +55,7 @@ class Search extends Component<SearchProps> {
         <input
           type="text"
           className="input"
+          placeholder="Pokemon name"
           value={this.state.data}
           onChange={this.handleChange}
         ></input>
