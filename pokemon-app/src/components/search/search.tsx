@@ -30,7 +30,6 @@ class Search extends Component<SearchProps> {
     )
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         const pokemons: Data[] = json.data.map((item: Card) => {
           return {
             id: item.id,
