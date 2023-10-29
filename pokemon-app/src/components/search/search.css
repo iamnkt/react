@@ -1,6 +1,21 @@
-.search{
+.search {
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1.2em;
+}
+
+.caption {
+  font-family: 'Yatra One';
+  font-size: 2em;
+  margin: 0.6em 0;
+}
+
+.search-form{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
 }
