@@ -24,6 +24,10 @@
   height: auto;
 }
 
+.nothing-caption {
+  text-align: center;
+}
+
 @media (max-width: 1280px) {
   .items {
     grid-template-columns: repeat(3, 1fr);
