@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
-import Item from './components/items/items';
 import Search from './components/search/search';
+import View from './components/view/view';
 import './App.css';
+import { Data } from './types/types';
 
 class App extends Component {
-  // const [count, setCount] = useState(0);
+  state: { data: Data[] } = {
+    data: [],
+  };
+
+  updateState = (items: Data[]) => {
+    this.setState({
+      data: items,
+    });
+    console.log(this.state.data);
+  };
 
   public render(): JSX.Element {
     return (
       <div className="App">
-        <Search />
-        <Item />
+        <Search setItems={this.updateState}></Search>
+        <View data={this.state.data}></View>
       </div>
     );
   }

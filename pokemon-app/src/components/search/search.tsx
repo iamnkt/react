@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { Card, Data, SearchProps } from '../../types/types';
 
-class Search extends Component {
+class Search extends Component<SearchProps> {
+  constructor(props: SearchProps) {
+    super(props);
+  }
+
   private searchCards(name: string): Promise<void> {
     const params = new URLSearchParams({
       page: '1',
@@ -14,8 +19,15 @@ class Search extends Component {
       }
     )
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+      .then((res) => {
+        const pokemons: Data[] = res.data.map((item: Card) => {
+          return {
+            id: item.id,
+            name: item.name,
+            description: item.flavorText,
+          };
+        });
+        this.props.setItems(pokemons);
       })
       .catch((error) => console.error(error));
   }
@@ -26,10 +38,9 @@ class Search extends Component {
         <input className="input" type={'text'}></input>
         <button
           className="button"
-          onClick={(e) => {
-            e.preventDefault();
-            this.searchCards(document.querySelector('input')!.value);
-          }}
+          onClick={() =>
+            this.searchCards(document.querySelector('input')!.value)
+          }
         >
           Search
         </button>
