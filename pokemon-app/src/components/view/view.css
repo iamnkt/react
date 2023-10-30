@@ -31,6 +31,13 @@
   text-align: center;
 }
 
+.spinner {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 1200px) {
   .items {
     grid-template-columns: repeat(3, 1fr);

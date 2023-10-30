@@ -8,7 +8,8 @@ class Search extends Component<SearchProps> {
     super(props);
   }
 
-  public state: { data: string } = {
+  public state: { loading: boolean; data: string } = {
+    loading: true,
     data: '',
   };
 
@@ -17,6 +18,8 @@ class Search extends Component<SearchProps> {
   };
 
   private searchCards(name: string): Promise<void> {
+    this.props.loading(true);
+
     const params = new URLSearchParams({
       page: '1',
       pageSize: '8',
@@ -37,6 +40,10 @@ class Search extends Component<SearchProps> {
             image: item.images.large,
           };
         });
+        this.setState({
+          loading: false,
+        });
+        this.props.loading(false);
         this.props.setItems(pokemons);
       })
       .catch((error) => console.error(error));

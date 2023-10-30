@@ -23,9 +23,11 @@ export interface ErrorState {
 }
 
 export type SearchProps = {
+  loading: (loading: boolean) => void;
   setItems: (items: Data[]) => void;
 };
 
 export type ViewProps = {
+  loading: boolean;
   data: Data[];
 };

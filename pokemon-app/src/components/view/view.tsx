@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Data, ViewProps } from '../../types/types';
+import { Vortex } from 'react-loader-spinner';
 import './view.css';
 
 class View extends Component<ViewProps, { items: Data[] }> {
@@ -27,7 +28,23 @@ class View extends Component<ViewProps, { items: Data[] }> {
   }
 
   public render(): JSX.Element {
-    return this.renderElement();
+    if (this.props.loading) {
+      return (
+        <div className="spinner">
+          <Vortex
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="vortex-loading"
+            wrapperStyle={{}}
+            wrapperClass="vortex-wrapper"
+            colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
+          />
+        </div>
+      );
+    } else {
+      return this.renderElement();
+    }
   }
 }
 
