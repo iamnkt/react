@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Data, ViewProps } from '../../types/types';
-import { Vortex } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 import './view.css';
 
 class View extends Component<ViewProps, { items: Data[] }> {
@@ -31,14 +31,15 @@ class View extends Component<ViewProps, { items: Data[] }> {
     if (this.props.loading) {
       return (
         <div className="spinner">
-          <Vortex
-            visible={true}
+          <ThreeDots
             height="80"
             width="80"
-            ariaLabel="vortex-loading"
+            radius="9"
+            color="#FFC759"
+            ariaLabel="three-dots-loading"
             wrapperStyle={{}}
-            wrapperClass="vortex-wrapper"
-            colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
+            wrapperClassName=""
+            visible={true}
           />
         </div>
       );
