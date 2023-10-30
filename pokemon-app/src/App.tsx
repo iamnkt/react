@@ -6,7 +6,7 @@ import { Data } from './types/types';
 
 class App extends Component {
   public state: { loading: boolean; data: Data[] } = {
-    loading: true,
+    loading: false,
     data: [],
   };
 

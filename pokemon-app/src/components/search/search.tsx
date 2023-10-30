@@ -8,8 +8,7 @@ class Search extends Component<SearchProps> {
     super(props);
   }
 
-  public state: { loading: boolean; data: string } = {
-    loading: true,
+  public state: { data: string } = {
     data: '',
   };
 
@@ -39,9 +38,6 @@ class Search extends Component<SearchProps> {
             name: item.name,
             image: item.images.large,
           };
-        });
-        this.setState({
-          loading: false,
         });
         this.props.loading(false);
         this.props.setItems(pokemons);
