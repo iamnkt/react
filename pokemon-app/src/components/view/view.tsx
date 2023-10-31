@@ -27,8 +27,6 @@ class View extends Component<ViewProps, { items: Data[] }> {
     );
   }
 
-  console.log('test')
-
   public render(): JSX.Element {
     if (this.props.loading) {
       return (
