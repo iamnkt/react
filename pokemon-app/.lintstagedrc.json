@@ -1,6 +1,0 @@
-{
-  "**/*.{js,jsx,ts,tsx,html,css,scss}": [
-    "npx eslint --fix",
-    "npx prettier --write"
-  ]
-}
