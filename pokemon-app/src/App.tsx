@@ -16,6 +16,8 @@ class App extends Component {
     });
   };
 
+  adsasd
+
   public updateLoading = (loading: boolean) => {
     this.setState({
       loading,
