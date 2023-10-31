@@ -1,5 +1,6 @@
 {
-  "src/**/*.{ts,tsx}": [
-    "npm run lint"
+  "**/*.{js,jsx,ts,tsx. html, css, scss}": [
+    "npx eslint --fix",
+    "npx prettier --write"
   ]
 }
