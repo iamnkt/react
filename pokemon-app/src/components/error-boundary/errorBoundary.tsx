@@ -5,8 +5,8 @@ import './errorBoundary.css';
 class ErrorBoundary extends Component<ErrorProps, ErrorState> {
   public state: ErrorState = { hasError: false };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   static getDerivedStateFromError(error: Error): ErrorState {
+    console.error(error);
     return { hasError: true };
   }
 
