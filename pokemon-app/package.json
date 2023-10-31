@@ -13,7 +13,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+      "npm run lint"
     ]
   },
   "dependencies": {
