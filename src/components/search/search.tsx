@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Data, SearchProps } from '../../types/types';
+import searchCards from '../../api/api';
+import { SearchProps } from '../../types/types';
 import ErrorButton from '../error-button/errorButton';
 import './search.css';
 
@@ -16,39 +17,19 @@ class Search extends Component<SearchProps> {
     this.setState({ data: e.target.value });
   };
 
-  private searchCards(name: string): Promise<void> {
+  private async search(name: string): Promise<void> {
     this.props.loading(true);
 
-    const params = new URLSearchParams({
-      page: '1',
-      pageSize: '8',
-    });
+    const cards = await searchCards(name);
 
-    return fetch(
-      `https://api.pokemontcg.io/v2/cards/?q=name:${name}*&${params}`,
-      {
-        method: 'GET',
-      }
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        const pokemons: Data[] = json.data.map((item: Card) => {
-          return {
-            id: item.id,
-            name: item.name,
-            image: item.images.large,
-          };
-        });
-        this.props.loading(false);
-        this.props.setItems(pokemons);
-      })
-      .catch((error) => console.error(error));
+    this.props.loading(false);
+    this.props.setItems(cards);
   }
 
   public componentDidMount = () => {
     const request = localStorage.getItem('request');
     this.setState({ data: request || '' });
-    this.searchCards(request?.trim() || '');
+    this.search(request?.trim() || '');
   };
 
   public render(): JSX.Element {
@@ -67,7 +48,7 @@ class Search extends Component<SearchProps> {
             className="button button__search"
             onClick={() => {
               const request = this.state.data.trim();
-              this.searchCards(request);
+              this.search(request);
               if (localStorage.getItem('request'))
                 localStorage.removeItem('request');
               localStorage.setItem('request', this.state.data);
