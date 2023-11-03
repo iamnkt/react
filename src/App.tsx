@@ -1,38 +1,27 @@
-import { Component } from 'react';
+import React, { useState } from 'react';
 import Search from './components/search/search';
 import View from './components/view/view';
-import './App.css';
 import { Data } from './types/types';
+import './App.css';
 
-class App extends Component {
-  public state: { loading: boolean; data: Data[] } = {
-    loading: false,
-    data: [],
+export const App: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useState<Data[]>([]);
+
+  const updateCards = (items: Data[]) => {
+    setData(items);
   };
 
-  public updateItems = (items: Data[]) => {
-    this.setState({
-      data: items,
-    });
+  const updateLoading = (state: boolean) => {
+    setLoading(state);
   };
 
-  public updateLoading = (loading: boolean) => {
-    this.setState({
-      loading,
-    });
-  };
-
-  public render(): JSX.Element {
-    return (
-      <div className="App">
-        <Search
-          loading={this.updateLoading}
-          setItems={this.updateItems}
-        ></Search>
-        <View loading={this.state.loading} data={this.state.data}></View>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <Search loading={updateLoading} setItems={updateCards}></Search>
+      <View loading={loading} data={data}></View>
+    </div>
+  );
+};
 
 export default App;
