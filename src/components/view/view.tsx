@@ -3,7 +3,7 @@ import { Data, ViewProps } from '../../types/types';
 import { ThreeDots } from 'react-loader-spinner';
 import './view.css';
 
-const View: React.FC<ViewProps> = ({ loading, data }: ViewProps) => {
+const View: React.FC<ViewProps> = ({ loading, data }) => {
   const render = (): JSX.Element => {
     if (data.length)
       return (

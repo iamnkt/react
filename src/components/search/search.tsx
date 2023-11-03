@@ -1,72 +1,58 @@
-import React, { Component } from 'react';
-// import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { searchCards } from '../../api/api';
 import { SearchProps } from '../../types/types';
 import ErrorButton from '../error-button/errorButton';
 import './search.css';
 
-// const Search: React.FC = (props: SearchProps) => {
-//   const [, set] = useState('');
+const Search: React.FC<SearchProps> = ({ loading, setItems }) => {
+  const [pokemon, setPokemon] = useState<string>('');
 
-// }
-
-class Search extends Component<SearchProps> {
-  constructor(props: SearchProps) {
-    super(props);
-  }
-
-  public state: { data: string } = {
-    data: '',
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPokemon(e.target.value);
   };
 
-  private handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ data: e.target.value });
-  };
-
-  private async search(name: string): Promise<void> {
-    this.props.loading(true);
+  const search = async (name: string) => {
+    loading(true);
 
     const cards = await searchCards(name);
 
-    this.props.loading(false);
-    this.props.setItems(cards);
-  }
-
-  public componentDidMount = () => {
-    const request = localStorage.getItem('request');
-    this.setState({ data: request || '' });
-    this.search(request?.trim() || '');
+    loading(false);
+    setItems(cards);
   };
 
-  public render(): JSX.Element {
-    return (
-      <div className="search">
-        <h2 className="caption">Pokemon cards</h2>
-        <div className="search-form">
-          <input
-            type="text"
-            className="input"
-            placeholder="Pokemon name"
-            value={this.state.data}
-            onChange={this.handleChange}
-          ></input>
-          <button
-            className="button button__search"
-            onClick={() => {
-              const request = this.state.data.trim();
-              this.search(request);
-              if (localStorage.getItem('request'))
-                localStorage.removeItem('request');
-              localStorage.setItem('request', this.state.data);
-            }}
-          >
-            Search
-          </button>
-          <ErrorButton />
-        </div>
+  useEffect(() => {
+    const request = localStorage.getItem('request');
+    setPokemon(request || '');
+    search(request?.trim() || '');
+  }, []);
+
+  return (
+    <div className="search">
+      <h2 className="caption">Pokemon cards</h2>
+      <div className="search-form">
+        <input
+          type="text"
+          className="input"
+          placeholder="Pokemon name"
+          value={pokemon}
+          onChange={handleChange}
+        ></input>
+        <button
+          className="button button__search"
+          onClick={() => {
+            const request = pokemon.trim();
+            search(request);
+            if (localStorage.getItem('request'))
+              localStorage.removeItem('request');
+            localStorage.setItem('request', pokemon);
+          }}
+        >
+          Search
+        </button>
+        <ErrorButton />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Search;
