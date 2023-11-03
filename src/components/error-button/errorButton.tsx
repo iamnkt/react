@@ -1,27 +1,22 @@
-import { Component } from 'react';
-import { ErrorState } from '../../types/types';
+import React, { useState } from 'react';
 
-class ErrorButton extends Component {
-  public state: ErrorState = { hasError: false };
+const ErrorButton: React.FC = () => {
+  const [hasError, setError] = useState<boolean>(false);
 
-  public componentDidUpdate({}, prevState: ErrorState): void {
-    if (this.state.hasError !== prevState.hasError) {
-      throw new Error('Something went wrong');
-    }
+  if (hasError === true) {
+    throw new Error('Something went wrong');
   }
 
-  public render() {
-    return (
-      <button
-        className="button button__error"
-        onClick={() => {
-          this.setState({ hasError: true });
-        }}
-      >
-        Error
-      </button>
-    );
-  }
-}
+  return (
+    <button
+      className="button button__error"
+      onClick={() => {
+        setError(true);
+      }}
+    >
+      Error
+    </button>
+  );
+};
 
 export default ErrorButton;

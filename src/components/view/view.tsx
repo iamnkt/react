@@ -1,5 +1,6 @@
-import { ThreeDots } from 'react-loader-spinner';
+import React from 'react';
 import { Data, ViewProps } from '../../types/types';
+import { ThreeDots } from 'react-loader-spinner';
 import './view.css';
 
 const View: React.FC<ViewProps> = ({ loading, data }: ViewProps) => {
