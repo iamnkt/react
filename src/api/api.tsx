@@ -1,11 +1,7 @@
+import { params } from '../constants/constants';
 import { Data, Card } from '../types/types';
 
-const params = new URLSearchParams({
-  page: '1',
-  pageSize: '8',
-});
-
-export default async function searchCards(name: string): Promise<Data[]> {
+export async function searchCards(name: string): Promise<Data[]> {
   let cards: Data[] = [];
 
   try {

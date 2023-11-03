@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import searchCards from '../../api/api';
+// import { useState } from 'react';
+import { searchCards } from '../../api/api';
 import { SearchProps } from '../../types/types';
 import ErrorButton from '../error-button/errorButton';
 import './search.css';
+
+// const Search: React.FC = (props: SearchProps) => {
+//   const [, set] = useState('');
+
+// }
 
 class Search extends Component<SearchProps> {
   constructor(props: SearchProps) {
