@@ -23,8 +23,8 @@ export interface ErrorState {
 }
 
 export type SearchProps = {
-  loading: (loading: boolean) => void;
-  setItems: (items: Data[]) => void;
+  updateLoading: (loading: boolean) => void;
+  updateCards: (data: Data[]) => void;
 };
 
 export type ViewProps = {

@@ -4,25 +4,25 @@ import { SearchProps } from '../../types/types';
 import ErrorButton from '../error-button/errorButton';
 import './search.css';
 
-const Search: React.FC<SearchProps> = ({ loading, setItems }) => {
-  const [pokemon, setPokemon] = useState<string>('');
+const Search: React.FC<SearchProps> = ({ updateLoading, updateCards }) => {
+  const [card, setCard] = useState<string>('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPokemon(e.target.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCard(e.target.value);
   };
 
-  const search = async (name: string) => {
-    loading(true);
+  const search = async (card: string) => {
+    updateLoading(true);
 
-    const cards = await searchCards(name);
+    const cards = await searchCards(card);
 
-    loading(false);
-    setItems(cards);
+    updateLoading(false);
+    updateCards(cards);
   };
 
   useEffect(() => {
     const request = localStorage.getItem('request');
-    setPokemon(request || '');
+    setCard(request || '');
     search(request?.trim() || '');
   }, []);
 
@@ -34,17 +34,17 @@ const Search: React.FC<SearchProps> = ({ loading, setItems }) => {
           type="text"
           className="input"
           placeholder="Pokemon name"
-          value={pokemon}
-          onChange={handleChange}
+          value={card}
+          onChange={handleInputChange}
         ></input>
         <button
           className="button button__search"
           onClick={() => {
-            const request = pokemon.trim();
+            const request = card.trim();
             search(request);
             if (localStorage.getItem('request'))
               localStorage.removeItem('request');
-            localStorage.setItem('request', pokemon);
+            localStorage.setItem('request', card);
           }}
         >
           Search

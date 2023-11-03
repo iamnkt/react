@@ -8,10 +8,10 @@ const View: React.FC<ViewProps> = ({ loading, data }) => {
     if (data.length)
       return (
         <div className="items">
-          {data.map((item: Data) => (
-            <div className="item" key={item.id}>
-              <h4 className="title">{item.name}</h4>
-              <img className="image" src={item.image}></img>
+          {data.map((card: Data) => (
+            <div className="item" key={card.id}>
+              <h4 className="title">{card.name}</h4>
+              <img className="image" src={card.image}></img>
             </div>
           ))}
         </div>

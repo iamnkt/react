@@ -6,10 +6,10 @@ import './App.css';
 
 export const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState<Data[]>([]);
+  const [cards, setCards] = useState<Data[]>([]);
 
-  const updateCards = (items: Data[]) => {
-    setData(items);
+  const updateCards = (data: Data[]) => {
+    setCards(data);
   };
 
   const updateLoading = (state: boolean) => {
@@ -18,8 +18,8 @@ export const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Search loading={updateLoading} setItems={updateCards}></Search>
-      <View loading={loading} data={data}></View>
+      <Search updateLoading={updateLoading} updateCards={updateCards}></Search>
+      <View loading={loading} data={cards}></View>
     </div>
   );
 };
