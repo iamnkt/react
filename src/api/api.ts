@@ -1,20 +1,13 @@
 import { Data, Card } from '../types/types';
 
-export const params = new URLSearchParams({
-  page: '1',
-  pageSize: '8',
-});
-
-export async function searchCards(card: string): Promise<Data[]> {
+export async function searchCards(params: URLSearchParams): Promise<Data[]> {
   let cards: Data[] = [];
 
   try {
-    const response = await fetch(
-      `https://api.pokemontcg.io/v2/cards/?q=name:${card}*&${params}`,
-      {
-        method: 'GET',
-      }
-    );
+    const apiUrl = new URL('https://api.pokemontcg.io/v2/cards/');
+    apiUrl.search = params.toString();
+    const response = await fetch(apiUrl.toString());
+    console.log(apiUrl.toString());
 
     const cardsData = await response.json();
 

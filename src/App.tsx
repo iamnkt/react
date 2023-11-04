@@ -30,7 +30,10 @@ export const App: React.FC = () => {
           <Search updateLoading={updateLoading} updateCards={updateCards} />
         }
       >
-        <Route index element={<View loading={loading} data={cards} />} />
+        <Route index element={<View loading={loading} data={cards} />}></Route>
+        <Route path={'cards'} element={<View loading={loading} data={cards} />}>
+          <Route />
+        </Route>
       </Route>
     )
   );

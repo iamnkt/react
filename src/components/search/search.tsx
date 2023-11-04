@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import { searchCards } from '../../api/api';
 import { SearchProps } from '../../types/types';
 import ErrorButton from '../error-button/errorButton';
@@ -7,15 +7,24 @@ import './search.css';
 
 const Search: React.FC<SearchProps> = ({ updateLoading, updateCards }) => {
   const [card, setCard] = useState<string>('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCard(e.target.value);
   };
 
-  const search = async (card: string) => {
+  const handleSearch = async () => {
+    const request = card.trim();
+    setSearchParams({ q: `name:${request}*` });
+
+    if (localStorage.getItem('request')) localStorage.removeItem('request');
+    localStorage.setItem('request', card);
+  };
+
+  const search = async () => {
     updateLoading(true);
 
-    const cards = await searchCards(card);
+    const cards = await searchCards(searchParams);
 
     updateLoading(false);
     updateCards(cards);
@@ -24,8 +33,13 @@ const Search: React.FC<SearchProps> = ({ updateLoading, updateCards }) => {
   useEffect(() => {
     const request = localStorage.getItem('request');
     setCard(request || '');
-    search(request?.trim() || '');
+    search();
   }, []);
+
+  useEffect(() => {
+    console.log(searchParams.get('q'));
+    search();
+  }, [searchParams]);
 
   return (
     <>
@@ -40,16 +54,7 @@ const Search: React.FC<SearchProps> = ({ updateLoading, updateCards }) => {
               value={card}
               onChange={handleInputChange}
             ></input>
-            <button
-              className="button button__search"
-              onClick={() => {
-                const request = card.trim();
-                search(request);
-                if (localStorage.getItem('request'))
-                  localStorage.removeItem('request');
-                localStorage.setItem('request', card);
-              }}
-            >
+            <button className="button button__search" onClick={handleSearch}>
               Search
             </button>
             <ErrorButton />
