@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import Search from './components/search/search';
-import View from './components/view/view';
-import { Data } from './types/types';
+import {
+  createBrowserRouter,
+  Route,
+  createRoutesFromElements,
+  RouterProvider,
+} from 'react-router-dom';
 import './App.css';
+import Search from './components/search/search';
+import { Data } from './types/types';
+import View from './components/view/view';
 
 export const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -16,10 +22,22 @@ export const App: React.FC = () => {
     setLoading(state);
   };
 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route
+        path="/"
+        element={
+          <Search updateLoading={updateLoading} updateCards={updateCards} />
+        }
+      >
+        <Route index element={<View loading={loading} data={cards} />} />
+      </Route>
+    )
+  );
+
   return (
     <div className="App">
-      <Search updateLoading={updateLoading} updateCards={updateCards}></Search>
-      <View loading={loading} data={cards}></View>
+      <RouterProvider router={router} />
     </div>
   );
 };

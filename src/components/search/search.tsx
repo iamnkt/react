@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import { searchCards } from '../../api/api';
 import { SearchProps } from '../../types/types';
 import ErrorButton from '../error-button/errorButton';
@@ -27,31 +28,39 @@ const Search: React.FC<SearchProps> = ({ updateLoading, updateCards }) => {
   }, []);
 
   return (
-    <div className="search">
-      <h2 className="caption">Pokemon cards</h2>
-      <div className="search-form">
-        <input
-          type="text"
-          className="input"
-          placeholder="Pokemon name"
-          value={card}
-          onChange={handleInputChange}
-        ></input>
-        <button
-          className="button button__search"
-          onClick={() => {
-            const request = card.trim();
-            search(request);
-            if (localStorage.getItem('request'))
-              localStorage.removeItem('request');
-            localStorage.setItem('request', card);
-          }}
-        >
-          Search
-        </button>
-        <ErrorButton />
-      </div>
-    </div>
+    <>
+      <header>
+        <div className="search">
+          <h2 className="caption">Pokemon cards</h2>
+          <div className="search-form">
+            <input
+              type="text"
+              className="input"
+              placeholder="Pokemon name"
+              value={card}
+              onChange={handleInputChange}
+            ></input>
+            <button
+              className="button button__search"
+              onClick={() => {
+                const request = card.trim();
+                search(request);
+                if (localStorage.getItem('request'))
+                  localStorage.removeItem('request');
+                localStorage.setItem('request', card);
+              }}
+            >
+              Search
+            </button>
+            <ErrorButton />
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
 };
 
