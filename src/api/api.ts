@@ -1,15 +1,20 @@
 import { Data, Card } from '../types/types';
 
-export async function searchCards(params: URLSearchParams): Promise<Data[]> {
+export async function searchCards(
+  params: URLSearchParams
+): Promise<{ cards: Data[]; totalCount: number }> {
   let cards: Data[] = [];
+  let totalCount: number = 0;
 
   try {
     const apiUrl = new URL('https://api.pokemontcg.io/v2/cards/');
     apiUrl.search = params.toString();
+
     const response = await fetch(apiUrl.toString());
-    console.log(apiUrl.toString());
 
     const cardsData = await response.json();
+
+    totalCount = cardsData.totalCount;
 
     cards = await cardsData.data.map((card: Card) => {
       return {
@@ -22,5 +27,5 @@ export async function searchCards(params: URLSearchParams): Promise<Data[]> {
     console.error(error);
   }
 
-  return cards;
+  return { cards, totalCount };
 }

@@ -20,6 +20,7 @@ const View: React.FC<ViewProps> = ({ loading, data }) => {
           <Outlet />
         </>
       );
+
     return (
       <div className="nothing">
         <h3 className="nothing-caption">No cards were found</h3>
@@ -42,9 +43,9 @@ const View: React.FC<ViewProps> = ({ loading, data }) => {
         />
       </div>
     );
-  } else {
-    return render();
   }
+
+  return render();
 };
 
 export default View;
