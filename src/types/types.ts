@@ -48,6 +48,7 @@ export type PaginationProps = {
 };
 
 export type DropdownProps = {
+  updateCurrentPage: (number: number) => void;
   updateCardsPerPage: (number: number) => void;
   options: number[];
 };

@@ -43,12 +43,13 @@ const Pagination: React.FC<PaginationProps> = ({
           </a>
         ))}
       </div>
-      {/* <select className="pager" onChange={updateCards(value)}>
-        <option value="8">8</option>
-        <option value="12">12</option>
-        <option value="16">16</option>
-      </select> */}
-      <Dropdown updateCardsPerPage={updateCardsPerPage} options={options} />
+      <div>
+        <Dropdown
+          updateCurrentPage={updateCurrentPage}
+          updateCardsPerPage={updateCardsPerPage}
+          options={options}
+        />
+      </div>
     </div>
   );
 };
