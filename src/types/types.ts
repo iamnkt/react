@@ -8,6 +8,12 @@ export interface Card {
   };
 }
 
+export interface CardDetail {
+  name: string;
+  hp: string;
+  types: string[];
+}
+
 export interface Data {
   id: string;
   name: string;
@@ -51,4 +57,19 @@ export type DropdownProps = {
   updateCurrentPage: (number: number) => void;
   updateCardsPerPage: (number: number) => void;
   options: number[];
+};
+
+export type RootProps = {
+  updateLoading: (loading: boolean) => void;
+  updateCard: (card: string) => void;
+  updateCards: (data: Data[]) => void;
+  updateTotalCount: (totalCount: number) => void;
+  updateCurrentPage: (pageNumber: number) => void;
+  updateCardsPerPage: (cardsNumber: number) => void;
+  name: string;
+  currentPage: number;
+  cardsPerPage: number;
+  loading: boolean;
+  cards: Data[];
+  totalCount: number;
 };

@@ -14,10 +14,14 @@ import Search from './components/search/search';
 export const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [cards, setCards] = useState<Data[]>([]);
-  const [name, setName] = useState<string>('');
+  const [name, setName] = useState<string>(localStorage.getItem('card') || '');
   const [totalCount, setTotalCount] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [cardsPerPage, setCardsPerPage] = useState<number>(8);
+  const [currentPage, setCurrentPage] = useState<number>(
+    Number(localStorage.getItem('pageNumber')) || 1
+  );
+  const [cardsPerPage, setCardsPerPage] = useState<number>(
+    Number(localStorage.getItem('pageCards')) || 8
+  );
 
   const updateCard = (name: string) => {
     setName(name);
@@ -61,7 +65,7 @@ export const App: React.FC = () => {
       }
     >
       <Route
-        index
+        path="/"
         element={
           <>
             <View loading={loading} data={cards} />

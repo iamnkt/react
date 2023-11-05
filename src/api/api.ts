@@ -1,4 +1,4 @@
-import { Data, Card } from '../types/types';
+import { Data, Card, CardDetail } from '../types/types';
 
 export async function searchCards(
   params: URLSearchParams
@@ -28,4 +28,19 @@ export async function searchCards(
   }
 
   return { cards, totalCount };
+}
+
+export async function getCardById(id: string): Promise<CardDetail | null> {
+  let card = null;
+
+  try {
+    const response = await fetch(`https://api.pokemontcg.io/v2/cards/${id}`);
+    const cardData = await response.json();
+    const { name, hp, types } = cardData.data;
+    card = { name, hp, types };
+  } catch (error) {
+    console.error(error);
+  }
+
+  return card;
 }

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
 import { searchCards } from '../../api/api';
@@ -12,7 +11,6 @@ const Search: React.FC<SearchProps> = ({
   updateCards,
   updateTotalCount,
   updateCurrentPage,
-  updateCardsPerPage,
   name,
   currentPage,
   cardsPerPage,
@@ -52,11 +50,6 @@ const Search: React.FC<SearchProps> = ({
 
   useEffect(() => {
     const lsCard = localStorage.getItem('card');
-    const lsPage = localStorage.getItem('pageNumber');
-    const lsCards = localStorage.getItem('pageCards');
-    updateCard(lsCard || '');
-    updateCurrentPage(Number(lsPage) || 1);
-    updateCardsPerPage(Number(lsCards) || 8);
     setCard(lsCard || '');
   }, []);
 
@@ -66,10 +59,11 @@ const Search: React.FC<SearchProps> = ({
       page: currentPage.toString(),
       pageSize: cardsPerPage.toString(),
     });
-  }, [name, currentPage, cardsPerPage]);
+  }, [name, currentPage, cardsPerPage, setSearchParams]);
 
   useEffect(() => {
     search();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return (
