@@ -7,9 +7,8 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import { Data } from './types/types';
-import View from './components/view/view';
-import Pagination from './components/pagination/pagination';
-import Search from './components/search/search';
+import Details from './components/details/details';
+import Main from './layouts/main';
 
 export const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -51,34 +50,24 @@ export const App: React.FC = () => {
     <Route
       path="/"
       element={
-        <Search
+        <Main
           updateLoading={updateLoading}
-          updateCard={updateCard}
           updateCards={updateCards}
+          updateCard={updateCard}
           updateTotalCount={updateTotalCount}
           updateCurrentPage={updateCurrentPage}
           updateCardsPerPage={updateCardsPerPage}
           name={name}
+          cards={cards}
           currentPage={currentPage}
+          loading={loading}
+          totalCount={totalCount}
           cardsPerPage={cardsPerPage}
         />
       }
     >
-      <Route
-        path="/"
-        element={
-          <>
-            <View loading={loading} data={cards} />
-            <Pagination
-              loading={loading}
-              totalCount={totalCount}
-              cardsPerPage={cardsPerPage}
-              updateCurrentPage={updateCurrentPage}
-              updateCardsPerPage={updateCardsPerPage}
-            />
-          </>
-        }
-      />
+      <Route index element={null} />
+      <Route path="details" element={<Details />} />
     </Route>
   );
 

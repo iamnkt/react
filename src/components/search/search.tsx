@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { searchCards } from '../../api/api';
 import { SearchProps } from '../../types/types';
 import ErrorButton from '../error-button/errorButton';
@@ -59,37 +59,27 @@ const Search: React.FC<SearchProps> = ({
       page: currentPage.toString(),
       pageSize: cardsPerPage.toString(),
     });
-  }, [name, currentPage, cardsPerPage, setSearchParams]);
-
-  useEffect(() => {
     search();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [name, currentPage, cardsPerPage]);
 
   return (
-    <>
-      <header className="header">
-        <div className="search">
-          <h2 className="caption">Pokemon cards</h2>
-          <div className="search-form">
-            <input
-              type="text"
-              className="input"
-              placeholder="Pokemon name"
-              value={card}
-              onChange={handleInputChange}
-            ></input>
-            <button className="button button__search" onClick={handleSearch}>
-              Search
-            </button>
-            <ErrorButton />
-          </div>
-        </div>
-      </header>
-      <main className="main">
-        <Outlet />
-      </main>
-    </>
+    <div className="search">
+      <h2 className="search__title">Pokemon cards</h2>
+      <div className="searh__form">
+        <input
+          type="text"
+          className="input input__search"
+          placeholder="Pokemon name"
+          value={card}
+          onChange={handleInputChange}
+        ></input>
+        <button className="button button__search" onClick={handleSearch}>
+          Search
+        </button>
+        <ErrorButton />
+      </div>
+    </div>
   );
 };
 

@@ -16,7 +16,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <select
-      className="pager"
+      className="dropdown"
       value={selectedOption}
       onChange={(e) => {
         setSelectedOption(Number(e.target.value));

@@ -1,9 +1,9 @@
 import React from 'react';
 import { PaginationProps } from '../../types/types';
 import Dropdown from '../dropdown/dropdown';
-import './pagination.css';
+import './pages.css';
 
-const Pagination: React.FC<PaginationProps> = ({
+const Pages: React.FC<PaginationProps> = ({
   loading,
   totalCount,
   cardsPerPage,
@@ -27,8 +27,8 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   return (
-    <div className="control">
-      <div className="pagination">
+    <div className="pages-controls">
+      <div className="pages">
         {pageNumbers.map((number) => (
           <a
             onClick={(e) => {
@@ -43,15 +43,13 @@ const Pagination: React.FC<PaginationProps> = ({
           </a>
         ))}
       </div>
-      <div>
-        <Dropdown
-          updateCurrentPage={updateCurrentPage}
-          updateCardsPerPage={updateCardsPerPage}
-          options={options}
-        />
-      </div>
+      <Dropdown
+        updateCurrentPage={updateCurrentPage}
+        updateCardsPerPage={updateCardsPerPage}
+        options={options}
+      />
     </div>
   );
 };
 
-export default Pagination;
+export default Pages;
