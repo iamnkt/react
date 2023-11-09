@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
+import { SearchContext } from '../../App';
 import { SearchProps } from '../../types/types';
 import ErrorButton from '../error-button/errorButton';
 import './styles.css';
 
-const Search: React.FC<SearchProps> = ({ query, updateQuery }) => {
+const Search: React.FC<SearchProps> = ({ updateQuery }) => {
+  const query = useContext(SearchContext);
   const inputText = useRef<HTMLInputElement>(null);
 
   const buttonSearchHandler = () => {

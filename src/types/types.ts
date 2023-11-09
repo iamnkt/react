@@ -33,7 +33,6 @@ export interface ErrorState {
 
 export type SearchProps = {
   updateQuery: (query: string) => void;
-  query: string;
 };
 
 export type PagesProps = {

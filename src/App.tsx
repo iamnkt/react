@@ -75,16 +75,18 @@ export const App: React.FC = () => {
   return (
     <div className="app" id="app">
       <div className="main__container">
-        <Search query={query} updateQuery={updateQuery} />
-        <Cards isLoading={isLoading} data={cards} setDetails={setDetails} />
-        <Pages
-          isLoading={isLoading}
-          totalCount={totalCount}
-          updateCardsPerPage={updateCardsPerPage}
-          updatePage={updatePage}
-          page={page}
-          cardsPerPage={cardsPerPage}
-        />
+        <SearchContext.Provider value={query}>
+          <Search updateQuery={updateQuery} />
+          <Cards isLoading={isLoading} data={cards} setDetails={setDetails} />
+          <Pages
+            isLoading={isLoading}
+            totalCount={totalCount}
+            updateCardsPerPage={updateCardsPerPage}
+            updatePage={updatePage}
+            page={page}
+            cardsPerPage={cardsPerPage}
+          />
+        </SearchContext.Provider>
       </div>
       <Outlet context={{ details, setDetails } satisfies ContextType} />
     </div>
