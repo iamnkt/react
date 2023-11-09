@@ -26,7 +26,6 @@ export const App: React.FC = () => {
   const [details, setDetails] = useState<CardDetail | null>(
     JSON.parse(localStorage.getItem('details') as string) || null
   );
-  // const [overlay, setOverlay] = useState(false);
 
   const updateQuery = (value: string) => {
     setQuery(value);
@@ -50,10 +49,6 @@ export const App: React.FC = () => {
     setCardsPerPage(cardsNumber);
     localStorage.setItem('cardsPerPage', cardsNumber.toString());
   };
-
-  // const updateOverlay = () => {
-  //   overlay === false ? setOverlay(true) : setOverlay(false);
-  // };
 
   useEffect(() => {
     setSearchParams({

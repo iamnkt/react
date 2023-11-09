@@ -1,5 +1,7 @@
 .pages__container {
   padding: 20px;
+  margin: 0 auto;
+  max-width: 1160px;
   width: 100%;
   display: flex;
   justify-content: space-between;
