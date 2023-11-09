@@ -36,12 +36,6 @@ export type SearchProps = {
   query: string;
 };
 
-export type CardsProps = {
-  isLoading: boolean;
-  data: Data[];
-  // updateOverlay: () => void;
-};
-
 export type PagesProps = {
   isLoading: boolean;
   totalCount: number;
@@ -58,6 +52,20 @@ export type DropdownProps = {
   cardsPerPage: number;
 };
 
-export type DetailsProps = {
-  updateOverlay: () => void;
+export type ContextType = {
+  details: CardDetail | null;
+  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
+};
+
+export type CardsProps = {
+  isLoading: boolean;
+  data: Data[];
+  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
+};
+
+export type CardProps = {
+  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
+  id: string;
+  name: string;
+  image: string;
 };

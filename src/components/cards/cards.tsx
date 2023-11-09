@@ -2,26 +2,21 @@ import React from 'react';
 import { CardsProps } from '../../types/types';
 import { ThreeDots } from 'react-loader-spinner';
 import './styles.css';
-import { Link, useSearchParams } from 'react-router-dom';
+import Card from '../card/card';
 
-const Cards: React.FC<CardsProps> = ({ isLoading, data }) => {
-  const [searchParams] = useSearchParams();
-
+const Cards: React.FC<CardsProps> = ({ isLoading, data, setDetails }) => {
   const render = (): JSX.Element => {
     return data.length ? (
       <div className="cards__container">
         {data.map((card) => {
-          searchParams.set('id', card.id);
           return (
-            <Link
-              className="card"
+            <Card
               key={card.id}
-              to={{ pathname: 'details', search: searchParams.toString() }}
-              // onClick={updateOverlay}
-            >
-              <h4 className="card__title">{card.name}</h4>
-              <img className="card__image" src={card.image}></img>
-            </Link>
+              id={card.id}
+              name={card.name}
+              image={card.image}
+              setDetails={setDetails}
+            />
           );
         })}
       </div>

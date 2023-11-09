@@ -1,12 +1,11 @@
 import { CardDetail } from '../types/types';
 
-export async function getCardById(id: string): Promise<CardDetail | null> {
+export async function getCardById(id: string): Promise<CardDetail> {
   let card = null;
 
   try {
     const response = await fetch(`https://api.pokemontcg.io/v2/cards/${id}`);
     const cardData = await response.json();
-    console.log(cardData);
     card = {};
     Object.defineProperties(card, {
       image: {
@@ -28,7 +27,6 @@ export async function getCardById(id: string): Promise<CardDetail | null> {
         value: cardData.data.rarity,
       },
     });
-    console.log(card);
   } catch (error) {
     console.error(error);
   }

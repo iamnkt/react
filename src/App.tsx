@@ -1,11 +1,11 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import { getCards } from './api/getCards';
 import './App.css';
 import Cards from './components/cards/cards';
 import Pages from './components/pages/pages';
 import Search from './components/search/search';
-import { Data } from './types/types';
+import { CardDetail, ContextType, Data } from './types/types';
 
 export const SearchContext = createContext('');
 
@@ -22,6 +22,9 @@ export const App: React.FC = () => {
   );
   const [cardsPerPage, setCardsPerPage] = useState<number>(
     Number(localStorage.getItem('cardsPerPage')) || 8
+  );
+  const [details, setDetails] = useState<CardDetail | null>(
+    JSON.parse(localStorage.getItem('details') as string) || null
   );
   // const [overlay, setOverlay] = useState(false);
 
@@ -78,7 +81,7 @@ export const App: React.FC = () => {
     <div className="app" id="app">
       <div className="main__container">
         <Search query={query} updateQuery={updateQuery} />
-        <Cards isLoading={isLoading} data={cards} />
+        <Cards isLoading={isLoading} data={cards} setDetails={setDetails} />
         <Pages
           isLoading={isLoading}
           totalCount={totalCount}
@@ -88,7 +91,7 @@ export const App: React.FC = () => {
           cardsPerPage={cardsPerPage}
         />
       </div>
-      {/* <Outlet /> */}
+      <Outlet context={{ details, setDetails } satisfies ContextType} />
     </div>
   );
 };

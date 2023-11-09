@@ -1,5 +1,6 @@
 .cards__container {
   margin: 0 auto;
+  max-width: 1160px;
   width: 100%;
   padding: 20px;
   display: grid;
@@ -14,6 +15,7 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .card__title {
