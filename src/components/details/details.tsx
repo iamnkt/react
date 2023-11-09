@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { getCardById } from '../../api/api';
-import { CardDetail, DetailsProps } from '../../types/types';
+import { CardDetail } from '../../types/types';
 import { ThreeDots } from 'react-loader-spinner';
-import './details.css';
+import './styles.css';
+import { getCardById } from '../../api/getDetailedCard';
 
-const Details: React.FC<DetailsProps> = ({ updateOverlay }) => {
+const Details: React.FC = () => {
   const [card, setCard] = useState<CardDetail | null>(null);
   const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
@@ -32,7 +32,6 @@ const Details: React.FC<DetailsProps> = ({ updateOverlay }) => {
 
   const buttonHandler = () => {
     searchParams.delete('id');
-    updateOverlay();
     navigate(-1);
   };
 

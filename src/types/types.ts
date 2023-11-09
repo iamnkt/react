@@ -32,52 +32,30 @@ export interface ErrorState {
 }
 
 export type SearchProps = {
-  updateLoading: (loading: boolean) => void;
-  updateCard: (card: string) => void;
-  updateCards: (data: Data[]) => void;
-  updateTotalCount: (totalCount: number) => void;
-  updateCurrentPage: (pageNumber: number) => void;
-  updateCardsPerPage: (cardsNumber: number) => void;
-  name: string;
-  currentPage: number;
-  cardsPerPage: number;
+  updateQuery: (query: string) => void;
+  query: string;
 };
 
 export type CardsProps = {
-  loading: boolean;
+  isLoading: boolean;
   data: Data[];
-  updateOverlay: () => void;
+  // updateOverlay: () => void;
 };
 
-export type PaginationProps = {
-  loading: boolean;
+export type PagesProps = {
+  isLoading: boolean;
   totalCount: number;
-  cardsPerPage: number;
-  updateCurrentPage: (number: number) => void;
+  page: number;
+  updatePage: (number: number) => void;
   updateCardsPerPage: (number: number) => void;
+  cardsPerPage: number;
 };
 
 export type DropdownProps = {
-  updateCurrentPage: (number: number) => void;
+  updatePage: (number: number) => void;
   updateCardsPerPage: (number: number) => void;
   options: number[];
-};
-
-export type RootProps = {
-  updateLoading: (loading: boolean) => void;
-  updateCard: (card: string) => void;
-  updateCards: (data: Data[]) => void;
-  updateTotalCount: (totalCount: number) => void;
-  updateCurrentPage: (pageNumber: number) => void;
-  updateCardsPerPage: (cardsNumber: number) => void;
-  updateOverlay: () => void;
-  overlay: boolean;
-  name: string;
-  currentPage: number;
   cardsPerPage: number;
-  loading: boolean;
-  cards: Data[];
-  totalCount: number;
 };
 
 export type DetailsProps = {

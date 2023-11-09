@@ -2,28 +2,22 @@ import React, { useState } from 'react';
 import { DropdownProps } from '../../types/types';
 
 const Dropdown: React.FC<DropdownProps> = ({
-  updateCurrentPage,
+  updatePage,
   updateCardsPerPage,
   options,
+  cardsPerPage,
 }) => {
-  const [selectedOption, setSelectedOption] = useState(
-    localStorage.getItem('pageCards') || options[0]
-  );
-
-  const updateCards = (number: number) => {
-    updateCardsPerPage(number);
-  };
+  const [selectedOption, setSelectedOption] = useState(cardsPerPage);
 
   return (
     <select
       className="dropdown"
       value={selectedOption}
       onChange={(e) => {
+        console.log(e.target.value);
         setSelectedOption(Number(e.target.value));
-        localStorage.setItem('pageCards', e.target.value);
-        localStorage.setItem('pageNumber', '1');
-        updateCards(Number(e.target.value));
-        updateCurrentPage(1);
+        updateCardsPerPage(Number(e.target.value));
+        updatePage(1);
       }}
     >
       {options.map((value: number) => (

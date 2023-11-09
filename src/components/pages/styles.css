@@ -1,5 +1,5 @@
-.pages-controls {
-  margin-top: 30px;
+.pages__container {
+  padding: 20px;
   width: 100%;
   display: flex;
   justify-content: space-between;

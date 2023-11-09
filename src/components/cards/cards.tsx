@@ -1,15 +1,15 @@
 import React from 'react';
 import { CardsProps } from '../../types/types';
 import { ThreeDots } from 'react-loader-spinner';
-import './cards.css';
+import './styles.css';
 import { Link, useSearchParams } from 'react-router-dom';
 
-const Cards: React.FC<CardsProps> = ({ loading, data, updateOverlay }) => {
+const Cards: React.FC<CardsProps> = ({ isLoading, data }) => {
   const [searchParams] = useSearchParams();
 
   const render = (): JSX.Element => {
     return data.length ? (
-      <div className="cards">
+      <div className="cards__container">
         {data.map((card) => {
           searchParams.set('id', card.id);
           return (
@@ -17,7 +17,7 @@ const Cards: React.FC<CardsProps> = ({ loading, data, updateOverlay }) => {
               className="card"
               key={card.id}
               to={{ pathname: 'details', search: searchParams.toString() }}
-              onClick={updateOverlay}
+              // onClick={updateOverlay}
             >
               <h4 className="card__title">{card.name}</h4>
               <img className="card__image" src={card.image}></img>
@@ -32,7 +32,7 @@ const Cards: React.FC<CardsProps> = ({ loading, data, updateOverlay }) => {
     );
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="loading">
         <ThreeDots

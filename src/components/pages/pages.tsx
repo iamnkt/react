@@ -1,52 +1,71 @@
 import React from 'react';
-import { PaginationProps } from '../../types/types';
+import { PagesProps } from '../../types/types';
 import Dropdown from '../dropdown/dropdown';
-import './pages.css';
+import './styles.css';
 
-const Pages: React.FC<PaginationProps> = ({
-  loading,
+const Pages: React.FC<PagesProps> = ({
+  isLoading,
+  page,
   totalCount,
   cardsPerPage,
-  updateCurrentPage,
+  updatePage,
   updateCardsPerPage,
 }) => {
-  const pageNumbers = [];
   const options = [8, 12];
+  const pagesCount = Math.ceil(totalCount / cardsPerPage);
 
-  for (let i = 1; i <= Math.ceil(totalCount / cardsPerPage); i += 1) {
-    pageNumbers.push(i);
-  }
-
-  const updatePage = (number: number) => {
-    updateCurrentPage(number);
-    localStorage.setItem('pageNumber', number.toString());
-  };
-
-  if (loading) {
+  if (isLoading) {
     return <></>;
   }
 
   return (
-    <div className="pages-controls">
+    <div className="pages__container">
       <div className="pages">
-        {pageNumbers.map((number) => (
-          <a
-            onClick={(e) => {
-              e.preventDefault();
-              updatePage(number);
-            }}
-            key={number}
-            href=""
-            className="page-link link"
-          >
-            {number}
-          </a>
-        ))}
+        <button
+          type="button"
+          onClick={() => updatePage(1)}
+          disabled={page === 1}
+        >
+          &#60;&#60;
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            if (page > 1) {
+              updatePage(page - 1);
+            }
+          }}
+          disabled={page === 1}
+        >
+          &#60;
+        </button>
+        <button type="button">{`${page}`}</button>
+        <button
+          type="button"
+          onClick={() => {
+            if (page < pagesCount) {
+              updatePage(page + 1);
+            }
+          }}
+          disabled={page === pagesCount}
+        >
+          &#62;
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            updatePage(pagesCount);
+          }}
+          disabled={page === pagesCount}
+        >
+          &#62;&#62;
+        </button>
       </div>
       <Dropdown
-        updateCurrentPage={updateCurrentPage}
+        updatePage={updatePage}
         updateCardsPerPage={updateCardsPerPage}
         options={options}
+        cardsPerPage={cardsPerPage}
       />
     </div>
   );
