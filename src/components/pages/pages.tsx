@@ -11,7 +11,7 @@ const Pages: React.FC<PaginationProps> = ({
   updateCardsPerPage,
 }) => {
   const pageNumbers = [];
-  const options = [8, 12, 16];
+  const options = [8, 12];
 
   for (let i = 1; i <= Math.ceil(totalCount / cardsPerPage); i += 1) {
     pageNumbers.push(i);

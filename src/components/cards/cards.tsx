@@ -1,10 +1,10 @@
 import React from 'react';
-import { ViewProps } from '../../types/types';
+import { CardsProps } from '../../types/types';
 import { ThreeDots } from 'react-loader-spinner';
 import './cards.css';
 import { Link, useSearchParams } from 'react-router-dom';
 
-const Cards: React.FC<ViewProps> = ({ loading, data }) => {
+const Cards: React.FC<CardsProps> = ({ loading, data, updateOverlay }) => {
   const [searchParams] = useSearchParams();
 
   const render = (): JSX.Element => {
@@ -17,6 +17,7 @@ const Cards: React.FC<ViewProps> = ({ loading, data }) => {
               className="card"
               key={card.id}
               to={{ pathname: 'details', search: searchParams.toString() }}
+              onClick={updateOverlay}
             >
               <h4 className="card__title">{card.name}</h4>
               <img className="card__image" src={card.image}></img>

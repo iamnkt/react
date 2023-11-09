@@ -9,9 +9,12 @@ export interface Card {
 }
 
 export interface CardDetail {
+  image: string;
   name: string;
   hp: string;
+  level: string;
   types: string[];
+  rarity: string;
 }
 
 export interface Data {
@@ -40,9 +43,10 @@ export type SearchProps = {
   cardsPerPage: number;
 };
 
-export type ViewProps = {
+export type CardsProps = {
   loading: boolean;
   data: Data[];
+  updateOverlay: () => void;
 };
 
 export type PaginationProps = {
@@ -66,10 +70,16 @@ export type RootProps = {
   updateTotalCount: (totalCount: number) => void;
   updateCurrentPage: (pageNumber: number) => void;
   updateCardsPerPage: (cardsNumber: number) => void;
+  updateOverlay: () => void;
+  overlay: boolean;
   name: string;
   currentPage: number;
   cardsPerPage: number;
   loading: boolean;
   cards: Data[];
   totalCount: number;
+};
+
+export type DetailsProps = {
+  updateOverlay: () => void;
 };

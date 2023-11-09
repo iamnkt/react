@@ -11,6 +11,7 @@ import Details from './components/details/details';
 import Main from './layouts/main';
 
 export const App: React.FC = () => {
+  const [overlay, setOverlay] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [cards, setCards] = useState<Data[]>([]);
   const [name, setName] = useState<string>(localStorage.getItem('card') || '');
@@ -21,6 +22,10 @@ export const App: React.FC = () => {
   const [cardsPerPage, setCardsPerPage] = useState<number>(
     Number(localStorage.getItem('pageCards')) || 8
   );
+
+  const updateOverlay = () => {
+    overlay === false ? setOverlay(true) : setOverlay(false);
+  };
 
   const updateCard = (name: string) => {
     setName(name);
@@ -57,6 +62,8 @@ export const App: React.FC = () => {
           updateTotalCount={updateTotalCount}
           updateCurrentPage={updateCurrentPage}
           updateCardsPerPage={updateCardsPerPage}
+          updateOverlay={updateOverlay}
+          overlay={overlay}
           name={name}
           cards={cards}
           currentPage={currentPage}
@@ -67,14 +74,17 @@ export const App: React.FC = () => {
       }
     >
       <Route index element={null} />
-      <Route path="details" element={<Details />} />
+      <Route
+        path="details"
+        element={<Details updateOverlay={updateOverlay} />}
+      />
     </Route>
   );
 
   const router = createBrowserRouter(routes);
 
   return (
-    <div className="app">
+    <div className="app" id="app">
       <RouterProvider router={router} />
     </div>
   );

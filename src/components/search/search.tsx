@@ -51,6 +51,11 @@ const Search: React.FC<SearchProps> = ({
   useEffect(() => {
     const lsCard = localStorage.getItem('card');
     setCard(lsCard || '');
+    setSearchParams({
+      q: `name:${name}*`,
+      page: currentPage.toString(),
+      pageSize: cardsPerPage.toString(),
+    });
   }, []);
 
   useEffect(() => {

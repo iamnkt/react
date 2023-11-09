@@ -11,7 +11,6 @@ export async function searchCards(
     apiUrl.search = params.toString();
 
     const response = await fetch(apiUrl.toString());
-
     const cardsData = await response.json();
 
     totalCount = cardsData.totalCount;
@@ -36,11 +35,32 @@ export async function getCardById(id: string): Promise<CardDetail | null> {
   try {
     const response = await fetch(`https://api.pokemontcg.io/v2/cards/${id}`);
     const cardData = await response.json();
-    const { name, hp, types } = cardData.data;
-    card = { name, hp, types };
+    console.log(cardData);
+    card = {};
+    Object.defineProperties(card, {
+      image: {
+        value: cardData.data.images.small,
+      },
+      name: {
+        value: cardData.data.name,
+      },
+      hp: {
+        value: cardData.data.hp,
+      },
+      level: {
+        value: cardData.data.level,
+      },
+      types: {
+        value: cardData.data.types,
+      },
+      rarity: {
+        value: cardData.data.rarity,
+      },
+    });
+    console.log(card);
   } catch (error) {
     console.error(error);
   }
 
-  return card;
+  return card as CardDetail;
 }

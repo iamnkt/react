@@ -8,9 +8,18 @@
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
   display: flex;
-  align-items: center;
   justify-content: center;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 2 1 0;
+  padding: 2rem;
+}
+
+.overlay {
+  z-index: 999;
+  opacity: 0.6;
 }
