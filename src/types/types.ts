@@ -23,6 +23,8 @@ export interface Data {
   image: string;
 }
 
+export type ContextCards = Data[];
+
 export interface ErrorProps {
   children?: ReactNode;
 }
@@ -58,7 +60,6 @@ export type ContextType = {
 
 export type CardsProps = {
   isLoading: boolean;
-  data: Data[];
   setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
 };
 

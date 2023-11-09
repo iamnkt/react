@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CardsProps } from '../../types/types';
 import { ThreeDots } from 'react-loader-spinner';
 import './styles.css';
 import Card from '../card/card';
+import { CardsContext } from '../../App';
 
-const Cards: React.FC<CardsProps> = ({ isLoading, data, setDetails }) => {
+const Cards: React.FC<CardsProps> = ({ isLoading, setDetails }) => {
+  const data = useContext(CardsContext);
+
   const render = (): JSX.Element => {
-    return data.length ? (
+    return data?.length ? (
       <div className="cards__container">
         {data.map((card) => {
           return (

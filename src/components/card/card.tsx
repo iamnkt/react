@@ -8,7 +8,6 @@ const Card: React.FC<CardProps> = ({ id, name, image, setDetails }) => {
 
   const cardHandler = async () => {
     const response = await getCardById(id);
-    console.log(response);
     setDetails(response);
     localStorage.setItem('details', JSON.stringify(response));
     navigate(`/details/${id}`);

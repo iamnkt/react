@@ -1,7 +1,7 @@
 .cards__container {
   margin: 0 auto;
   max-width: 1160px;
-  width: 100%;
+  width: fit-content;
   padding: 20px;
   display: grid;
   gap: 40px;

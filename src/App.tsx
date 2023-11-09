@@ -8,6 +8,7 @@ import Search from './components/search/search';
 import { CardDetail, ContextType, Data } from './types/types';
 
 export const SearchContext = createContext('');
+export const CardsContext = createContext<Data[] | null>(null);
 
 export const App: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -77,16 +78,18 @@ export const App: React.FC = () => {
       <div className="main__container">
         <SearchContext.Provider value={query}>
           <Search updateQuery={updateQuery} />
-          <Cards isLoading={isLoading} data={cards} setDetails={setDetails} />
-          <Pages
-            isLoading={isLoading}
-            totalCount={totalCount}
-            updateCardsPerPage={updateCardsPerPage}
-            updatePage={updatePage}
-            page={page}
-            cardsPerPage={cardsPerPage}
-          />
         </SearchContext.Provider>
+        <CardsContext.Provider value={cards}>
+          <Cards isLoading={isLoading} setDetails={setDetails} />
+        </CardsContext.Provider>
+        <Pages
+          isLoading={isLoading}
+          totalCount={totalCount}
+          updateCardsPerPage={updateCardsPerPage}
+          updatePage={updatePage}
+          page={page}
+          cardsPerPage={cardsPerPage}
+        />
       </div>
       <Outlet context={{ details, setDetails } satisfies ContextType} />
     </div>
