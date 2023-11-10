@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import { CardsDataContext } from '../../App';
+import { DataContext } from '../../App';
 import { PagesProps } from '../../types/types';
 import Dropdown from '../dropdown/dropdown';
 import './styles.css';
 
 const Pages: React.FC<PagesProps> = ({ isLoading }) => {
-  const { totalCount, cardsPerPage, page, setPage } =
-    useContext(CardsDataContext);
+  const { totalCount, cardsPerPage, page, setPage } = useContext(DataContext);
   const options = [8, 12];
   const pagesCount = Math.ceil(totalCount / cardsPerPage);
 

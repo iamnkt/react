@@ -56,12 +56,9 @@ export type CardProps = {
   image: string;
 };
 
-export type TSearchDataContext = {
+export type TDataContext = {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
-};
-
-export type TCardsDataContext = {
   cards: Data[];
   setCards: React.Dispatch<React.SetStateAction<Data[]>>;
   details: CardDetail | null;

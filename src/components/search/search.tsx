@@ -1,10 +1,10 @@
 import React, { useContext, useRef } from 'react';
-import { SearchDataContext } from '../../App';
+import { DataContext } from '../../App';
 import ErrorButton from '../error-button/errorButton';
 import './styles.css';
 
 const Search: React.FC = () => {
-  const { query, setQuery } = useContext(SearchDataContext);
+  const { query, setQuery } = useContext(DataContext);
   const inputText = useRef<HTMLInputElement>(null);
 
   const buttonSearchHandler = () => {

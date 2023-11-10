@@ -4,17 +4,10 @@ import { getCards } from './api/getCards';
 import Cards from './components/cards/cards';
 import Pages from './components/pages/pages';
 import Search from './components/search/search';
-import {
-  CardDetail,
-  ContextType,
-  Data,
-  TCardsDataContext,
-  TSearchDataContext,
-} from './types/types';
+import { CardDetail, ContextType, Data, TDataContext } from './types/types';
 import './App.css';
 
-export const SearchDataContext = createContext<TSearchDataContext>(null!);
-export const CardsDataContext = createContext<TCardsDataContext>(null!);
+export const DataContext = createContext<TDataContext>(null!);
 
 export const App: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,8 +27,7 @@ export const App: React.FC = () => {
     JSON.parse(localStorage.getItem('details') as string) || null
   );
 
-  const SearchDataProvider = SearchDataContext.Provider;
-  const CardsDataProvider = CardsDataContext.Provider;
+  const DataProvider = DataContext.Provider;
 
   useEffect(() => {
     setSearchParams({
@@ -61,8 +53,10 @@ export const App: React.FC = () => {
 
   return (
     <div className="app" id="app">
-      <CardsDataProvider
+      <DataProvider
         value={{
+          query,
+          setQuery,
           cards,
           setCards,
           details,
@@ -75,14 +69,12 @@ export const App: React.FC = () => {
         }}
       >
         <div className="main__container">
-          <SearchDataProvider value={{ query, setQuery }}>
-            <Search />
-          </SearchDataProvider>
+          <Search />
           <Cards isLoading={isLoading} />
           <Pages isLoading={isLoading} />
         </div>
         <Outlet context={{ details, setDetails } satisfies ContextType} />
-      </CardsDataProvider>
+      </DataProvider>
     </div>
   );
 };

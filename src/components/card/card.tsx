@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCardById } from '../../api/getDetailedCard';
-import { CardsDataContext } from '../../App';
+import { DataContext } from '../../App';
 import { CardProps } from '../../types/types';
 
 const Card: React.FC<CardProps> = ({ id, name, image }) => {
-  const { setDetails } = useContext(CardsDataContext);
+  const { setDetails } = useContext(DataContext);
   const navigate = useNavigate();
 
   const cardHandler = async () => {

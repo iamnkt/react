@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { CardsDataContext } from '../../App';
+import { DataContext } from '../../App';
 import { DropdownProps } from '../../types/types';
 
 const Dropdown: React.FC<DropdownProps> = ({ options }) => {
-  const { cardsPerPage, setCardsPerPage, setPage } =
-    useContext(CardsDataContext);
+  const { cardsPerPage, setCardsPerPage, setPage } = useContext(DataContext);
   const [selectedOption, setSelectedOption] = useState(cardsPerPage);
 
   return (
