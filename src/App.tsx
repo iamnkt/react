@@ -1,11 +1,11 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
 import { getCards } from './api/getCards';
-import './App.css';
 import Cards from './components/cards/cards';
 import Pages from './components/pages/pages';
 import Search from './components/search/search';
 import { CardDetail, ContextType, Data } from './types/types';
+import './App.css';
 
 export const SearchContext = createContext('');
 export const CardsContext = createContext<Data[] | null>(null);
