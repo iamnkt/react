@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { CardsDataContext } from '../../App';
 import { DropdownProps } from '../../types/types';
 
-const Dropdown: React.FC<DropdownProps> = ({
-  updatePage,
-  updateCardsPerPage,
-  options,
-  cardsPerPage,
-}) => {
+const Dropdown: React.FC<DropdownProps> = ({ options }) => {
+  const { cardsPerPage, setCardsPerPage, setPage } =
+    useContext(CardsDataContext);
   const [selectedOption, setSelectedOption] = useState(cardsPerPage);
 
   return (
@@ -16,8 +14,10 @@ const Dropdown: React.FC<DropdownProps> = ({
       onChange={(e) => {
         console.log(e.target.value);
         setSelectedOption(Number(e.target.value));
-        updateCardsPerPage(Number(e.target.value));
-        updatePage(1);
+        setCardsPerPage(Number(e.target.value));
+        setPage(1);
+        localStorage.setItem('cardsPerPage', e.target.value);
+        localStorage.setItem('pageNumber', '1');
       }}
     >
       {options.map((value: number) => (

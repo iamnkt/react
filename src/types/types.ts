@@ -33,24 +33,12 @@ export interface ErrorState {
   hasError: boolean;
 }
 
-export type SearchProps = {
-  updateQuery: (query: string) => void;
-};
-
 export type PagesProps = {
   isLoading: boolean;
-  totalCount: number;
-  page: number;
-  updatePage: (number: number) => void;
-  updateCardsPerPage: (number: number) => void;
-  cardsPerPage: number;
 };
 
 export type DropdownProps = {
-  updatePage: (number: number) => void;
-  updateCardsPerPage: (number: number) => void;
   options: number[];
-  cardsPerPage: number;
 };
 
 export type ContextType = {
@@ -60,12 +48,27 @@ export type ContextType = {
 
 export type CardsProps = {
   isLoading: boolean;
-  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
 };
 
 export type CardProps = {
-  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
   id: string;
   name: string;
   image: string;
+};
+
+export type TSearchDataContext = {
+  query: string;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export type TCardsDataContext = {
+  cards: Data[];
+  setCards: React.Dispatch<React.SetStateAction<Data[]>>;
+  details: CardDetail | null;
+  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
+  totalCount: number;
+  page: number;
+  cardsPerPage: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  setCardsPerPage: React.Dispatch<React.SetStateAction<number>>;
 };

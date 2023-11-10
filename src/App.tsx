@@ -4,11 +4,17 @@ import { getCards } from './api/getCards';
 import Cards from './components/cards/cards';
 import Pages from './components/pages/pages';
 import Search from './components/search/search';
-import { CardDetail, ContextType, Data } from './types/types';
+import {
+  CardDetail,
+  ContextType,
+  Data,
+  TCardsDataContext,
+  TSearchDataContext,
+} from './types/types';
 import './App.css';
 
-export const SearchContext = createContext('');
-export const CardsContext = createContext<Data[] | null>(null);
+export const SearchDataContext = createContext<TSearchDataContext>(null!);
+export const CardsDataContext = createContext<TCardsDataContext>(null!);
 
 export const App: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -28,28 +34,8 @@ export const App: React.FC = () => {
     JSON.parse(localStorage.getItem('details') as string) || null
   );
 
-  const updateQuery = (value: string) => {
-    setQuery(value);
-    localStorage.setItem('query', value);
-  };
-
-  const updateCards = (data: Data[]) => {
-    setCards(data);
-  };
-
-  const updateTotalCount = (totalCount: number) => {
-    setTotalCount(totalCount);
-  };
-
-  const updatePage = (pageNumber: number) => {
-    setPage(pageNumber);
-    localStorage.setItem('pageNumber', pageNumber.toString());
-  };
-
-  const updateCardsPerPage = (cardsNumber: number) => {
-    setCardsPerPage(cardsNumber);
-    localStorage.setItem('cardsPerPage', cardsNumber.toString());
-  };
+  const SearchDataProvider = SearchDataContext.Provider;
+  const CardsDataProvider = CardsDataContext.Provider;
 
   useEffect(() => {
     setSearchParams({
@@ -67,31 +53,36 @@ export const App: React.FC = () => {
       const { cards, totalCount } = await request;
 
       setIsLoading(false);
-      updateTotalCount(totalCount);
-      updateCards(cards);
+      setTotalCount(totalCount);
+      setCards(cards);
     }
     fetchData();
   }, [searchParams]);
 
   return (
     <div className="app" id="app">
-      <div className="main__container">
-        <SearchContext.Provider value={query}>
-          <Search updateQuery={updateQuery} />
-        </SearchContext.Provider>
-        <CardsContext.Provider value={cards}>
-          <Cards isLoading={isLoading} setDetails={setDetails} />
-        </CardsContext.Provider>
-        <Pages
-          isLoading={isLoading}
-          totalCount={totalCount}
-          updateCardsPerPage={updateCardsPerPage}
-          updatePage={updatePage}
-          page={page}
-          cardsPerPage={cardsPerPage}
-        />
-      </div>
-      <Outlet context={{ details, setDetails } satisfies ContextType} />
+      <CardsDataProvider
+        value={{
+          cards,
+          setCards,
+          details,
+          setDetails,
+          page,
+          totalCount,
+          cardsPerPage,
+          setPage,
+          setCardsPerPage,
+        }}
+      >
+        <div className="main__container">
+          <SearchDataProvider value={{ query, setQuery }}>
+            <Search />
+          </SearchDataProvider>
+          <Cards isLoading={isLoading} />
+          <Pages isLoading={isLoading} />
+        </div>
+        <Outlet context={{ details, setDetails } satisfies ContextType} />
+      </CardsDataProvider>
     </div>
   );
 };

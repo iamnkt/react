@@ -1,16 +1,16 @@
 import React, { useContext, useRef } from 'react';
-import { SearchContext } from '../../App';
-import { SearchProps } from '../../types/types';
+import { SearchDataContext } from '../../App';
 import ErrorButton from '../error-button/errorButton';
 import './styles.css';
 
-const Search: React.FC<SearchProps> = ({ updateQuery }) => {
-  const query = useContext(SearchContext);
+const Search: React.FC = () => {
+  const { query, setQuery } = useContext(SearchDataContext);
   const inputText = useRef<HTMLInputElement>(null);
 
   const buttonSearchHandler = () => {
     if (inputText.current) {
-      updateQuery(inputText.current?.value.trim());
+      setQuery(inputText.current?.value.trim());
+      localStorage.setItem('query', inputText.current?.value.trim());
     }
   };
 

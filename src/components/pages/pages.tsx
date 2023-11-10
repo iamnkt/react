@@ -1,16 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CardsDataContext } from '../../App';
 import { PagesProps } from '../../types/types';
 import Dropdown from '../dropdown/dropdown';
 import './styles.css';
 
-const Pages: React.FC<PagesProps> = ({
-  isLoading,
-  page,
-  totalCount,
-  cardsPerPage,
-  updatePage,
-  updateCardsPerPage,
-}) => {
+const Pages: React.FC<PagesProps> = ({ isLoading }) => {
+  const { totalCount, cardsPerPage, page, setPage } =
+    useContext(CardsDataContext);
   const options = [8, 12];
   const pagesCount = Math.ceil(totalCount / cardsPerPage);
 
@@ -23,7 +19,10 @@ const Pages: React.FC<PagesProps> = ({
       <div className="pages">
         <button
           type="button"
-          onClick={() => updatePage(1)}
+          onClick={() => {
+            setPage(1);
+            localStorage.setItem('pageNumber', '1');
+          }}
           disabled={page === 1}
         >
           &#60;&#60;
@@ -32,7 +31,8 @@ const Pages: React.FC<PagesProps> = ({
           type="button"
           onClick={() => {
             if (page > 1) {
-              updatePage(page - 1);
+              setPage(page - 1);
+              localStorage.setItem('pageNumber', String(page - 1));
             }
           }}
           disabled={page === 1}
@@ -44,7 +44,8 @@ const Pages: React.FC<PagesProps> = ({
           type="button"
           onClick={() => {
             if (page < pagesCount) {
-              updatePage(page + 1);
+              setPage(page + 1);
+              localStorage.setItem('pageNumber', String(page + 1));
             }
           }}
           disabled={page === pagesCount}
@@ -54,19 +55,15 @@ const Pages: React.FC<PagesProps> = ({
         <button
           type="button"
           onClick={() => {
-            updatePage(pagesCount);
+            setPage(pagesCount);
+            localStorage.setItem('pageNumber', String(pagesCount));
           }}
           disabled={page === pagesCount}
         >
           &#62;&#62;
         </button>
       </div>
-      <Dropdown
-        updatePage={updatePage}
-        updateCardsPerPage={updateCardsPerPage}
-        options={options}
-        cardsPerPage={cardsPerPage}
-      />
+      <Dropdown options={options} />
     </div>
   );
 };

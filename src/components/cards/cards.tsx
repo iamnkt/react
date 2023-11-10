@@ -3,22 +3,21 @@ import { CardsProps } from '../../types/types';
 import { ThreeDots } from 'react-loader-spinner';
 import './styles.css';
 import Card from '../card/card';
-import { CardsContext } from '../../App';
+import { CardsDataContext } from '../../App';
 
-const Cards: React.FC<CardsProps> = ({ isLoading, setDetails }) => {
-  const data = useContext(CardsContext);
+const Cards: React.FC<CardsProps> = ({ isLoading }) => {
+  const { cards } = useContext(CardsDataContext);
 
   const render = (): JSX.Element => {
-    return data?.length ? (
+    return cards?.length ? (
       <div className="cards__container">
-        {data.map((card) => {
+        {cards.map((card) => {
           return (
             <Card
               key={card.id}
               id={card.id}
               name={card.name}
               image={card.image}
-              setDetails={setDetails}
             />
           );
         })}
