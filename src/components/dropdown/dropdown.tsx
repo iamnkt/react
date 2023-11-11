@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { DataContext } from '../../App';
+import { DataContext } from '../../context/context';
 import { DropdownProps } from '../../types/types';
 
 const Dropdown: React.FC<DropdownProps> = ({ options }) => {
@@ -13,8 +13,8 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
       onChange={(e) => {
         console.log(e.target.value);
         setSelectedOption(Number(e.target.value));
-        setCardsPerPage(Number(e.target.value));
-        setPage(1);
+        setCardsPerPage!(Number(e.target.value));
+        setPage!(1);
         localStorage.setItem('cardsPerPage', e.target.value);
         localStorage.setItem('pageNumber', '1');
       }}

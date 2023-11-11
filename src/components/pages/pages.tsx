@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { DataContext } from '../../App';
-import { PagesProps } from '../../types/types';
+import { DataContext } from '../../context/context';
 import Dropdown from '../dropdown/dropdown';
 import './styles.css';
 
-const Pages: React.FC<PagesProps> = ({ isLoading }) => {
-  const { totalCount, cardsPerPage, page, setPage } = useContext(DataContext);
+const Pages: React.FC = () => {
+  const { totalCount, cardsPerPage, page, setPage, isLoading } =
+    useContext(DataContext);
   const options = [8, 12];
   const pagesCount = Math.ceil(totalCount / cardsPerPage);
 
@@ -19,7 +19,7 @@ const Pages: React.FC<PagesProps> = ({ isLoading }) => {
         <button
           type="button"
           onClick={() => {
-            setPage(1);
+            setPage!(1);
             localStorage.setItem('pageNumber', '1');
           }}
           disabled={page === 1}
@@ -30,7 +30,7 @@ const Pages: React.FC<PagesProps> = ({ isLoading }) => {
           type="button"
           onClick={() => {
             if (page > 1) {
-              setPage(page - 1);
+              setPage!(page - 1);
               localStorage.setItem('pageNumber', String(page - 1));
             }
           }}
@@ -43,7 +43,7 @@ const Pages: React.FC<PagesProps> = ({ isLoading }) => {
           type="button"
           onClick={() => {
             if (page < pagesCount) {
-              setPage(page + 1);
+              setPage!(page + 1);
               localStorage.setItem('pageNumber', String(page + 1));
             }
           }}
@@ -54,7 +54,7 @@ const Pages: React.FC<PagesProps> = ({ isLoading }) => {
         <button
           type="button"
           onClick={() => {
-            setPage(pagesCount);
+            setPage!(pagesCount);
             localStorage.setItem('pageNumber', String(pagesCount));
           }}
           disabled={page === pagesCount}

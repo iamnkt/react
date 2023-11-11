@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import { CardsProps } from '../../types/types';
 import { ThreeDots } from 'react-loader-spinner';
 import './styles.css';
 import Card from '../card/card';
-import { DataContext } from '../../App';
+import { DataContext } from '../../context/context';
 
-const Cards: React.FC<CardsProps> = ({ isLoading }) => {
-  const { cards } = useContext(DataContext);
+const Cards: React.FC = () => {
+  const { cards, isLoading } = useContext(DataContext);
 
   const render = (): JSX.Element => {
     return cards?.length ? (

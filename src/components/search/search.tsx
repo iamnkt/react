@@ -1,15 +1,49 @@
-import React, { useContext, useRef } from 'react';
-import { DataContext } from '../../App';
+import React, { useContext, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { getCards } from '../../api/getCards';
+import { DataContext } from '../../context/context';
 import ErrorButton from '../error-button/errorButton';
 import './styles.css';
 
 const Search: React.FC = () => {
-  const { query, setQuery } = useContext(DataContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const {
+    query,
+    setQuery,
+    page,
+    cardsPerPage,
+    setIsLoading,
+    setCards,
+    setTotalCount,
+  } = useContext(DataContext);
   const inputText = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setSearchParams({
+      q: `name:${query}*`,
+      page: page.toString(),
+      pageSize: cardsPerPage.toString(),
+    });
+  }, [query, page, cardsPerPage, setSearchParams]);
+
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading!(true);
+
+      const request = await getCards(searchParams);
+      const { cards, totalCount } = await request;
+
+      setIsLoading!(false);
+      setTotalCount!(totalCount);
+      setCards!(cards);
+    }
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   const buttonSearchHandler = () => {
     if (inputText.current) {
-      setQuery(inputText.current?.value.trim());
+      setQuery!(inputText.current?.value.trim());
       localStorage.setItem('query', inputText.current?.value.trim());
     }
   };

@@ -1,20 +1,18 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { Outlet, useSearchParams } from 'react-router-dom';
-import { getCards } from './api/getCards';
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import './App.css';
 import Cards from './components/cards/cards';
 import Pages from './components/pages/pages';
 import Search from './components/search/search';
-import { CardDetail, ContextType, Data, TDataContext } from './types/types';
-import './App.css';
+import { DataContext } from './context/context';
+import { Data, CardDetail, ContextType } from './types/types';
 
-export const DataContext = createContext<TDataContext>(null!);
+export const DataProvider = DataContext.Provider;
 
 export const App: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState<string>(
     localStorage.getItem('query') || ''
   );
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cards, setCards] = useState<Data[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [page, setPage] = useState<number>(
@@ -26,30 +24,7 @@ export const App: React.FC = () => {
   const [details, setDetails] = useState<CardDetail | null>(
     JSON.parse(localStorage.getItem('details') as string) || null
   );
-
-  const DataProvider = DataContext.Provider;
-
-  useEffect(() => {
-    setSearchParams({
-      q: `name:${query}*`,
-      page: page.toString(),
-      pageSize: cardsPerPage.toString(),
-    });
-  }, [query, page, cardsPerPage, setSearchParams]);
-
-  useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-
-      const request = await getCards(searchParams);
-      const { cards, totalCount } = await request;
-
-      setIsLoading(false);
-      setTotalCount(totalCount);
-      setCards(cards);
-    }
-    fetchData();
-  }, [searchParams]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <div className="app" id="app">
@@ -59,19 +34,22 @@ export const App: React.FC = () => {
           setQuery,
           cards,
           setCards,
+          totalCount,
+          setTotalCount,
+          page,
+          setPage,
+          cardsPerPage,
+          setCardsPerPage,
           details,
           setDetails,
-          page,
-          totalCount,
-          cardsPerPage,
-          setPage,
-          setCardsPerPage,
+          isLoading,
+          setIsLoading,
         }}
       >
         <div className="main__container">
           <Search />
-          <Cards isLoading={isLoading} />
-          <Pages isLoading={isLoading} />
+          <Cards />
+          <Pages />
         </div>
         <Outlet context={{ details, setDetails } satisfies ContextType} />
       </DataProvider>

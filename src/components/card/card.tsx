@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCardById } from '../../api/getDetailedCard';
-import { DataContext } from '../../App';
+import { DataContext } from '../../context/context';
+
 import { CardProps } from '../../types/types';
 
 const Card: React.FC<CardProps> = ({ id, name, image }) => {
@@ -10,7 +11,7 @@ const Card: React.FC<CardProps> = ({ id, name, image }) => {
 
   const cardHandler = async () => {
     const response = await getCardById(id);
-    setDetails(response);
+    setDetails!(response);
     localStorage.setItem('details', JSON.stringify(response));
     navigate(`/details/${id}`);
   };
