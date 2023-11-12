@@ -3,14 +3,17 @@ import { ThreeDots } from 'react-loader-spinner';
 import './styles.css';
 import Card from '../card/card';
 import { DataContext } from '../../context/context';
+import { useSearchParams } from 'react-router-dom';
 
 const Cards: React.FC = () => {
   const { cards, isLoading } = useContext(DataContext);
+  const [searchParams] = useSearchParams();
 
   const render = (): JSX.Element => {
     return cards?.length ? (
       <div className="cards__container">
         {cards.map((card) => {
+          searchParams.set('id', card.id);
           return (
             <Card
               key={card.id}

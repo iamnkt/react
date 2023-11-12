@@ -1,12 +1,12 @@
 import { BrowserRouter } from 'react-router-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-
 import { DataProvider } from '../App';
 import { CardDetail, Data } from '../types/types';
 import { CharizardCardMock } from './__mocks__/cardMock';
 import {
   cardsPerPage,
+  isDetailsLoading,
   isLoading,
   page,
   query,
@@ -50,6 +50,7 @@ describe('Pages component', () => {
             page,
             cardsPerPage,
             isLoading,
+            isDetailsLoading,
           }}
         >
           <Pages />

@@ -6,6 +6,7 @@ import { CardDetail, Data } from '../types/types';
 import { CharizardCardMock } from './__mocks__/cardMock';
 import {
   cardsPerPage,
+  isDetailsLoading,
   isLoading,
   page,
   query,
@@ -39,6 +40,8 @@ const { getItemMock, setItemMock } = localStorageMock();
 
 describe('In search component', () => {
   const setQuery = jest.fn();
+  const setPage = jest.fn();
+
   it('clicking the Search button saves the entered value to the local storage', () => {
     render(
       <BrowserRouter>
@@ -46,12 +49,14 @@ describe('In search component', () => {
           value={{
             query,
             setQuery,
+            setPage,
             cards,
             details,
             totalCount,
             page,
             cardsPerPage,
             isLoading,
+            isDetailsLoading,
           }}
         >
           <Search />
@@ -70,12 +75,14 @@ describe('In search component', () => {
           value={{
             query,
             setQuery,
+            setPage,
             cards,
             details,
             totalCount,
             page,
             cardsPerPage,
             isLoading,
+            isDetailsLoading,
           }}
         >
           <Search />

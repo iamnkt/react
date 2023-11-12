@@ -1,16 +1,24 @@
 import React, { useContext, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { DataContext } from '../../context/context';
 import ErrorButton from '../error-button/errorButton';
 import './styles.css';
 
 const Search: React.FC = () => {
-  const { query, setQuery } = useContext(DataContext);
+  const { query, setQuery, setPage, cardsPerPage } = useContext(DataContext);
   const inputText = useRef<HTMLInputElement>(null);
+  const [, setSearchParams] = useSearchParams();
 
   const buttonSearchHandler = () => {
     if (inputText.current) {
       setQuery!(inputText.current?.value.trim());
       localStorage.setItem('query', inputText.current?.value.trim());
+      setPage!(1);
+      setSearchParams({
+        q: `name:${inputText.current?.value.trim()}*`,
+        page: '1',
+        pageSize: cardsPerPage.toString(),
+      });
     }
   };
 

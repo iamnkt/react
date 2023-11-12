@@ -1,21 +1,45 @@
-import React from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { ThreeDots } from 'react-loader-spinner';
+import {
+  useNavigate,
+  useOutletContext,
+  useSearchParams,
+} from 'react-router-dom';
+import { DataContext } from '../../context/context';
 import { ContextType } from '../../types/types';
 import './styles.css';
 
 const Details: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const { isDetailsLoading } = useContext(DataContext);
   const { details, setDetails } = useOutletContext<ContextType>();
   const navigate = useNavigate();
 
-  return (
+  const onCloseClick = () => {
+    setDetails(null);
+    localStorage.removeItem('details');
+    navigate(`/?${searchParams}`);
+  };
+
+  return isDetailsLoading ? (
+    <div data-testid="loader" className="loading">
+      <ThreeDots
+        height="80"
+        width="80"
+        radius="9"
+        color="#FFC759"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClassName=""
+        visible={true}
+      />
+    </div>
+  ) : (
     <div data-testid="card-details" className="card-details">
       <button
+        data-testid="button"
         className="card-details__button button"
-        onClick={() => {
-          setDetails(null);
-          localStorage.removeItem('details');
-          navigate('/');
-        }}
+        onClick={onCloseClick}
       >
         x
       </button>

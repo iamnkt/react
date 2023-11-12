@@ -1,9 +1,12 @@
 import React, { useContext, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { DataContext } from '../../context/context';
 import { DropdownProps } from '../../types/types';
 
 const Dropdown: React.FC<DropdownProps> = ({ options }) => {
-  const { cardsPerPage, setCardsPerPage, setPage } = useContext(DataContext);
+  const [, setSearchParams] = useSearchParams();
+  const { cardsPerPage, setCardsPerPage, setPage, query } =
+    useContext(DataContext);
   const [selectedOption, setSelectedOption] = useState(cardsPerPage);
 
   return (
@@ -15,6 +18,11 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
         setSelectedOption(Number(e.target.value));
         setCardsPerPage!(Number(e.target.value));
         setPage!(1);
+        setSearchParams({
+          q: `name:${query}*`,
+          page: '1',
+          pageSize: e.target.value,
+        });
         localStorage.setItem('cardsPerPage', e.target.value);
         localStorage.setItem('pageNumber', '1');
       }}

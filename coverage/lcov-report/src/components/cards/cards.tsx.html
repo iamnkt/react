@@ -23,9 +23,9 @@
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">92.85% </span>
+            <span class="strong">94.11% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">13/14</span>
+            <span class="fraction">16/17</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -41,9 +41,9 @@
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">92.85% </span>
+            <span class="strong">94.11% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">13/14</span>
+            <span class="fraction">16/17</span>
           </div>
         </div>
         <p class="quiet">
@@ -110,19 +110,25 @@
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -160,20 +166,23 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useContext } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import './styles.css';
 import Card from '../card/card';
 import { DataContext } from '../../context/context';
+import { useSearchParams } from 'react-router-dom';
 &nbsp;
 const Cards: React.FC = () =&gt; {
   const { cards, isLoading } = useContext(DataContext);
+  const [searchParams] = useSearchParams();
 &nbsp;
   const render = (): JSX.Element =&gt; {
     return cards?.length ? (
       &lt;div className="cards__container"&gt;
         {cards.map((card) =&gt; {
+          searchParams.set('id', card.id);
           return (
             &lt;Card
               key={card.id}
@@ -226,7 +235,7 @@ export default Cards;
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2023-11-12T13:39:00.544Z
+      at 2023-11-12T21:40:02.068Z
     </div>
     <script src="../../../prettify.js"></script>
     <script>

@@ -71,6 +71,8 @@ export type TDataContext = {
   setCardsPerPage?: React.Dispatch<React.SetStateAction<number>>;
   isLoading: boolean;
   setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+  isDetailsLoading: boolean;
+  setIsDetailsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export interface ContextValue {

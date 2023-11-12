@@ -23,9 +23,9 @@
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">71.42% </span>
+            <span class="strong">64.7% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">10/14</span>
+            <span class="fraction">11/17</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -41,9 +41,9 @@
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">71.42% </span>
+            <span class="strong">64.7% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">10/14</span>
+            <span class="fraction">11/17</span>
           </div>
         </div>
         <p class="quiet">
@@ -88,51 +88,57 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getCardById } from '../../api/getDetailedCard';
 import { DataContext } from '../../context/context';
-&nbsp;
 import { CardProps } from '../../types/types';
 &nbsp;
 const Card: React.FC&lt;CardProps&gt; = ({ id, name, image }) =&gt; {
-  const { setDetails } = useContext(DataContext);
+  const { setDetails, setIsDetailsLoading } = useContext(DataContext);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 &nbsp;
   const cardHandler = <span class="fstat-no" title="function not covered" >async </span>() =&gt; {
+<span class="cstat-no" title="statement not covered" >    setIsDetailsLoading!(true);</span>
     const response = <span class="cstat-no" title="statement not covered" >await getCardById(id);</span>
 <span class="cstat-no" title="statement not covered" >    setDetails!(response);</span>
 <span class="cstat-no" title="statement not covered" >    localStorage.setItem('details', JSON.stringify(response));</span>
-<span class="cstat-no" title="statement not covered" >    navigate(`/details/${id}`);</span>
+<span class="cstat-no" title="statement not covered" >    navigate(`/details/${id}?${searchParams}`);</span>
+<span class="cstat-no" title="statement not covered" >    setIsDetailsLoading!(false);</span>
   };
 &nbsp;
   return (
@@ -160,7 +166,7 @@ export default Card;
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2023-11-12T13:39:00.544Z
+      at 2023-11-12T21:40:02.068Z
     </div>
     <script src="../../../prettify.js"></script>
     <script>

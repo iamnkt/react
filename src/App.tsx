@@ -26,6 +26,8 @@ export const App: React.FC = () => {
     JSON.parse(localStorage.getItem('details') as string) || null
   );
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isDetailsLoading, setIsDetailsLoading] =
+    React.useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -34,6 +36,10 @@ export const App: React.FC = () => {
       page: page.toString(),
       pageSize: cardsPerPage.toString(),
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     async function fetchData() {
       setIsLoading!(true);
 
@@ -46,7 +52,7 @@ export const App: React.FC = () => {
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, page, cardsPerPage, searchParams]);
+  }, [searchParams]);
 
   return (
     <div className="app" id="app">
@@ -66,6 +72,8 @@ export const App: React.FC = () => {
           setDetails,
           isLoading,
           setIsLoading,
+          isDetailsLoading,
+          setIsDetailsLoading,
         }}
       >
         <div className="main__container">

@@ -22,6 +22,11 @@ const Pages: React.FC = () => {
           type="button"
           onClick={() => {
             setPage!(1);
+            setSearchParams({
+              q: `name:${query}*`,
+              page: '1',
+              pageSize: cardsPerPage.toString(),
+            });
             localStorage.setItem('pageNumber', '1');
           }}
           disabled={page === 1}
@@ -33,6 +38,11 @@ const Pages: React.FC = () => {
           onClick={() => {
             if (page > 1) {
               setPage!(page - 1);
+              setSearchParams({
+                q: `name:${query}*`,
+                page: (page - 1).toString(),
+                pageSize: cardsPerPage.toString(),
+              });
               localStorage.setItem('pageNumber', String(page - 1));
             }
           }}
@@ -63,6 +73,11 @@ const Pages: React.FC = () => {
           type="button"
           onClick={() => {
             setPage!(pagesCount);
+            setSearchParams({
+              q: `name:${query}*`,
+              page: pagesCount.toString(),
+              pageSize: cardsPerPage.toString(),
+            });
             localStorage.setItem('pageNumber', String(pagesCount));
           }}
           disabled={page === pagesCount}

@@ -1,19 +1,21 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getCardById } from '../../api/getDetailedCard';
 import { DataContext } from '../../context/context';
-
 import { CardProps } from '../../types/types';
 
 const Card: React.FC<CardProps> = ({ id, name, image }) => {
-  const { setDetails } = useContext(DataContext);
+  const { setDetails, setIsDetailsLoading } = useContext(DataContext);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const cardHandler = async () => {
+    setIsDetailsLoading!(true);
     const response = await getCardById(id);
     setDetails!(response);
     localStorage.setItem('details', JSON.stringify(response));
-    navigate(`/details/${id}`);
+    navigate(`/details/${id}?${searchParams}`);
+    setIsDetailsLoading!(false);
   };
 
   return (

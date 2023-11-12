@@ -1,10 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-
-import Cards from '../components/cards/cards';
 import { DataProvider } from '../App';
-import { CharizardMock, CharmanderMock } from './__mocks__/cardsMock';
 import { CardDetail, Data } from '../types/types';
 import { CharizardCardMock } from './__mocks__/cardMock';
 import {
@@ -14,34 +11,30 @@ import {
   query,
   totalCount,
 } from './__mocks__/contextDataMock';
+import { CharizardMock, CharmanderMock } from './__mocks__/cardsMock';
+import Details from '../components/details/details';
+import Card from '../components/card/card';
 
 const details: CardDetail = CharizardCardMock;
+const cards: Data[] = [CharmanderMock, CharizardMock];
+const mockedUsedNavigate = jest.fn();
 
-describe('Cards component', () => {
-  it('renders correctly', () => {
-    const cards: Data[] = [CharmanderMock, CharizardMock];
-    const container = render(
-      <BrowserRouter>
-        <DataProvider
-          value={{
-            query,
-            cards,
-            details,
-            totalCount,
-            page,
-            cardsPerPage,
-            isLoading,
-          }}
-        >
-          <Cards />
-        </DataProvider>
-      </BrowserRouter>
-    );
-    expect(container).toMatchSnapshot();
-  });
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedUsedNavigate,
+}));
 
-  it('should display the specified number of cards', () => {
-    const cards: Data[] = [CharmanderMock, CharizardMock];
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useOutletContext: () => ({
+    details: details,
+    setDetails: jest.fn(),
+  }),
+}));
+
+describe('Details component', () => {
+  it('displays loading indicator while fetching data', () => {
+    const isDetailsLoading = true;
     render(
       <BrowserRouter>
         <DataProvider
@@ -53,18 +46,19 @@ describe('Cards component', () => {
             page,
             cardsPerPage,
             isLoading,
+            isDetailsLoading,
           }}
         >
-          <Cards />
+          <Details />
         </DataProvider>
       </BrowserRouter>
     );
-    const result = screen.queryAllByTestId('card');
-    expect(result).toHaveLength(2);
+    const loader = screen.getByTestId('loader');
+    expect(loader).toBeInTheDocument();
   });
 
-  it('should be displayed component, when there are no cards', () => {
-    const cards: Data[] = [];
+  it('correctly displays the detailed card data', () => {
+    const isDetailsLoading = false;
     render(
       <BrowserRouter>
         <DataProvider
@@ -76,13 +70,53 @@ describe('Cards component', () => {
             page,
             cardsPerPage,
             isLoading,
+            isDetailsLoading,
           }}
         >
-          <Cards />
+          <Details />
         </DataProvider>
       </BrowserRouter>
     );
-    const result = screen.queryByText(/No cards were found/i);
-    expect(result).toBeInTheDocument();
+    expect(screen.queryByText(/Charizard/i)).toBeInTheDocument();
+    expect(screen.queryByText(/150/i)).toBeInTheDocument();
+    expect(screen.queryByText(/12/i)).toBeInTheDocument();
+    expect(screen.queryByText(/fire/i)).toBeInTheDocument();
+    expect(screen.queryByText(/rare/i)).toBeInTheDocument();
+  });
+
+  it('clicking the close button hides the component', async () => {
+    const isDetailsLoading = false;
+    const setDetails = jest.fn();
+    render(
+      <BrowserRouter>
+        <DataProvider
+          value={{
+            query,
+            cards,
+            details,
+            setDetails,
+            totalCount,
+            page,
+            cardsPerPage,
+            isLoading,
+            isDetailsLoading,
+          }}
+        >
+          <Card
+            id={CharizardMock.id}
+            name={CharizardMock.name}
+            image={CharizardMock.image}
+          />
+          <Details />
+        </DataProvider>
+      </BrowserRouter>
+    );
+    const closeButton = screen.getByTestId('button');
+    const detailedCard = screen.queryByTestId('card-details');
+    expect(detailedCard).toBeInTheDocument();
+    fireEvent.click(closeButton);
+    await waitFor(() => {
+      expect(detailedCard).not.toBeNull();
+    });
   });
 });

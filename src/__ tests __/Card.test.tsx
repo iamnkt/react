@@ -1,14 +1,13 @@
 import { BrowserRouter } from 'react-router-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-
 import Card from '../components/card/card';
 import { DataProvider } from '../App';
-import { CharizardMock, CharmanderMock } from './__mocks__/cardsMock';
 import { CardDetail } from '../types/types';
 import { CharizardCardMock } from './__mocks__/cardMock';
 import {
   cardsPerPage,
+  isDetailsLoading,
   isLoading,
   page,
   query,
@@ -16,6 +15,7 @@ import {
 } from './__mocks__/contextDataMock';
 import React from 'react';
 import { getCardById } from '../api/getDetailedCard';
+import { CharizardMock, CharmanderMock } from './__mocks__/cardsMock';
 
 const cards = [CharizardMock, CharmanderMock];
 const details: CardDetail = CharizardCardMock;
@@ -47,6 +47,7 @@ describe('Card component', () => {
             page,
             cardsPerPage,
             isLoading,
+            isDetailsLoading,
           }}
         >
           <Card
@@ -72,6 +73,7 @@ describe('Card component', () => {
               query,
               cards,
               details,
+              isDetailsLoading,
               setDetails,
               totalCount,
               page,
@@ -87,12 +89,14 @@ describe('Card component', () => {
           </DataProvider>
         </BrowserRouter>
       );
-      await fireEvent.click(screen.getByTestId('card'));
-      expect(await screen.findByTestId('card-details')).toBeInTheDocument();
+      const card = screen.getByTestId('card');
+      const detailedCard = screen.getByTestId('card-details');
+      await fireEvent.click(card);
+      expect(await detailedCard).toBeInTheDocument();
     };
   });
 
-  it('triggers on clicking an additional API call to fetch detailed information.', () => {
+  it('triggers on clicking an additional API call to fetch detailed information', () => {
     const setDetails = jest.fn();
     async () => {
       (getCardById as jest.Mock).mockResolvedValue(details);
@@ -109,6 +113,7 @@ describe('Card component', () => {
               page,
               cardsPerPage,
               isLoading,
+              isDetailsLoading,
             }}
           >
             <Card
@@ -119,7 +124,8 @@ describe('Card component', () => {
           </DataProvider>
         </BrowserRouter>
       );
-      await fireEvent.click(screen.getByTestId('card'));
+      const card = screen.getByTestId('card');
+      await fireEvent.click(card);
       expect(getCardById).toHaveBeenCalled();
     };
   });
