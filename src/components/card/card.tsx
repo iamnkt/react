@@ -18,8 +18,10 @@ const Card: React.FC<CardProps> = ({ id, name, image }) => {
 
   return (
     <div data-testid={'card'} className="card" id={id} onClick={cardHandler}>
-      <h4 className="card__title">{name}</h4>
-      <img className="card__image" src={image}></img>
+      <h4 data-testid={'card-title'} className="card__title">
+        {name}
+      </h4>
+      <img data-testif={'card-image'} className="card__image" src={image}></img>
     </div>
   );
 };

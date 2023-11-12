@@ -8,7 +8,7 @@ const Details: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div id="card-details" className="card-details">
+    <div data-testid="card-details" className="card-details">
       <button
         className="card-details__button button"
         onClick={() => {

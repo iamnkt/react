@@ -15,11 +15,13 @@ exports[`Cards component renders correctly 1`] = `
         >
           <h4
             class="card__title"
+            data-testid="card-title"
           >
             Charmander
           </h4>
           <img
             class="card__image"
+            data-testif="card-image"
             src="https://images.pokemontcg.io/xy10/10_hires.png""
           />
         </div>
@@ -30,11 +32,13 @@ exports[`Cards component renders correctly 1`] = `
         >
           <h4
             class="card__title"
+            data-testid="card-title"
           >
             Charizard
           </h4>
           <img
             class="card__image"
+            data-testif="card-image"
             src="https://images.pokemontcg.io/bw15/12_hires.png""
           />
         </div>
@@ -52,11 +56,13 @@ exports[`Cards component renders correctly 1`] = `
       >
         <h4
           class="card__title"
+          data-testid="card-title"
         >
           Charmander
         </h4>
         <img
           class="card__image"
+          data-testif="card-image"
           src="https://images.pokemontcg.io/xy10/10_hires.png""
         />
       </div>
@@ -67,11 +73,13 @@ exports[`Cards component renders correctly 1`] = `
       >
         <h4
           class="card__title"
+          data-testid="card-title"
         >
           Charizard
         </h4>
         <img
           class="card__image"
+          data-testif="card-image"
           src="https://images.pokemontcg.io/bw15/12_hires.png""
         />
       </div>

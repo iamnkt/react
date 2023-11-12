@@ -52,7 +52,7 @@ describe('In search component', () => {
     );
     const button = screen.getByTestId('search-button');
     fireEvent.click(button);
-    expect(localStorage.getItem('query') !== null).toBe(true);
+    expect(localStorage.getItem('query')).toEqual('char');
   });
 
   it('retrieves the value from the local storage upon mounting', () => {

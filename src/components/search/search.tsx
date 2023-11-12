@@ -4,7 +4,7 @@ import ErrorButton from '../error-button/errorButton';
 import './styles.css';
 
 const Search: React.FC = () => {
-  const { setQuery } = useContext(DataContext);
+  const { query, setQuery } = useContext(DataContext);
   const inputText = useRef<HTMLInputElement>(null);
 
   const buttonSearchHandler = () => {
@@ -23,7 +23,7 @@ const Search: React.FC = () => {
           type="text"
           className="input input__search"
           placeholder="Pokemon name"
-          defaultValue={localStorage.getItem('query') || ''}
+          defaultValue={query}
           ref={inputText}
         ></input>
         <button

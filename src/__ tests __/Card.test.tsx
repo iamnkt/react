@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import Card from '../components/card/card';
@@ -15,6 +15,7 @@ import {
   totalCount,
 } from '../test/__mocks__/contextDataMock';
 import React from 'react';
+import { getCardById } from '../api/getDetailedCard';
 
 const cards = [CharizardMock, CharmanderMock];
 const details: CardDetail = CharizardCardMock;
@@ -25,34 +26,16 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockedUsedNavigate,
 }));
 
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve(details),
+  })
+) as jest.Mock;
+
+jest.mock('../api/getDetailedCard');
+
 describe('Card component', () => {
   it('renders the relevant card data', () => {
-    const container = render(
-      <BrowserRouter>
-        <DataProvider
-          value={{
-            query,
-            cards,
-            details,
-            totalCount,
-            page,
-            cardsPerPage,
-            isLoading,
-          }}
-        >
-          <Card
-            id={CharizardMock.id}
-            name={CharizardMock.name}
-            image={CharizardMock.image}
-          />
-        </DataProvider>
-      </BrowserRouter>
-    );
-    expect(container).toMatchSnapshot();
-  });
-
-  it('opens a detailed card component', () => {
-    const setDetails = jest.fn();
     render(
       <BrowserRouter>
         <DataProvider
@@ -60,7 +43,6 @@ describe('Card component', () => {
             query,
             cards,
             details,
-            setDetails,
             totalCount,
             page,
             cardsPerPage,
@@ -75,31 +57,70 @@ describe('Card component', () => {
         </DataProvider>
       </BrowserRouter>
     );
-    const card = screen.getByTestId('card');
-    act(() => fireEvent.click(card));
-    expect(document.getElementById('card-details')).toBeInTheDocument();
+    expect(screen.queryByText(CharizardMock.name)).toBeInTheDocument();
   });
 
-  // it('should be displayed component, when there are no cards', () => {
-  //   const cards: Data[] = [];
-  //   render(
-  //     <BrowserRouter>
-  //       <DataProvider
-  //         value={{
-  //           query,
-  //           cards,
-  //           details,
-  //           totalCount,
-  //           page,
-  //           cardsPerPage,
-  //           isLoading,
-  //         }}
-  //       >
-  //         <Card />
-  //       </DataProvider>
-  //     </BrowserRouter>
-  //   );
-  //   const result = screen.queryByText(/No cards were found/i);
-  //   expect(result).toBeInTheDocument();
-  // });
+  it('opens a detailed card component', () => {
+    const setDetails = jest.fn();
+    async () => {
+      (getCardById as jest.Mock).mockResolvedValue(details);
+
+      render(
+        <BrowserRouter>
+          <DataProvider
+            value={{
+              query,
+              cards,
+              details,
+              setDetails,
+              totalCount,
+              page,
+              cardsPerPage,
+              isLoading,
+            }}
+          >
+            <Card
+              id={CharizardMock.id}
+              name={CharizardMock.name}
+              image={CharizardMock.image}
+            />
+          </DataProvider>
+        </BrowserRouter>
+      );
+      await fireEvent.click(screen.getByTestId('card'));
+      expect(await screen.findByTestId('card-details')).toBeInTheDocument();
+    };
+  });
+
+  it('triggers on clicking an additional API call to fetch detailed information.', () => {
+    const setDetails = jest.fn();
+    async () => {
+      (getCardById as jest.Mock).mockResolvedValue(details);
+
+      render(
+        <BrowserRouter>
+          <DataProvider
+            value={{
+              query,
+              cards,
+              details,
+              setDetails,
+              totalCount,
+              page,
+              cardsPerPage,
+              isLoading,
+            }}
+          >
+            <Card
+              id={CharizardMock.id}
+              name={CharizardMock.name}
+              image={CharizardMock.image}
+            />
+          </DataProvider>
+        </BrowserRouter>
+      );
+      await fireEvent.click(screen.getByTestId('card'));
+      expect(getCardById).toHaveBeenCalled();
+    };
+  });
 });

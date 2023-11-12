@@ -5,26 +5,26 @@ export async function getCardById(id: string): Promise<CardDetail> {
 
   try {
     const response = await fetch(`https://api.pokemontcg.io/v2/cards/${id}`);
-    const cardData = await response.json();
+    const data = await response.json();
     card = {};
     Object.defineProperties(card, {
       image: {
-        value: cardData.data.images.small,
+        value: data.data.images.small,
       },
       name: {
-        value: cardData.data.name,
+        value: data.data.name,
       },
       hp: {
-        value: cardData.data.hp,
+        value: data.data.hp,
       },
       level: {
-        value: cardData.data.level,
+        value: data.data.level,
       },
       types: {
-        value: cardData.data.types,
+        value: data.data.types,
       },
       rarity: {
-        value: cardData.data.rarity,
+        value: data.data.rarity,
       },
     });
   } catch (error) {

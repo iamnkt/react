@@ -23,9 +23,9 @@
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">28.57% </span>
+            <span class="strong">57.14% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">4/14</span>
+            <span class="fraction">8/14</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -35,15 +35,15 @@
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">0% </span>
+            <span class="strong">66.66% </span>
             <span class="quiet">Functions</span>
-            <span class="fraction">0/3</span>
+            <span class="fraction">2/3</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">28.57% </span>
+            <span class="strong">57.14% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">4/14</span>
+            <span class="fraction">8/14</span>
           </div>
         </div>
         <p class="quiet">
@@ -57,7 +57,7 @@
           </div>
         </template>
       </div>
-      <div class="status-line low"></div>
+      <div class="status-line medium"></div>
       <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -90,29 +90,29 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -120,16 +120,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useContext, useState } from 'react';
 import { DataContext } from '../../context/context';
 import { DropdownProps } from '../../types/types';
 &nbsp;
-const Dropdown: React.FC&lt;DropdownProps&gt; = <span class="fstat-no" title="function not covered" >({</span> options }) =&gt; {
-  const { cardsPerPage, setCardsPerPage, setPage } = <span class="cstat-no" title="statement not covered" >useContext(DataContext);</span>
-  const [selectedOption, setSelectedOption] = <span class="cstat-no" title="statement not covered" >useState(cardsPerPage);</span>
+const Dropdown: React.FC&lt;DropdownProps&gt; = ({ options }) =&gt; {
+  const { cardsPerPage, setCardsPerPage, setPage } = useContext(DataContext);
+  const [selectedOption, setSelectedOption] = useState(cardsPerPage);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;select
       className="dropdown"
       value={selectedOption}
@@ -142,8 +142,8 @@ const Dropdown: React.FC&lt;DropdownProps&gt; = <span class="fstat-no" title="fu
 <span class="cstat-no" title="statement not covered" >        localStorage.setItem('pageNumber', '1');</span>
       }}
     &gt;
-      {options.map(<span class="fstat-no" title="function not covered" >(v</span>alue: number) =&gt; (
-<span class="cstat-no" title="statement not covered" >        &lt;option key={value} v</span>alue={value}&gt;
+      {options.map((value: number) =&gt; (
+        &lt;option key={value} value={value}&gt;
           {value}
         &lt;/option&gt;
       ))}
@@ -166,7 +166,7 @@ export default Dropdown;
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2023-11-11T01:24:46.252Z
+      at 2023-11-12T13:39:00.544Z
     </div>
     <script src="../../../prettify.js"></script>
     <script>
