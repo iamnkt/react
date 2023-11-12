@@ -97,7 +97,6 @@ describe('Card component', () => {
   it('opens a detailed card component', () => {
     async () => {
       (getCardById as jest.Mock).mockResolvedValue(details);
-
       render(
         <BrowserRouter>
           <DataProvider
@@ -138,7 +137,6 @@ describe('Card component', () => {
   it('triggers on clicking an additional API call to fetch detailed information', () => {
     async () => {
       (getCardById as jest.Mock).mockResolvedValue(details);
-
       render(
         <BrowserRouter>
           <DataProvider

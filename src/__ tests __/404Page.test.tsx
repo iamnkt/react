@@ -7,7 +7,6 @@ import ErrorPage from '../components/error-page/errorPage';
 describe('404 page component', () => {
   it('is displayed when navigating to an invalid route', () => {
     const route = '/test';
-
     render(
       <MemoryRouter initialEntries={[route]}>
         <Routes>
@@ -16,7 +15,6 @@ describe('404 page component', () => {
         </Routes>
       </MemoryRouter>
     );
-
     expect(screen.getByText('Page not found')).toBeInTheDocument();
   });
 });
