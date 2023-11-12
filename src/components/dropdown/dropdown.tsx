@@ -14,7 +14,6 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
       className="dropdown"
       value={selectedOption}
       onChange={(e) => {
-        console.log(e.target.value);
         setSelectedOption(Number(e.target.value));
         setCardsPerPage!(Number(e.target.value));
         setPage!(1);
