@@ -17,6 +17,15 @@ import { CharmanderMock, CharizardMock } from './__mocks__/cardsMock';
 
 const details: CardDetail = CharizardCardMock;
 
+const setQuery = jest.fn();
+const setCards = jest.fn();
+const setDetails = jest.fn();
+const setPage = jest.fn();
+const setTotalCount = jest.fn();
+const setIsDetailsLoading = jest.fn();
+const setCardsPerPage = jest.fn();
+const setIsLoading = jest.fn();
+
 describe('Cards component', () => {
   it('renders correctly', () => {
     const cards: Data[] = [CharmanderMock, CharizardMock];
@@ -32,6 +41,14 @@ describe('Cards component', () => {
             cardsPerPage,
             isLoading,
             isDetailsLoading,
+            setQuery,
+            setCards,
+            setDetails,
+            setPage,
+            setTotalCount,
+            setIsDetailsLoading,
+            setCardsPerPage,
+            setIsLoading,
           }}
         >
           <Cards />
@@ -55,6 +72,14 @@ describe('Cards component', () => {
             cardsPerPage,
             isLoading,
             isDetailsLoading,
+            setQuery,
+            setCards,
+            setDetails,
+            setPage,
+            setTotalCount,
+            setIsDetailsLoading,
+            setCardsPerPage,
+            setIsLoading,
           }}
         >
           <Cards />
@@ -78,6 +103,14 @@ describe('Cards component', () => {
             cardsPerPage,
             isLoading,
             isDetailsLoading,
+            setQuery,
+            setCards,
+            setDetails,
+            setPage,
+            setTotalCount,
+            setIsDetailsLoading,
+            setCardsPerPage,
+            setIsLoading,
           }}
         >
           <Cards />

@@ -20,6 +20,7 @@ const Pages: React.FC = () => {
       <div className="pages">
         <button
           type="button"
+          data-testid="firstpage-button"
           onClick={() => {
             setPage!(1);
             setSearchParams({
@@ -35,6 +36,7 @@ const Pages: React.FC = () => {
         </button>
         <button
           type="button"
+          data-testid="prevpage-button"
           onClick={() => {
             if (page > 1) {
               setPage!(page - 1);
@@ -52,8 +54,8 @@ const Pages: React.FC = () => {
         </button>
         <button type="button">{`${page}`}</button>
         <button
-          data-testid="nextpage-button"
           type="button"
+          data-testid="nextpage-button"
           onClick={() => {
             if (page < pagesCount) {
               setPage!(page + 1);
@@ -71,6 +73,7 @@ const Pages: React.FC = () => {
         </button>
         <button
           type="button"
+          data-testid="lastpage-button"
           onClick={() => {
             setPage!(pagesCount);
             setSearchParams({

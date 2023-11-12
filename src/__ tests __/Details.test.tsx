@@ -32,6 +32,15 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
+const setQuery = jest.fn();
+const setCards = jest.fn();
+const setDetails = jest.fn();
+const setPage = jest.fn();
+const setTotalCount = jest.fn();
+const setIsDetailsLoading = jest.fn();
+const setCardsPerPage = jest.fn();
+const setIsLoading = jest.fn();
+
 describe('Details component', () => {
   it('displays loading indicator while fetching data', () => {
     const isDetailsLoading = true;
@@ -47,6 +56,14 @@ describe('Details component', () => {
             cardsPerPage,
             isLoading,
             isDetailsLoading,
+            setQuery,
+            setCards,
+            setDetails,
+            setPage,
+            setTotalCount,
+            setIsDetailsLoading,
+            setCardsPerPage,
+            setIsLoading,
           }}
         >
           <Details />
@@ -71,6 +88,14 @@ describe('Details component', () => {
             cardsPerPage,
             isLoading,
             isDetailsLoading,
+            setQuery,
+            setCards,
+            setDetails,
+            setPage,
+            setTotalCount,
+            setIsDetailsLoading,
+            setCardsPerPage,
+            setIsLoading,
           }}
         >
           <Details />
@@ -86,7 +111,6 @@ describe('Details component', () => {
 
   it('clicking the close button hides the component', async () => {
     const isDetailsLoading = false;
-    const setDetails = jest.fn();
     render(
       <BrowserRouter>
         <DataProvider
@@ -94,12 +118,19 @@ describe('Details component', () => {
             query,
             cards,
             details,
-            setDetails,
             totalCount,
             page,
             cardsPerPage,
             isLoading,
             isDetailsLoading,
+            setQuery,
+            setCards,
+            setDetails,
+            setPage,
+            setTotalCount,
+            setIsDetailsLoading,
+            setCardsPerPage,
+            setIsLoading,
           }}
         >
           <Card

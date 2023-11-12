@@ -38,18 +38,22 @@ const localStorageMock = () => {
 
 const { getItemMock, setItemMock } = localStorageMock();
 
-describe('In search component', () => {
-  const setQuery = jest.fn();
-  const setPage = jest.fn();
+const setQuery = jest.fn();
+const setCards = jest.fn();
+const setDetails = jest.fn();
+const setPage = jest.fn();
+const setTotalCount = jest.fn();
+const setIsDetailsLoading = jest.fn();
+const setCardsPerPage = jest.fn();
+const setIsLoading = jest.fn();
 
+describe('In search component', () => {
   it('clicking the Search button saves the entered value to the local storage', () => {
     render(
       <BrowserRouter>
         <DataProvider
           value={{
             query,
-            setQuery,
-            setPage,
             cards,
             details,
             totalCount,
@@ -57,6 +61,14 @@ describe('In search component', () => {
             cardsPerPage,
             isLoading,
             isDetailsLoading,
+            setQuery,
+            setCards,
+            setDetails,
+            setPage,
+            setTotalCount,
+            setIsDetailsLoading,
+            setCardsPerPage,
+            setIsLoading,
           }}
         >
           <Search />
@@ -74,8 +86,6 @@ describe('In search component', () => {
         <DataProvider
           value={{
             query,
-            setQuery,
-            setPage,
             cards,
             details,
             totalCount,
@@ -83,6 +93,14 @@ describe('In search component', () => {
             cardsPerPage,
             isLoading,
             isDetailsLoading,
+            setQuery,
+            setCards,
+            setDetails,
+            setPage,
+            setTotalCount,
+            setIsDetailsLoading,
+            setCardsPerPage,
+            setIsLoading,
           }}
         >
           <Search />

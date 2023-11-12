@@ -3,6 +3,7 @@ export default {
     'node_modules',
     'test-config',
     'types',
+    'api',
     'jestGlobalMocks.ts',
     '.module.ts',
     '<rootDir>/src/app/main.ts',

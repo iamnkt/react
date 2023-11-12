@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699825202086" clover="3.2.0">
-  <project timestamp="1699825202086" name="All files">
-    <metrics statements="178" coveredstatements="111" conditionals="20" coveredconditionals="8" methods="27" coveredmethods="14" elements="225" coveredelements="133" complexity="0" loc="178" ncloc="178" packages="11" files="12" classes="12"/>
+<coverage generated="1699828574728" clover="3.2.0">
+  <project timestamp="1699828574728" name="All files">
+    <metrics statements="147" coveredstatements="109" conditionals="19" coveredconditionals="9" methods="22" coveredmethods="15" elements="188" coveredelements="133" complexity="0" loc="147" ncloc="147" packages="9" files="9" classes="9"/>
     <package name="src">
       <metrics statements="31" coveredstatements="11" conditionals="8" coveredconditionals="0" methods="4" coveredmethods="0"/>
       <file name="App.tsx" path="/Users/acielle/Downloads/rsschool/react/src/App.tsx">
@@ -37,37 +37,6 @@
         <line num="53" count="0" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
         <line num="90" count="6" type="stmt"/>
-      </file>
-    </package>
-    <package name="src.api">
-      <metrics statements="22" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-      <file name="getCards.ts" path="/Users/acielle/Downloads/rsschool/react/src/api/getCards.ts">
-        <metrics statements="13" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-      </file>
-      <file name="getDetailedCard.ts" path="/Users/acielle/Downloads/rsschool/react/src/api/getDetailedCard.ts">
-        <metrics statements="9" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.components.card">
@@ -146,10 +115,10 @@
         <line num="2" count="6" type="stmt"/>
         <line num="3" count="6" type="stmt"/>
         <line num="6" count="6" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="10" count="5" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
@@ -157,22 +126,8 @@
         <line num="21" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
-        <line num="31" count="4" type="stmt"/>
+        <line num="31" count="10" type="stmt"/>
         <line num="39" count="6" type="stmt"/>
-      </file>
-    </package>
-    <package name="src.components.error-button">
-      <metrics statements="8" coveredstatements="6" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="1"/>
-      <file name="errorButton.tsx" path="/Users/acielle/Downloads/rsschool/react/src/components/error-button/errorButton.tsx">
-        <metrics statements="8" coveredstatements="6" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="1"/>
-        <line num="1" count="6" type="stmt"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="6" count="3" type="cond" truecount="0" falsecount="1"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="22" count="6" type="stmt"/>
       </file>
     </package>
     <package name="src.components.error-page">
@@ -185,60 +140,59 @@
       </file>
     </package>
     <package name="src.components.pages">
-      <metrics statements="28" coveredstatements="17" conditionals="3" coveredconditionals="1" methods="5" coveredmethods="2"/>
+      <metrics statements="28" coveredstatements="24" conditionals="3" coveredconditionals="2" methods="5" coveredmethods="4"/>
       <file name="pages.tsx" path="/Users/acielle/Downloads/rsschool/react/src/components/pages/pages.tsx">
-        <metrics statements="28" coveredstatements="17" conditionals="3" coveredconditionals="1" methods="5" coveredmethods="2"/>
+        <metrics statements="28" coveredstatements="24" conditionals="3" coveredconditionals="2" methods="5" coveredmethods="4"/>
         <line num="1" count="6" type="stmt"/>
         <line num="2" count="6" type="stmt"/>
         <line num="3" count="6" type="stmt"/>
         <line num="4" count="6" type="stmt"/>
         <line num="5" count="6" type="stmt"/>
         <line num="7" count="6" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="14" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="10" count="5" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="14" count="5" type="cond" truecount="0" falsecount="1"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="39" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="58" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="59" count="1" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="93" count="6" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="41" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="60" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="96" count="6" type="stmt"/>
       </file>
     </package>
     <package name="src.components.search">
-      <metrics statements="17" coveredstatements="17" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+      <metrics statements="16" coveredstatements="16" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
       <file name="search.tsx" path="/Users/acielle/Downloads/rsschool/react/src/components/search/search.tsx">
-        <metrics statements="17" coveredstatements="17" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <metrics statements="16" coveredstatements="16" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="1" count="6" type="stmt"/>
         <line num="2" count="6" type="stmt"/>
         <line num="3" count="6" type="stmt"/>
         <line num="4" count="6" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="7" count="6" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
         <line num="9" count="3" type="stmt"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="25" count="3" type="stmt"/>
-        <line num="50" count="6" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="48" count="6" type="stmt"/>
       </file>
     </package>
     <package name="src.context">

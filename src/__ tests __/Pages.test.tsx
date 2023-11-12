@@ -35,22 +35,37 @@ jest.mock('react-router-dom', () => ({
   },
 }));
 
+const setQuery = jest.fn();
+const setCards = jest.fn();
+const setDetails = jest.fn();
+const setPage = jest.fn();
+const setTotalCount = jest.fn();
+const setIsDetailsLoading = jest.fn();
+const setCardsPerPage = jest.fn();
+const setIsLoading = jest.fn();
+
 describe('Pages component', () => {
   it('updates URL query parameter when page changes.', () => {
-    const setPage = jest.fn();
     render(
       <BrowserRouter>
         <DataProvider
           value={{
             query,
             cards,
-            setPage,
             details,
             totalCount,
             page,
             cardsPerPage,
             isLoading,
             isDetailsLoading,
+            setQuery,
+            setCards,
+            setDetails,
+            setPage,
+            setTotalCount,
+            setIsDetailsLoading,
+            setCardsPerPage,
+            setIsLoading,
           }}
         >
           <Pages />
@@ -61,5 +76,17 @@ describe('Pages component', () => {
     fireEvent.click(nextPageButton);
     const queryString = new URLSearchParams(mockSearchParam).toString();
     expect(queryString).toContain('page=3');
+    const prevPageButton = screen.getByTestId('prevpage-button');
+    fireEvent.click(prevPageButton);
+    const queryString2 = new URLSearchParams(mockSearchParam).toString();
+    expect(queryString2).toContain('page=1');
+    const firstPageButton = screen.getByTestId('prevpage-button');
+    fireEvent.click(firstPageButton);
+    const queryString3 = new URLSearchParams(mockSearchParam).toString();
+    expect(queryString3).toContain('page=1');
+    const lastPageButton = screen.getByTestId('lastpage-button');
+    fireEvent.click(lastPageButton);
+    const queryString4 = new URLSearchParams(mockSearchParam).toString();
+    expect(queryString4).toContain('page=9');
   });
 });

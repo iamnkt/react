@@ -34,6 +34,31 @@ global.fetch = jest.fn(() =>
 
 jest.mock('../api/getDetailedCard');
 
+const localStorageMock = () => {
+  const setItemMock = jest.fn();
+
+  beforeEach(() => {
+    Storage.prototype.setItem = setItemMock;
+  });
+
+  afterEach(() => {
+    setItemMock.mockRestore();
+  });
+
+  return { setItemMock };
+};
+
+const { setItemMock } = localStorageMock();
+
+const setQuery = jest.fn();
+const setCards = jest.fn();
+const setDetails = jest.fn();
+const setPage = jest.fn();
+const setTotalCount = jest.fn();
+const setIsDetailsLoading = jest.fn();
+const setCardsPerPage = jest.fn();
+const setIsLoading = jest.fn();
+
 describe('Card component', () => {
   it('renders the relevant card data', () => {
     render(
@@ -48,6 +73,14 @@ describe('Card component', () => {
             cardsPerPage,
             isLoading,
             isDetailsLoading,
+            setQuery,
+            setCards,
+            setDetails,
+            setPage,
+            setTotalCount,
+            setIsDetailsLoading,
+            setCardsPerPage,
+            setIsLoading,
           }}
         >
           <Card
@@ -62,7 +95,6 @@ describe('Card component', () => {
   });
 
   it('opens a detailed card component', () => {
-    const setDetails = jest.fn();
     async () => {
       (getCardById as jest.Mock).mockResolvedValue(details);
 
@@ -74,11 +106,18 @@ describe('Card component', () => {
               cards,
               details,
               isDetailsLoading,
-              setDetails,
               totalCount,
               page,
               cardsPerPage,
               isLoading,
+              setQuery,
+              setCards,
+              setDetails,
+              setPage,
+              setTotalCount,
+              setIsDetailsLoading,
+              setCardsPerPage,
+              setIsLoading,
             }}
           >
             <Card
@@ -97,7 +136,6 @@ describe('Card component', () => {
   });
 
   it('triggers on clicking an additional API call to fetch detailed information', () => {
-    const setDetails = jest.fn();
     async () => {
       (getCardById as jest.Mock).mockResolvedValue(details);
 
@@ -108,12 +146,19 @@ describe('Card component', () => {
               query,
               cards,
               details,
-              setDetails,
               totalCount,
               page,
               cardsPerPage,
               isLoading,
               isDetailsLoading,
+              setQuery,
+              setCards,
+              setDetails,
+              setPage,
+              setTotalCount,
+              setIsDetailsLoading,
+              setCardsPerPage,
+              setIsLoading,
             }}
           >
             <Card
@@ -127,6 +172,46 @@ describe('Card component', () => {
       const card = screen.getByTestId('card');
       await fireEvent.click(card);
       expect(getCardById).toHaveBeenCalled();
+    };
+  });
+
+  it('sets card details to local storage', () => {
+    async () => {
+      (getCardById as jest.Mock).mockResolvedValue(details);
+
+      render(
+        <BrowserRouter>
+          <DataProvider
+            value={{
+              query,
+              cards,
+              details,
+              totalCount,
+              page,
+              cardsPerPage,
+              isLoading,
+              isDetailsLoading,
+              setQuery,
+              setCards,
+              setDetails,
+              setPage,
+              setTotalCount,
+              setIsDetailsLoading,
+              setCardsPerPage,
+              setIsLoading,
+            }}
+          >
+            <Card
+              id={CharizardMock.id}
+              name={CharizardMock.name}
+              image={CharizardMock.image}
+            />
+          </DataProvider>
+        </BrowserRouter>
+      );
+      const card = screen.getByTestId('card');
+      await fireEvent.click(card);
+      expect(setItemMock).toHaveBeenCalledWith('details', details);
     };
   });
 });

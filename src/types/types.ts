@@ -58,21 +58,21 @@ export type CardProps = {
 
 export type TDataContext = {
   query: string;
-  setQuery?: React.Dispatch<React.SetStateAction<string>>;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
   cards: Data[];
-  setCards?: React.Dispatch<React.SetStateAction<Data[]>>;
+  setCards: React.Dispatch<React.SetStateAction<Data[]>>;
   details: CardDetail | null;
-  setDetails?: React.Dispatch<React.SetStateAction<CardDetail | null>>;
+  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
   totalCount: number;
   setTotalCount?: React.Dispatch<React.SetStateAction<number>>;
   page: number;
   cardsPerPage: number;
-  setPage?: React.Dispatch<React.SetStateAction<number>>;
-  setCardsPerPage?: React.Dispatch<React.SetStateAction<number>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  setCardsPerPage: React.Dispatch<React.SetStateAction<number>>;
   isLoading: boolean;
-  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isDetailsLoading: boolean;
-  setIsDetailsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDetailsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export interface ContextValue {

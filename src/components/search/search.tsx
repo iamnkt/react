@@ -1,7 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { DataContext } from '../../context/context';
-import ErrorButton from '../error-button/errorButton';
 import './styles.css';
 
 const Search: React.FC = () => {
@@ -41,7 +40,6 @@ const Search: React.FC = () => {
         >
           Search
         </button>
-        <ErrorButton />
       </div>
     </div>
   );
