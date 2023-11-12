@@ -23,7 +23,7 @@ const Search: React.FC = () => {
           type="text"
           className="input input__search"
           placeholder="Pokemon name"
-          defaultValue={query}
+          defaultValue={localStorage.getItem('query') || query}
           ref={inputText}
         ></input>
         <button

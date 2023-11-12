@@ -4,6 +4,7 @@ import '@testing-library/jest-dom';
 
 import Cards from '../components/cards/cards';
 import { DataProvider } from '../App';
+import { CharizardMock, CharmanderMock } from './__mocks__/cardsMock';
 import { CardDetail, Data } from '../types/types';
 import { CharizardCardMock } from './__mocks__/cardMock';
 import {
@@ -13,7 +14,6 @@ import {
   query,
   totalCount,
 } from './__mocks__/contextDataMock';
-import { CharmanderMock, CharizardMock } from './__mocks__/cardsMock';
 
 const details: CardDetail = CharizardCardMock;
 

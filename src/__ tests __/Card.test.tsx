@@ -4,16 +4,16 @@ import '@testing-library/jest-dom';
 
 import Card from '../components/card/card';
 import { DataProvider } from '../App';
-import { CharizardMock, CharmanderMock } from '../test/__mocks__/cardsMock';
+import { CharizardMock, CharmanderMock } from './__mocks__/cardsMock';
 import { CardDetail } from '../types/types';
-import { CharizardCardMock } from '../test/__mocks__/cardMock';
+import { CharizardCardMock } from './__mocks__/cardMock';
 import {
   cardsPerPage,
   isLoading,
   page,
   query,
   totalCount,
-} from '../test/__mocks__/contextDataMock';
+} from './__mocks__/contextDataMock';
 import React from 'react';
 import { getCardById } from '../api/getDetailedCard';
 

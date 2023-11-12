@@ -34,10 +34,6 @@ export const App: React.FC = () => {
       page: page.toString(),
       pageSize: cardsPerPage.toString(),
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, page, cardsPerPage]);
-
-  useEffect(() => {
     async function fetchData() {
       setIsLoading!(true);
 
@@ -50,7 +46,7 @@ export const App: React.FC = () => {
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [query, page, cardsPerPage, searchParams]);
 
   return (
     <div className="app" id="app">

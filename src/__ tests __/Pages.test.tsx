@@ -3,18 +3,18 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { DataProvider } from '../App';
-import { CharizardMock, CharmanderMock } from '../test/__mocks__/cardsMock';
 import { CardDetail, Data } from '../types/types';
-import { CharizardCardMock } from '../test/__mocks__/cardMock';
+import { CharizardCardMock } from './__mocks__/cardMock';
 import {
   cardsPerPage,
   isLoading,
   page,
   query,
   totalCount,
-} from '../test/__mocks__/contextDataMock';
+} from './__mocks__/contextDataMock';
 import Pages from '../components/pages/pages';
 import { useState } from 'react';
+import { CharizardMock, CharmanderMock } from './__mocks__/cardsMock';
 
 const cards: Data[] = [CharmanderMock, CharizardMock];
 const details: CardDetail = CharizardCardMock;

@@ -1,33 +1,41 @@
 import { BrowserRouter } from 'react-router-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-
 import { DataProvider } from '../App';
-import { CharizardMock, CharmanderMock } from '../test/__mocks__/cardsMock';
 import { CardDetail, Data } from '../types/types';
-import { CharizardCardMock } from '../test/__mocks__/cardMock';
+import { CharizardCardMock } from './__mocks__/cardMock';
 import {
   cardsPerPage,
   isLoading,
   page,
   query,
   totalCount,
-} from '../test/__mocks__/contextDataMock';
+} from './__mocks__/contextDataMock';
 import Search from '../components/search/search';
 import React from 'react';
+import { CharizardMock, CharmanderMock } from './__mocks__/cardsMock';
 
 const cards: Data[] = [CharmanderMock, CharizardMock];
 const details: CardDetail = CharizardCardMock;
 
-const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  clear: jest.fn(),
-  removeItem: jest.fn(),
-  key: jest.fn(),
-  length: 1,
+const localStorageMock = () => {
+  const setItemMock = jest.fn();
+  const getItemMock = jest.fn();
+
+  beforeEach(() => {
+    Storage.prototype.setItem = setItemMock;
+    Storage.prototype.getItem = getItemMock;
+  });
+
+  afterEach(() => {
+    setItemMock.mockRestore();
+    getItemMock.mockRestore();
+  });
+
+  return { setItemMock, getItemMock };
 };
-global.localStorage = localStorageMock;
+
+const { getItemMock, setItemMock } = localStorageMock();
 
 describe('In search component', () => {
   const setQuery = jest.fn();
@@ -52,7 +60,7 @@ describe('In search component', () => {
     );
     const button = screen.getByTestId('search-button');
     fireEvent.click(button);
-    expect(localStorage.getItem('query')).toEqual('char');
+    expect(setItemMock).toHaveBeenCalledWith('query', 'char');
   });
 
   it('retrieves the value from the local storage upon mounting', () => {
@@ -74,7 +82,8 @@ describe('In search component', () => {
         </DataProvider>
       </BrowserRouter>
     );
-    const input: HTMLInputElement = screen.getByTestId('search-input');
-    expect(input.value).toEqual(localStorage.getItem('query'));
+    const input = screen.getByTestId('search-input');
+    expect(getItemMock).toHaveBeenCalled();
+    expect(input).toHaveValue('char');
   });
 });
