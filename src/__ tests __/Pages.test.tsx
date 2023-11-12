@@ -35,6 +35,25 @@ jest.mock('react-router-dom', () => ({
   },
 }));
 
+const localStorageMock = () => {
+  const setItemMock = jest.fn();
+  const getItemMock = jest.fn();
+
+  beforeEach(() => {
+    Storage.prototype.setItem = setItemMock;
+    Storage.prototype.getItem = getItemMock;
+  });
+
+  afterEach(() => {
+    setItemMock.mockRestore();
+    getItemMock.mockRestore();
+  });
+
+  return { setItemMock, getItemMock };
+};
+
+const { setItemMock } = localStorageMock();
+
 const setQuery = jest.fn();
 const setCards = jest.fn();
 const setDetails = jest.fn();
@@ -45,7 +64,7 @@ const setCardsPerPage = jest.fn();
 const setIsLoading = jest.fn();
 
 describe('Pages component', () => {
-  it('updates URL query parameter when page changes.', () => {
+  it('updates URL query parameter when page changes and sets page number value to local storage', () => {
     render(
       <BrowserRouter>
         <DataProvider
@@ -76,17 +95,21 @@ describe('Pages component', () => {
     fireEvent.click(nextPageButton);
     const queryString = new URLSearchParams(mockSearchParam).toString();
     expect(queryString).toContain('page=3');
+    expect(setItemMock).toHaveBeenCalledWith('pageNumber', '3');
     const prevPageButton = screen.getByTestId('prevpage-button');
     fireEvent.click(prevPageButton);
     const queryString2 = new URLSearchParams(mockSearchParam).toString();
     expect(queryString2).toContain('page=1');
+    expect(setItemMock).toHaveBeenCalledWith('pageNumber', '1');
     const firstPageButton = screen.getByTestId('prevpage-button');
     fireEvent.click(firstPageButton);
     const queryString3 = new URLSearchParams(mockSearchParam).toString();
     expect(queryString3).toContain('page=1');
+    expect(setItemMock).toHaveBeenCalledWith('pageNumber', '1');
     const lastPageButton = screen.getByTestId('lastpage-button');
     fireEvent.click(lastPageButton);
     const queryString4 = new URLSearchParams(mockSearchParam).toString();
     expect(queryString4).toContain('page=9');
+    expect(setItemMock).toHaveBeenCalledWith('pageNumber', '9');
   });
 });
