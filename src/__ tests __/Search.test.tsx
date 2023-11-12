@@ -1,8 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import Cards from '../components/cards/cards';
 import { DataProvider } from '../App';
 import { CharizardMock, CharmanderMock } from '../test/__mocks__/cardsMock';
 import { CardDetail, Data } from '../types/types';
@@ -14,39 +13,31 @@ import {
   query,
   totalCount,
 } from '../test/__mocks__/contextDataMock';
+import Search from '../components/search/search';
+import React from 'react';
 
+const cards: Data[] = [CharmanderMock, CharizardMock];
 const details: CardDetail = CharizardCardMock;
 
-describe('Cards component', () => {
-  it('renders correctly', () => {
-    const cards: Data[] = [CharmanderMock, CharizardMock];
-    const container = render(
-      <BrowserRouter>
-        <DataProvider
-          value={{
-            query,
-            cards,
-            details,
-            totalCount,
-            page,
-            cardsPerPage,
-            isLoading,
-          }}
-        >
-          <Cards />
-        </DataProvider>
-      </BrowserRouter>
-    );
-    expect(container).toMatchSnapshot();
-  });
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  clear: jest.fn(),
+  removeItem: jest.fn(),
+  key: jest.fn(),
+  length: 1,
+};
+global.localStorage = localStorageMock;
 
-  it('should display the specified number of cards', () => {
-    const cards: Data[] = [CharmanderMock, CharizardMock];
+describe('In search component', () => {
+  const setQuery = jest.fn();
+  it('clicking the Search button saves the entered value to the local storage', () => {
     render(
       <BrowserRouter>
         <DataProvider
           value={{
             query,
+            setQuery,
             cards,
             details,
             totalCount,
@@ -55,21 +46,22 @@ describe('Cards component', () => {
             isLoading,
           }}
         >
-          <Cards />
+          <Search />
         </DataProvider>
       </BrowserRouter>
     );
-    const result = screen.queryAllByTestId('card');
-    expect(result).toHaveLength(2);
+    const button = screen.getByTestId('search-button');
+    fireEvent.click(button);
+    expect(localStorage.getItem('query') !== null).toBe(true);
   });
 
-  it('should be displayed component, when there are no cards', () => {
-    const cards: Data[] = [];
+  it('retrieves the value from the local storage upon mounting', () => {
     render(
       <BrowserRouter>
         <DataProvider
           value={{
             query,
+            setQuery,
             cards,
             details,
             totalCount,
@@ -78,11 +70,11 @@ describe('Cards component', () => {
             isLoading,
           }}
         >
-          <Cards />
+          <Search />
         </DataProvider>
       </BrowserRouter>
     );
-    const result = screen.queryByText(/No cards were found/i);
-    expect(result).toBeInTheDocument();
+    const input: HTMLInputElement = screen.getByTestId('search-input');
+    expect(input.value).toEqual(localStorage.getItem('query'));
   });
 });

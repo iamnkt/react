@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { DataContext } from '../../context/context';
 import Dropdown from '../dropdown/dropdown';
 import './styles.css';
 
 const Pages: React.FC = () => {
-  const { totalCount, cardsPerPage, page, setPage, isLoading } =
+  const [, setSearchParams] = useSearchParams();
+  const { totalCount, cardsPerPage, page, setPage, isLoading, query } =
     useContext(DataContext);
   const options = [8, 12];
   const pagesCount = Math.ceil(totalCount / cardsPerPage);
@@ -40,10 +42,16 @@ const Pages: React.FC = () => {
         </button>
         <button type="button">{`${page}`}</button>
         <button
+          data-testid="nextpage-button"
           type="button"
           onClick={() => {
             if (page < pagesCount) {
               setPage!(page + 1);
+              setSearchParams({
+                q: `name:${query}*`,
+                page: (page + 1).toString(),
+                pageSize: cardsPerPage.toString(),
+              });
               localStorage.setItem('pageNumber', String(page + 1));
             }
           }}
