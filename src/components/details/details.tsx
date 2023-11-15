@@ -30,7 +30,6 @@ const Details: React.FC = () => {
         color="#FFC759"
         ariaLabel="three-dots-loading"
         wrapperStyle={{}}
-        wrapperClassName=""
         visible={true}
       />
     </div>
