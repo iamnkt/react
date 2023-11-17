@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { DataContext } from '../../context/context';
+import { DEFAULT_PAGE } from '../../constants/constants';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { limitValueSlice } from '../../store/reducers/limitValueSlice';
+import { pageValueSlice } from '../../store/reducers/pageValueSlice';
 import { DropdownProps } from '../../types/types';
 
 const Dropdown: React.FC<DropdownProps> = ({ options }) => {
@@ -11,9 +12,8 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
   const { limit } = useAppSelector((state) => state.limitValueReducer);
 
   const { setLimit } = limitValueSlice.actions;
+  const { setPage } = pageValueSlice.actions;
   const dispatch = useAppDispatch();
-
-  const { setPage } = useContext(DataContext);
 
   const [selectedOption, setSelectedOption] = useState(limit);
 
@@ -24,14 +24,14 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
       onChange={(e) => {
         setSelectedOption(Number(e.target.value));
         dispatch(setLimit(Number(e.target.value)));
-        setPage!(1);
+        dispatch(setPage(DEFAULT_PAGE));
         setSearchParams({
           q: `name:${query}*`,
-          page: '1',
+          page: DEFAULT_PAGE.toString(),
           pageSize: e.target.value,
         });
         localStorage.setItem('limit', e.target.value);
-        localStorage.setItem('pageNumber', '1');
+        localStorage.setItem('page', DEFAULT_PAGE.toString());
       }}
     >
       {options.map((value: number) => (

@@ -1,18 +1,18 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { DataContext } from '../../context/context';
+import { DEFAULT_PAGE } from '../../constants/constants';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { pageValueSlice } from '../../store/reducers/pageValueSlice';
 import { searchValueSlice } from '../../store/reducers/searchValueSlice';
 import './styles.css';
 
 const Search: React.FC = () => {
   const { query } = useAppSelector((state) => state.searchValueReducer);
+  const { limit } = useAppSelector((state) => state.limitValueReducer);
   const { setQuery } = searchValueSlice.actions;
+  const { setPage } = pageValueSlice.actions;
   const dispatch = useAppDispatch();
 
-  const { limit } = useAppSelector((state) => state.limitValueReducer);
-
-  const { setPage } = useContext(DataContext);
   const inputText = useRef<HTMLInputElement>(null);
   const [, setSearchParams] = useSearchParams();
 
@@ -20,10 +20,10 @@ const Search: React.FC = () => {
     if (inputText.current) {
       dispatch(setQuery(inputText.current?.value.trim()));
       localStorage.setItem('query', inputText.current?.value.trim());
-      setPage!(1);
+      dispatch(setPage(DEFAULT_PAGE));
       setSearchParams({
         q: `name:${inputText.current?.value.trim()}*`,
-        page: '1',
+        page: DEFAULT_PAGE.toString(),
         pageSize: limit.toString(),
       });
     }

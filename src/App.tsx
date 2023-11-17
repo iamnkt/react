@@ -14,12 +14,10 @@ export const DataProvider = DataContext.Provider;
 export const App: React.FC = () => {
   const { query } = useAppSelector((state) => state.searchValueReducer);
   const { limit } = useAppSelector((state) => state.limitValueReducer);
+  const { page } = useAppSelector((state) => state.pageValueReducer);
 
   const [cards, setCards] = React.useState<Data[]>([]);
   const [totalCount, setTotalCount] = React.useState<number>(0);
-  const [page, setPage] = React.useState<number>(
-    Number(localStorage.getItem('pageNumber')) || 1
-  );
   const [details, setDetails] = React.useState<CardDetail | null>(
     JSON.parse(localStorage.getItem('details') as string) || null
   );
@@ -60,8 +58,6 @@ export const App: React.FC = () => {
           setCards,
           totalCount,
           setTotalCount,
-          page,
-          setPage,
           details,
           setDetails,
           isLoading,

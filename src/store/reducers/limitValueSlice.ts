@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { DEFAULT_CARDS_NUMBER } from '../../constants/constants';
 
 interface LimitValueState {
   limit: number;
 }
 
 const initialState: LimitValueState = {
-  limit: Number(localStorage.getItem('limit')) || 8,
+  limit: Number(localStorage.getItem('limit')) || DEFAULT_CARDS_NUMBER,
 };
 
 export const limitValueSlice = createSlice({
