@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { getCardById } from '../../api/getDetailedCard';
+import { getCardById } from '../../services/getDetailedCard';
 import { DataContext } from '../../context/context';
 import { CardProps } from '../../types/types';
 

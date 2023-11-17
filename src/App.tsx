@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
-import { getCards } from './api/getCards';
+import { getCards } from './services/getCards';
 import './App.css';
 import Cards from './components/cards/cards';
 import Pages from './components/pages/pages';
 import Search from './components/search/search';
 import { DataContext } from './context/context';
 import { Data, CardDetail, ContextType } from './types/types';
+import { useAppSelector } from './hooks/hooks';
 
 export const DataProvider = DataContext.Provider;
 
 export const App: React.FC = () => {
-  const [query, setQuery] = React.useState<string>(
-    localStorage.getItem('query') || ''
-  );
+  const { query } = useAppSelector((state) => state.searchReducer);
+
   const [cards, setCards] = React.useState<Data[]>([]);
   const [totalCount, setTotalCount] = React.useState<number>(0);
   const [page, setPage] = React.useState<number>(
@@ -58,8 +58,6 @@ export const App: React.FC = () => {
     <div className="app" id="app">
       <DataProvider
         value={{
-          query,
-          setQuery,
           cards,
           setCards,
           totalCount,

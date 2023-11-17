@@ -14,7 +14,7 @@ import {
   totalCount,
 } from './__mocks__/contextDataMock';
 import React from 'react';
-import { getCardById } from '../api/getDetailedCard';
+import { getCardById } from '../services/getDetailedCard';
 import { CharizardMock, CharmanderMock } from './__mocks__/cardsMock';
 
 const cards = [CharizardMock, CharmanderMock];
