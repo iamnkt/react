@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface SearchState {
+interface SearchValueState {
   query: string;
 }
 
-const initialState: SearchState = {
+const initialState: SearchValueState = {
   query: localStorage.getItem('query') || '',
 };
 
-export const searchSlice = createSlice({
+export const searchValueSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
@@ -18,4 +18,4 @@ export const searchSlice = createSlice({
   },
 });
 
-export default searchSlice.reducer;
+export default searchValueSlice.reducer;

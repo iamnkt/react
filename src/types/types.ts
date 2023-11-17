@@ -64,9 +64,7 @@ export type TDataContext = {
   totalCount: number;
   setTotalCount?: React.Dispatch<React.SetStateAction<number>>;
   page: number;
-  cardsPerPage: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
-  setCardsPerPage: React.Dispatch<React.SetStateAction<number>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isDetailsLoading: boolean;

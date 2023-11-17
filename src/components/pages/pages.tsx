@@ -1,15 +1,18 @@
 import React, { useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { DataContext } from '../../context/context';
+import { useAppSelector } from '../../hooks/hooks';
 import Dropdown from '../dropdown/dropdown';
 import './styles.css';
 
 const Pages: React.FC = () => {
   const [, setSearchParams] = useSearchParams();
-  const { totalCount, cardsPerPage, page, setPage, isLoading, query } =
-    useContext(DataContext);
+  const { query } = useAppSelector((state) => state.searchValueReducer);
+  const { limit } = useAppSelector((state) => state.limitValueReducer);
+
+  const { totalCount, page, setPage, isLoading } = useContext(DataContext);
   const options = [8, 12];
-  const pagesCount = Math.ceil(totalCount / cardsPerPage);
+  const pagesCount = Math.ceil(totalCount / limit);
 
   if (isLoading) {
     return <></>;
@@ -26,7 +29,7 @@ const Pages: React.FC = () => {
             setSearchParams({
               q: `name:${query}*`,
               page: '1',
-              pageSize: cardsPerPage.toString(),
+              pageSize: limit.toString(),
             });
             localStorage.setItem('pageNumber', '1');
           }}
@@ -43,7 +46,7 @@ const Pages: React.FC = () => {
               setSearchParams({
                 q: `name:${query}*`,
                 page: (page - 1).toString(),
-                pageSize: cardsPerPage.toString(),
+                pageSize: limit.toString(),
               });
               localStorage.setItem('pageNumber', String(page - 1));
             }
@@ -62,7 +65,7 @@ const Pages: React.FC = () => {
               setSearchParams({
                 q: `name:${query}*`,
                 page: (page + 1).toString(),
-                pageSize: cardsPerPage.toString(),
+                pageSize: limit.toString(),
               });
               localStorage.setItem('pageNumber', String(page + 1));
             }
@@ -79,7 +82,7 @@ const Pages: React.FC = () => {
             setSearchParams({
               q: `name:${query}*`,
               page: pagesCount.toString(),
-              pageSize: cardsPerPage.toString(),
+              pageSize: limit.toString(),
             });
             localStorage.setItem('pageNumber', String(pagesCount));
           }}

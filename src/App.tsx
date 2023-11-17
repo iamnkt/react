@@ -12,15 +12,13 @@ import { useAppSelector } from './hooks/hooks';
 export const DataProvider = DataContext.Provider;
 
 export const App: React.FC = () => {
-  const { query } = useAppSelector((state) => state.searchReducer);
+  const { query } = useAppSelector((state) => state.searchValueReducer);
+  const { limit } = useAppSelector((state) => state.limitValueReducer);
 
   const [cards, setCards] = React.useState<Data[]>([]);
   const [totalCount, setTotalCount] = React.useState<number>(0);
   const [page, setPage] = React.useState<number>(
     Number(localStorage.getItem('pageNumber')) || 1
-  );
-  const [cardsPerPage, setCardsPerPage] = React.useState<number>(
-    Number(localStorage.getItem('cardsPerPage')) || 8
   );
   const [details, setDetails] = React.useState<CardDetail | null>(
     JSON.parse(localStorage.getItem('details') as string) || null
@@ -34,7 +32,7 @@ export const App: React.FC = () => {
     setSearchParams({
       q: `name:${query}*`,
       page: page.toString(),
-      pageSize: cardsPerPage.toString(),
+      pageSize: limit.toString(),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -64,8 +62,6 @@ export const App: React.FC = () => {
           setTotalCount,
           page,
           setPage,
-          cardsPerPage,
-          setCardsPerPage,
           details,
           setDetails,
           isLoading,

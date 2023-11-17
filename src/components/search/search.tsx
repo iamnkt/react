@@ -2,15 +2,17 @@ import React, { useContext, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { DataContext } from '../../context/context';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { searchSlice } from '../../store/reducers/searchSlice';
+import { searchValueSlice } from '../../store/reducers/searchValueSlice';
 import './styles.css';
 
 const Search: React.FC = () => {
-  const { query } = useAppSelector((state) => state.searchReducer);
-  const { setQuery } = searchSlice.actions;
+  const { query } = useAppSelector((state) => state.searchValueReducer);
+  const { setQuery } = searchValueSlice.actions;
   const dispatch = useAppDispatch();
 
-  const { setPage, cardsPerPage } = useContext(DataContext);
+  const { limit } = useAppSelector((state) => state.limitValueReducer);
+
+  const { setPage } = useContext(DataContext);
   const inputText = useRef<HTMLInputElement>(null);
   const [, setSearchParams] = useSearchParams();
 
@@ -22,7 +24,7 @@ const Search: React.FC = () => {
       setSearchParams({
         q: `name:${inputText.current?.value.trim()}*`,
         page: '1',
-        pageSize: cardsPerPage.toString(),
+        pageSize: limit.toString(),
       });
     }
   };
