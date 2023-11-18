@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface Card {
+export interface CardData {
   id: string;
   name: string;
   images: {
@@ -17,13 +17,14 @@ export interface CardDetail {
   rarity: string;
 }
 
-export interface Data {
-  id: string;
-  name: string;
-  image: string;
+export interface CardsData {
+  count: number;
+  data: CardData[];
+  page: number;
+  pageSize: number;
+  totalCount: number;
 }
-
-export type ContextCards = Data[];
+export type ContextCards = CardData[];
 
 export interface ErrorProps {
   children?: ReactNode;
@@ -47,7 +48,7 @@ export type ContextType = {
 };
 
 export type CardsProps = {
-  isLoading: boolean;
+  cards: CardsData;
 };
 
 export type CardProps = {
@@ -57,14 +58,10 @@ export type CardProps = {
 };
 
 export type TDataContext = {
-  cards: Data[];
-  setCards: React.Dispatch<React.SetStateAction<Data[]>>;
   details: CardDetail | null;
   setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
   totalCount: number;
   setTotalCount?: React.Dispatch<React.SetStateAction<number>>;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isDetailsLoading: boolean;
   setIsDetailsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };

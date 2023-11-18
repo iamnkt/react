@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
-import { getCards } from './services/getCards';
+import { cardsAPI } from './services/cardsService';
 import './App.css';
 import Cards from './components/cards/cards';
 import Pages from './components/pages/pages';
 import Search from './components/search/search';
 import { DataContext } from './context/context';
-import { Data, CardDetail, ContextType } from './types/types';
+import { CardDetail, ContextType } from './types/types';
 import { useAppSelector } from './hooks/hooks';
 
 export const DataProvider = DataContext.Provider;
@@ -16,59 +16,45 @@ export const App: React.FC = () => {
   const { limit } = useAppSelector((state) => state.limitValueReducer);
   const { page } = useAppSelector((state) => state.pageValueReducer);
 
-  const [cards, setCards] = React.useState<Data[]>([]);
   const [totalCount, setTotalCount] = React.useState<number>(0);
   const [details, setDetails] = React.useState<CardDetail | null>(
     JSON.parse(localStorage.getItem('details') as string) || null
   );
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isDetailsLoading, setIsDetailsLoading] =
     React.useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     setSearchParams({
-      q: `name:${query}*`,
+      name: query,
       page: page.toString(),
-      pageSize: limit.toString(),
+      limit: limit.toString(),
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query, page, limit, setSearchParams]);
 
-  useEffect(() => {
-    async function fetchData() {
-      setIsLoading!(true);
+  const { data: cards } = cardsAPI.useGetCardsQuery({
+    name: searchParams.get('name') || '',
+    page: Number(searchParams.get('page')) || 1,
+    limit: Number(searchParams.get('limit')) || 8,
+  });
 
-      const request = await getCards(searchParams);
-      const { cards, totalCount } = await request;
-
-      setIsLoading!(false);
-      setTotalCount!(totalCount);
-      setCards!(cards);
-    }
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  console.log(cards);
 
   return (
     <div className="app" id="app">
       <DataProvider
         value={{
-          cards,
-          setCards,
           totalCount,
           setTotalCount,
           details,
           setDetails,
-          isLoading,
-          setIsLoading,
           isDetailsLoading,
           setIsDetailsLoading,
         }}
       >
         <div className="main__container">
           <Search />
-          <Cards />
+          {cards && <Cards cards={cards} />}
           <Pages />
         </div>
         <Outlet context={{ details, setDetails } satisfies ContextType} />

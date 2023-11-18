@@ -1,25 +1,24 @@
-import React, { useContext } from 'react';
-import { ThreeDots } from 'react-loader-spinner';
+import React from 'react';
 import './styles.css';
+import { CardData, CardsProps } from '../../types/types';
 import Card from '../card/card';
-import { DataContext } from '../../context/context';
 import { useSearchParams } from 'react-router-dom';
 
-const Cards: React.FC = () => {
-  const { cards, isLoading } = useContext(DataContext);
+const Cards: React.FC<CardsProps> = ({ cards }) => {
   const [searchParams] = useSearchParams();
 
   const render = (): JSX.Element => {
-    return cards?.length ? (
+    const data = cards.data;
+    return data.length ? (
       <div className="cards__container">
-        {cards.map((card) => {
+        {data.map((card: CardData) => {
           searchParams.set('id', card.id);
           return (
             <Card
               key={card.id}
               id={card.id}
               name={card.name}
-              image={card.image}
+              image={card.images.large}
             />
           );
         })}
@@ -31,21 +30,21 @@ const Cards: React.FC = () => {
     );
   };
 
-  if (isLoading) {
-    return (
-      <div className="loading">
-        <ThreeDots
-          height="80"
-          width="80"
-          radius="9"
-          color="#FFC759"
-          ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
-          visible={true}
-        />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="loading">
+  //       <ThreeDots
+  //         height="80"
+  //         width="80"
+  //         radius="9"
+  //         color="#FFC759"
+  //         ariaLabel="three-dots-loading"
+  //         wrapperStyle={{}}
+  //         visible={true}
+  //       />
+  //     </div>
+  //   );
+  // }
 
   return render();
 };
