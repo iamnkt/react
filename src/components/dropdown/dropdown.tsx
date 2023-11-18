@@ -29,8 +29,6 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
           page: DEFAULT_PAGE.toString(),
           pageSize: e.target.value,
         });
-        localStorage.setItem('limit', e.target.value);
-        localStorage.setItem('page', DEFAULT_PAGE.toString());
       }}
     >
       {options.map((value: number) => (

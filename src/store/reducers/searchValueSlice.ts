@@ -5,7 +5,7 @@ interface SearchValueState {
 }
 
 const initialState: SearchValueState = {
-  query: localStorage.getItem('query') || '',
+  query: '',
 };
 
 export const searchValueSlice = createSlice({

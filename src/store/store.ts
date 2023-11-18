@@ -7,8 +7,10 @@ import { cardsAPI } from '../services/cardsService';
 import cardsFlagValueReducer from './reducers/cardsFlagValueSlice';
 import cardIdValueReducer from './reducers/cardIdValueSlice';
 import cardFlagValueReducer from './reducers/cardFlagValueSlice';
+import { persistReducer } from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   searchValueReducer,
   limitValueReducer,
   pageValueReducer,
@@ -19,9 +21,16 @@ const rootReducer = combineReducers({
   cardFlagValueReducer,
 });
 
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const setupStore = () => {
   return configureStore({
-    reducer: rootReducer,
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(cardsAPI.middleware),
   });

@@ -6,7 +6,7 @@ interface LimitValueState {
 }
 
 const initialState: LimitValueState = {
-  limit: Number(localStorage.getItem('limit')) || DEFAULT_CARDS_NUMBER,
+  limit: DEFAULT_CARDS_NUMBER,
 };
 
 export const limitValueSlice = createSlice({

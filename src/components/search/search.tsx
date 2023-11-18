@@ -16,7 +16,6 @@ const Search: React.FC = () => {
   const buttonSearchHandler = () => {
     if (inputText.current) {
       dispatch(setQuery(inputText.current?.value.trim()));
-      localStorage.setItem('query', inputText.current?.value.trim());
       dispatch(setPage(DEFAULT_PAGE));
     }
   };

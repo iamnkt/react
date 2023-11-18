@@ -25,16 +25,18 @@ const Details: React.FC = () => {
   };
 
   return isFetching ? (
-    <div data-testid="loader" className="loading">
-      <ThreeDots
-        height="80"
-        width="80"
-        radius="9"
-        color="#FFC759"
-        ariaLabel="three-dots-loading"
-        wrapperStyle={{}}
-        visible={true}
-      />
+    <div className="loader-container">
+      <div data-testid="loader" className="loader">
+        <ThreeDots
+          height="80"
+          width="80"
+          radius="9"
+          color="#FFC759"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          visible={true}
+        />
+      </div>
     </div>
   ) : (
     <div data-testid="card-details" className="card-details">

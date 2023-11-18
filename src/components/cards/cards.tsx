@@ -35,7 +35,7 @@ const Cards: React.FC<CardsProps> = ({ cards }) => {
 
   if (isLoading) {
     return (
-      <div className="loading">
+      <div className="loader">
         <ThreeDots
           height="80"
           width="80"

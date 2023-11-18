@@ -5,8 +5,9 @@ import './App.css';
 import Cards from './components/cards/cards';
 import Pages from './components/pages/pages';
 import Search from './components/search/search';
-import { useAppSelector } from './hooks/hooks';
+import { useAppDispatch, useAppSelector } from './hooks/hooks';
 import { ContextType } from './types/types';
+import { cardsFlagValueSlice } from './store/reducers/cardsFlagValueSlice';
 
 export const App: React.FC = () => {
   const { query } = useAppSelector((state) => state.searchValueReducer);
@@ -14,6 +15,8 @@ export const App: React.FC = () => {
   const { page } = useAppSelector((state) => state.pageValueReducer);
   const { id } = useAppSelector((state) => state.cardIdValueReducer);
   const [searchParams, setSearchParams] = useSearchParams();
+  const { setIsLoading } = cardsFlagValueSlice.actions;
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setSearchParams({
@@ -23,11 +26,12 @@ export const App: React.FC = () => {
     });
   }, [query, page, limit, setSearchParams]);
 
-  const { data: cards } = cardsAPI.useGetCardsQuery({
+  const { data: cards, isFetching } = cardsAPI.useGetCardsQuery({
     name: searchParams.get('name') || '',
     page: Number(searchParams.get('page')) || 1,
     limit: Number(searchParams.get('limit')) || 8,
   });
+  dispatch(setIsLoading(isFetching));
 
   return (
     <div className="app" id="app">

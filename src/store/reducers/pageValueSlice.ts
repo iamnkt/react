@@ -6,7 +6,7 @@ interface PageValueState {
 }
 
 const initialState: PageValueState = {
-  page: Number(localStorage.getItem('page')) || DEFAULT_PAGE,
+  page: DEFAULT_PAGE,
 };
 
 export const pageValueSlice = createSlice({

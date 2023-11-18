@@ -35,7 +35,6 @@ const Pages: React.FC<PagesProps> = ({ cards }) => {
               page: DEFAULT_PAGE.toString(),
               pageSize: limit.toString(),
             });
-            localStorage.setItem('page', DEFAULT_PAGE.toString());
           }}
           disabled={page === DEFAULT_PAGE}
         >
@@ -52,7 +51,6 @@ const Pages: React.FC<PagesProps> = ({ cards }) => {
                 page: (page - 1).toString(),
                 pageSize: limit.toString(),
               });
-              localStorage.setItem('page', String(page - 1));
             }
           }}
           disabled={page === DEFAULT_PAGE}
@@ -71,7 +69,6 @@ const Pages: React.FC<PagesProps> = ({ cards }) => {
                 page: (page + 1).toString(),
                 pageSize: limit.toString(),
               });
-              localStorage.setItem('page', String(page + 1));
             }
           }}
           disabled={page === pagesCount}
@@ -88,7 +85,6 @@ const Pages: React.FC<PagesProps> = ({ cards }) => {
               page: pagesCount.toString(),
               pageSize: limit.toString(),
             });
-            localStorage.setItem('page', String(pagesCount));
           }}
           disabled={page === pagesCount}
         >
