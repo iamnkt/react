@@ -1,27 +1,25 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import {
   useNavigate,
   useOutletContext,
   useSearchParams,
 } from 'react-router-dom';
-import { DataContext } from '../../context/context';
+import { cardsAPI } from '../../services/cardsService';
 import { ContextType } from '../../types/types';
 import './styles.css';
 
 const Details: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const { isDetailsLoading } = useContext(DataContext);
-  const { details, setDetails } = useOutletContext<ContextType>();
   const navigate = useNavigate();
+  const { id } = useOutletContext<ContextType>();
+  const { data: card, isFetching } = cardsAPI.useGetDetailedCardQuery({ id });
 
   const onCloseClick = () => {
-    setDetails(null);
-    localStorage.removeItem('details');
     navigate(`/?${searchParams}`);
   };
 
-  return isDetailsLoading ? (
+  return isFetching ? (
     <div data-testid="loader" className="loading">
       <ThreeDots
         height="80"
@@ -43,11 +41,11 @@ const Details: React.FC = () => {
         x
       </button>
       <div className="card-details__container">
-        <p className="card-details__name">Name: {details?.name}</p>
-        <p className="card-details__hp">HP: {details?.hp}</p>
-        <p className="card-details__level">Level: {details?.level}</p>
-        <p className="card-details__type">Type: {details?.types[0]}</p>
-        <p className="card-details__rarity">Rarity: {details?.rarity}</p>
+        <p className="card-details__name">Name: {card?.data.name}</p>
+        <p className="card-details__hp">HP: {card?.data.hp}</p>
+        <p className="card-details__level">Level: {card?.data.level}</p>
+        <p className="card-details__type">Type: {card?.data.types[0]}</p>
+        <p className="card-details__rarity">Rarity: {card?.data.rarity}</p>
       </div>
     </div>
   );

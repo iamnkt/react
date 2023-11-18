@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { CardsData } from '../types/types';
+import { CardsData, DetailedCardData } from '../types/types';
 
 export const cardsAPI = createApi({
   reducerPath: 'cardsAPI',
@@ -18,6 +18,14 @@ export const cardsAPI = createApi({
             page,
             pageSize: limit,
           },
+        };
+      },
+    }),
+    getDetailedCard: build.query<DetailedCardData, { id: string }>({
+      query: (arg) => {
+        const { id } = arg;
+        return {
+          url: `/${id}`,
         };
       },
     }),

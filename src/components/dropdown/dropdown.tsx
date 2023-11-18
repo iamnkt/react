@@ -10,7 +10,6 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
   const [, setSearchParams] = useSearchParams();
   const { query } = useAppSelector((state) => state.searchValueReducer);
   const { limit } = useAppSelector((state) => state.limitValueReducer);
-
   const { setLimit } = limitValueSlice.actions;
   const { setPage } = pageValueSlice.actions;
   const dispatch = useAppDispatch();

@@ -1,5 +1,12 @@
 import { ReactNode } from 'react';
 
+export interface CardsData {
+  count: number;
+  data: CardData[];
+  page: number;
+  pageSize: number;
+  totalCount: number;
+}
 export interface CardData {
   id: string;
   name: string;
@@ -8,22 +15,18 @@ export interface CardData {
   };
 }
 
-export interface CardDetail {
-  image: string;
+export interface DetailedCardData {
+  data: DetailedCard;
+}
+
+export type DetailedCard = {
   name: string;
   hp: string;
   level: string;
   types: string[];
   rarity: string;
-}
+};
 
-export interface CardsData {
-  count: number;
-  data: CardData[];
-  page: number;
-  pageSize: number;
-  totalCount: number;
-}
 export type ContextCards = CardData[];
 
 export interface ErrorProps {
@@ -34,21 +37,22 @@ export interface ErrorState {
   hasError: boolean;
 }
 
-export type PagesProps = {
-  isLoading: boolean;
-};
-
-export type DropdownProps = {
-  options: number[];
-};
-
 export type ContextType = {
-  details: CardDetail | null;
-  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
+  id: string;
 };
 
 export type CardsProps = {
   cards: CardsData;
+  isFetching: boolean;
+};
+
+export type PagesProps = {
+  cards: CardsData;
+  isFetching: boolean;
+};
+
+export type DropdownProps = {
+  options: number[];
 };
 
 export type CardProps = {
@@ -56,16 +60,3 @@ export type CardProps = {
   name: string;
   image: string;
 };
-
-export type TDataContext = {
-  details: CardDetail | null;
-  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
-  totalCount: number;
-  setTotalCount?: React.Dispatch<React.SetStateAction<number>>;
-  isDetailsLoading: boolean;
-  setIsDetailsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export interface ContextValue {
-  value: TDataContext;
-}

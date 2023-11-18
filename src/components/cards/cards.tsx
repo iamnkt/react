@@ -3,8 +3,9 @@ import './styles.css';
 import { CardData, CardsProps } from '../../types/types';
 import Card from '../card/card';
 import { useSearchParams } from 'react-router-dom';
+import { ThreeDots } from 'react-loader-spinner';
 
-const Cards: React.FC<CardsProps> = ({ cards }) => {
+const Cards: React.FC<CardsProps> = ({ cards, isFetching }) => {
   const [searchParams] = useSearchParams();
 
   const render = (): JSX.Element => {
@@ -30,21 +31,21 @@ const Cards: React.FC<CardsProps> = ({ cards }) => {
     );
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="loading">
-  //       <ThreeDots
-  //         height="80"
-  //         width="80"
-  //         radius="9"
-  //         color="#FFC759"
-  //         ariaLabel="three-dots-loading"
-  //         wrapperStyle={{}}
-  //         visible={true}
-  //       />
-  //     </div>
-  //   );
-  // }
+  if (isFetching) {
+    return (
+      <div className="loading">
+        <ThreeDots
+          height="80"
+          width="80"
+          radius="9"
+          color="#FFC759"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          visible={true}
+        />
+      </div>
+    );
+  }
 
   return render();
 };

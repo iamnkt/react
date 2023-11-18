@@ -1,24 +1,23 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { DEFAULT_PAGE, PAGE_SIZES } from '../../constants/constants';
-import { DataContext } from '../../context/context';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { pageValueSlice } from '../../store/reducers/pageValueSlice';
+import { PagesProps } from '../../types/types';
 import Dropdown from '../dropdown/dropdown';
 import './styles.css';
 
-const Pages: React.FC = () => {
+const Pages: React.FC<PagesProps> = ({ cards, isFetching }) => {
   const [, setSearchParams] = useSearchParams();
   const { query } = useAppSelector((state) => state.searchValueReducer);
   const { limit } = useAppSelector((state) => state.limitValueReducer);
   const { page } = useAppSelector((state) => state.pageValueReducer);
   const { setPage } = pageValueSlice.actions;
   const dispatch = useAppDispatch();
-
-  const { totalCount, isLoading } = useContext(DataContext);
+  const { totalCount } = cards;
   const pagesCount = Math.ceil(totalCount / limit);
 
-  if (isLoading) {
+  if (isFetching) {
     return <></>;
   }
 
