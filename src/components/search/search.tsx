@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-// import { useSearchParams } from 'react-router-dom';
 import { DEFAULT_PAGE } from '../../constants/constants';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { pageValueSlice } from '../../store/reducers/pageValueSlice';
@@ -8,24 +7,17 @@ import './styles.css';
 
 const Search: React.FC = () => {
   const { query } = useAppSelector((state) => state.searchValueReducer);
-  // const { limit } = useAppSelector((state) => state.limitValueReducer);
   const { setQuery } = searchValueSlice.actions;
   const { setPage } = pageValueSlice.actions;
   const dispatch = useAppDispatch();
 
   const inputText = useRef<HTMLInputElement>(null);
-  // const [, setSearchParams] = useSearchParams();
 
   const buttonSearchHandler = () => {
     if (inputText.current) {
       dispatch(setQuery(inputText.current?.value.trim()));
       localStorage.setItem('query', inputText.current?.value.trim());
       dispatch(setPage(DEFAULT_PAGE));
-      // setSearchParams({
-      //   q: `name:${inputText.current?.value.trim()}*`,
-      //   page: DEFAULT_PAGE.toString(),
-      //   pageSize: limit.toString(),
-      // });
     }
   };
 

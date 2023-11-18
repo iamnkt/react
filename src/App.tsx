@@ -38,8 +38,6 @@ export const App: React.FC = () => {
     limit: Number(searchParams.get('limit')) || 8,
   });
 
-  console.log(cards);
-
   return (
     <div className="app" id="app">
       <DataProvider
