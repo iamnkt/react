@@ -4,8 +4,9 @@ import limitValueReducer from './reducers/limitValueSlice';
 import pageValueReducer from './reducers/pageValueSlice';
 import cardValueReducer from './reducers/cardValueSlice';
 import { cardsAPI } from '../services/cardsService';
-import cardFlagValueReducer from './reducers/cardLoadingFlag';
+import cardsFlagValueReducer from './reducers/cardsFlagValueSlice';
 import cardIdValueReducer from './reducers/cardIdValueSlice';
+import cardFlagValueReducer from './reducers/cardFlagValueSlice';
 
 const rootReducer = combineReducers({
   searchValueReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   [cardsAPI.reducerPath]: cardsAPI.reducer,
   cardValueReducer,
   cardIdValueReducer,
+  cardsFlagValueReducer,
   cardFlagValueReducer,
 });
 

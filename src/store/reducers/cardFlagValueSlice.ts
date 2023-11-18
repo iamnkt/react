@@ -9,7 +9,7 @@ const initialState: cardFlagValueState = {
 };
 
 export const cardFlagValueSlice = createSlice({
-  name: 'cardFlag',
+  name: 'cardsFlag',
   initialState,
   reducers: {
     setIsFetching(state, action: PayloadAction<boolean>) {

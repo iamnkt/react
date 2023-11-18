@@ -5,7 +5,9 @@ import {
   useOutletContext,
   useSearchParams,
 } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/hooks';
 import { cardsAPI } from '../../services/cardsService';
+import { cardFlagValueSlice } from '../../store/reducers/cardFlagValueSlice';
 import { ContextType } from '../../types/types';
 import './styles.css';
 
@@ -14,6 +16,9 @@ const Details: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useOutletContext<ContextType>();
   const { data: card, isFetching } = cardsAPI.useGetDetailedCardQuery({ id });
+  const { setIsFetching } = cardFlagValueSlice.actions;
+  const dispatch = useAppDispatch();
+  dispatch(setIsFetching(isFetching));
 
   const onCloseClick = () => {
     navigate(`/?${searchParams}`);

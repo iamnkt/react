@@ -43,12 +43,10 @@ export type ContextType = {
 
 export type CardsProps = {
   cards: CardsData;
-  isFetching: boolean;
 };
 
 export type PagesProps = {
   cards: CardsData;
-  isFetching: boolean;
 };
 
 export type DropdownProps = {

@@ -7,7 +7,7 @@ import { PagesProps } from '../../types/types';
 import Dropdown from '../dropdown/dropdown';
 import './styles.css';
 
-const Pages: React.FC<PagesProps> = ({ cards, isFetching }) => {
+const Pages: React.FC<PagesProps> = ({ cards }) => {
   const [, setSearchParams] = useSearchParams();
   const { query } = useAppSelector((state) => state.searchValueReducer);
   const { limit } = useAppSelector((state) => state.limitValueReducer);
@@ -16,8 +16,9 @@ const Pages: React.FC<PagesProps> = ({ cards, isFetching }) => {
   const dispatch = useAppDispatch();
   const { totalCount } = cards;
   const pagesCount = Math.ceil(totalCount / limit);
+  const { isLoading } = useAppSelector((state) => state.cardsFlagValueReducer);
 
-  if (isFetching) {
+  if (isLoading) {
     return <></>;
   }
 

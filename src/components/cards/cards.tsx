@@ -4,9 +4,11 @@ import { CardData, CardsProps } from '../../types/types';
 import Card from '../card/card';
 import { useSearchParams } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
+import { useAppSelector } from '../../hooks/hooks';
 
-const Cards: React.FC<CardsProps> = ({ cards, isFetching }) => {
+const Cards: React.FC<CardsProps> = ({ cards }) => {
   const [searchParams] = useSearchParams();
+  const { isLoading } = useAppSelector((state) => state.cardsFlagValueReducer);
 
   const render = (): JSX.Element => {
     const data = cards.data;
@@ -31,7 +33,7 @@ const Cards: React.FC<CardsProps> = ({ cards, isFetching }) => {
     );
   };
 
-  if (isFetching) {
+  if (isLoading) {
     return (
       <div className="loading">
         <ThreeDots
