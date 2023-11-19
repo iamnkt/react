@@ -8,7 +8,7 @@ import './index.css';
 import { router } from './router/router';
 import { setupStore } from './store/store';
 
-const store = setupStore();
+export const store = setupStore();
 export const persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

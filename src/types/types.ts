@@ -11,7 +11,7 @@ export interface CardData {
   id: string;
   name: string;
   images: {
-    large: 'string';
+    large: string;
   };
 }
 

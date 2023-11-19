@@ -23,9 +23,9 @@
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">62.5% </span>
+            <span class="strong">34.78% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">10/16</span>
+            <span class="fraction">8/23</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -35,15 +35,15 @@
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">66.66% </span>
+            <span class="strong">0% </span>
             <span class="quiet">Functions</span>
-            <span class="fraction">2/3</span>
+            <span class="fraction">0/5</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">62.5% </span>
+            <span class="strong">38.09% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">10/16</span>
+            <span class="fraction">8/21</span>
           </div>
         </div>
         <p class="quiet">
@@ -57,7 +57,7 @@
           </div>
         </template>
       </div>
-      <div class="status-line medium"></div>
+      <div class="status-line low"></div>
       <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,18 +97,30 @@
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,12 +133,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -134,37 +144,42 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useContext, useState } from 'react';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { DataContext } from '../../context/context';
+import { DEFAULT_PAGE } from '../../constants/constants';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { limitValueSlice } from '../../store/reducers/limitValueSlice';
+import { pageValueSlice } from '../../store/reducers/pageValueSlice';
 import { DropdownProps } from '../../types/types';
 &nbsp;
-const Dropdown: React.FC&lt;DropdownProps&gt; = ({ options }) =&gt; {
-  const [, setSearchParams] = useSearchParams();
-  const { cardsPerPage, setCardsPerPage, setPage, query } =
-    useContext(DataContext);
-  const [selectedOption, setSelectedOption] = useState(cardsPerPage);
+const Dropdown: React.FC&lt;DropdownProps&gt; = <span class="fstat-no" title="function not covered" >({</span> options }) =&gt; {
+  const [, setSearchParams] = <span class="cstat-no" title="statement not covered" >useSearchParams();</span>
+  const { query } = <span class="cstat-no" title="statement not covered" >useAppSelector(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.searchValueReducer)</span>;</span>
+  const { limit } = <span class="cstat-no" title="statement not covered" >useAppSelector(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.limitValueReducer)</span>;</span>
+  const { setLimit } = <span class="cstat-no" title="statement not covered" >limitValueSlice.actions;</span>
+  const { setPage } = <span class="cstat-no" title="statement not covered" >pageValueSlice.actions;</span>
+  const dispatch = <span class="cstat-no" title="statement not covered" >useAppDispatch();</span>
 &nbsp;
-  return (
+  const [selectedOption, setSelectedOption] = <span class="cstat-no" title="statement not covered" >useState(limit);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;select
       className="dropdown"
       value={selectedOption}
       onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
 <span class="cstat-no" title="statement not covered" >        setSelectedOption(Number(e.target.value));</span>
-<span class="cstat-no" title="statement not covered" >        setCardsPerPage!(Number(e.target.value));</span>
-<span class="cstat-no" title="statement not covered" >        setPage!(1);</span>
+<span class="cstat-no" title="statement not covered" >        dispatch(setLimit(Number(e.target.value)));</span>
+<span class="cstat-no" title="statement not covered" >        dispatch(setPage(DEFAULT_PAGE));</span>
 <span class="cstat-no" title="statement not covered" >        setSearchParams({</span>
           q: `name:${query}*`,
-          page: '1',
+          page: DEFAULT_PAGE.toString(),
           pageSize: e.target.value,
         });
-<span class="cstat-no" title="statement not covered" >        localStorage.setItem('cardsPerPage', e.target.value);</span>
-<span class="cstat-no" title="statement not covered" >        localStorage.setItem('pageNumber', '1');</span>
       }}
     &gt;
-      {options.map((value: number) =&gt; (
-        &lt;option key={value} value={value}&gt;
+      {options.map(<span class="fstat-no" title="function not covered" >(v</span>alue: number) =&gt; (
+<span class="cstat-no" title="statement not covered" >        &lt;option key={value} v</span>alue={value}&gt;
           {value}
         &lt;/option&gt;
       ))}
@@ -187,7 +202,7 @@ export default Dropdown;
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2023-11-15T08:17:10.266Z
+      at 2023-11-19T15:31:03.313Z
     </div>
     <script src="../../../prettify.js"></script>
     <script>

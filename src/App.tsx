@@ -34,7 +34,7 @@ export const App: React.FC = () => {
   dispatch(setIsLoading(isFetching));
 
   return (
-    <div className="app" id="app">
+    <div className="app">
       <div className="main__container">
         <Search />
         {cards && <Cards cards={cards} />}

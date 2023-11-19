@@ -18,4 +18,6 @@ export const cardsFlagValueSlice = createSlice({
   },
 });
 
+export const { setIsLoading } = cardsFlagValueSlice.actions;
+
 export default cardsFlagValueSlice.reducer;

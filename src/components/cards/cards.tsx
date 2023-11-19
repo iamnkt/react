@@ -18,6 +18,7 @@ const Cards: React.FC<CardsProps> = ({ cards }) => {
           searchParams.set('id', card.id);
           return (
             <Card
+              data-testid="card"
               key={card.id}
               id={card.id}
               name={card.name}
@@ -35,7 +36,7 @@ const Cards: React.FC<CardsProps> = ({ cards }) => {
 
   if (isLoading) {
     return (
-      <div className="loader">
+      <div data-testid="loader" className="loader">
         <ThreeDots
           height="80"
           width="80"

@@ -39,7 +39,7 @@ const Details: React.FC = () => {
       </div>
     </div>
   ) : (
-    <div data-testid="card-details" className="card-details">
+    <div data-testid="detailed-card" className="card-details">
       <button
         data-testid="button"
         className="card-details__button button"
