@@ -19,4 +19,6 @@ export const pageValueSlice = createSlice({
   },
 });
 
+export const { setPage } = pageValueSlice.actions;
+
 export default pageValueSlice.reducer;

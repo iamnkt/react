@@ -24,11 +24,22 @@ export const CharizardDetailedMockCard = {
 };
 
 export const CardsDataMock = {
-  count: 2,
-  data: [CharmanderMockCard, CharizardMockCard],
-  page: 3,
+  count: 10,
+  data: [
+    CharmanderMockCard,
+    CharizardMockCard,
+    CharizardMockCard,
+    CharizardMockCard,
+    CharizardMockCard,
+    CharizardMockCard,
+    CharizardMockCard,
+    CharmanderMockCard,
+    CharmanderMockCard,
+    CharmanderMockCard,
+  ],
+  page: 1,
   pageSize: 8,
-  totalCount: 2,
+  totalCount: 10,
 };
 
 export const CardsEmptyDataMock = {

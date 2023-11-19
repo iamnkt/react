@@ -18,4 +18,6 @@ export const cardFlagValueSlice = createSlice({
   },
 });
 
+export const { setIsFetching } = cardFlagValueSlice.actions;
+
 export default cardFlagValueSlice.reducer;

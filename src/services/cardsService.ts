@@ -31,3 +31,5 @@ export const cardsAPI = createApi({
     }),
   }),
 });
+
+export const { useGetCardsQuery, useGetDetailedCardQuery } = cardsAPI;

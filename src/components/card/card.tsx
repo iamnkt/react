@@ -20,7 +20,7 @@ const Card: React.FC<CardProps> = ({ id, name, image }) => {
       <h4 data-testid={'card-title'} className="card__title">
         {name}
       </h4>
-      <img data-testif={'card-image'} className="card__image" src={image}></img>
+      <img data-testid={'card-image'} className="card__image" src={image}></img>
     </div>
   );
 };

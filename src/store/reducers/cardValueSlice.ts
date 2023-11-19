@@ -29,4 +29,6 @@ export const cardValueSlice = createSlice({
   },
 });
 
+export const { setCard } = cardValueSlice.actions;
+
 export default cardValueSlice.reducer;

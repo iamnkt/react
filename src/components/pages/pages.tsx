@@ -24,7 +24,7 @@ const Pages: React.FC<PagesProps> = ({ cards }) => {
 
   return (
     <div className="pages__container">
-      <div className="pages">
+      <div data-testid="page-buttons" className="pages">
         <button
           type="button"
           data-testid="firstpage-button"
@@ -32,7 +32,7 @@ const Pages: React.FC<PagesProps> = ({ cards }) => {
             dispatch(setPage(DEFAULT_PAGE));
             setSearchParams({
               q: `name:${query}*`,
-              page: DEFAULT_PAGE.toString(),
+              page: '1',
               pageSize: limit.toString(),
             });
           }}

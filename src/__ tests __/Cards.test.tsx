@@ -12,7 +12,7 @@ const store = setupStore();
 describe('Cards component', () => {
   it('renders correctly and should display the specified number of cards', () => {
     renderWithProviders(<Cards cards={CardsDataMock} />, { store });
-    expect(screen.queryAllByTestId('card')).toHaveLength(2);
+    expect(screen.queryAllByTestId('card')).toHaveLength(10);
   });
 
   it('should be displayed component, when there are no cards', () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import {
   useNavigate,
@@ -16,9 +16,12 @@ const Details: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useOutletContext<ContextType>();
   const { data: card, isFetching } = cardsAPI.useGetDetailedCardQuery({ id });
-  const { setIsFetching } = cardFlagValueSlice.actions;
   const dispatch = useAppDispatch();
-  dispatch(setIsFetching(isFetching));
+  const { setIsFetching } = cardFlagValueSlice.actions;
+  useEffect(() => {
+    dispatch(setIsFetching(isFetching));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFetching]);
 
   const onCloseClick = () => {
     navigate(`/?${searchParams}`);
