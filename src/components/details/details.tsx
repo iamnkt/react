@@ -44,7 +44,7 @@ const Details: React.FC = () => {
   ) : (
     <div data-testid="detailed-card" className="card-details">
       <button
-        data-testid="button"
+        data-testid="close-button"
         className="card-details__button button"
         onClick={onCloseClick}
       >

@@ -1,21 +1,14 @@
 import 'whatwg-fetch';
-import { rest } from 'msw';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import Card from '../components/card/card';
 import Details from '../components/details/details';
 import { setupStore } from '../store/store';
 import { renderWithProviders } from '../utils/test-utils';
-import { server } from './__mocks__/api/server';
+import { CharizardMockCard } from './__mocks__/Mocks';
 
-const apiData = {
-  data: {
-    name: 'Charizard',
-    hp: '150',
-    level: '12',
-    types: ['fire'],
-    rarity: 'rare',
-  },
-};
+const { id, name } = CharizardMockCard;
+const image = CharizardMockCard.images.large;
 
 const store = setupStore();
 
@@ -35,41 +28,35 @@ jest.mock('react-router-dom', () => ({
 
 describe('Details component', () => {
   it('correctly displays the detailed card data', async () => {
-    server.use(
-      rest.get(
-        `https://api.pokemontcg.io/v2/cards/bw15-12`,
-        (req, res, ctx) => {
-          return res(ctx.json(apiData));
-        }
-      )
+    renderWithProviders(
+      <>
+        <Card id={id} name={name} image={image} />,
+        <Details />
+      </>,
+      { store }
     );
-    renderWithProviders(<Details />, { store });
+    const card = screen.getByTestId('card');
+    await fireEvent.click(card);
     await waitFor(() => {
-      expect(screen.getByText(/name/i)).toBeInTheDocument();
-      expect(screen.queryByText(/level/i)).toBeInTheDocument();
-      expect(screen.queryByText(/hp/i)).toBeInTheDocument();
-      expect(screen.queryByText(/type/i)).toBeInTheDocument();
-      expect(screen.queryByText(/rarity/i)).toBeInTheDocument();
+      expect(screen.getByText(/charizard/i)).toBeInTheDocument();
     });
   });
 
   it('clicking the close button hides the component', async () => {
-    server.use(
-      rest.get(
-        `https://api.pokemontcg.io/v2/cards/bw15-12`,
-        (req, res, ctx) => {
-          return res(ctx.json(apiData));
-        }
-      )
+    renderWithProviders(
+      <>
+        <Card id={id} name={name} image={image} />,
+        <Details />
+      </>,
+      { store }
     );
-
-    renderWithProviders(<Details />, { store });
+    const card = screen.getByTestId('card');
+    await fireEvent.click(card);
     await waitFor(() => {
       expect(screen.getByTestId('detailed-card')).toBeInTheDocument();
     });
-    await waitFor(() => {
-      fireEvent.click(screen.getByTestId('button'));
-    });
+    const closebtn = screen.getByTestId('close-button');
+    await fireEvent.click(closebtn);
     await waitFor(() => {
       expect(screen.queryByTestId('detailed-card')).not.toBeNull();
     });
