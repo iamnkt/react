@@ -5,66 +5,76 @@ import Card from '../components/card/card';
 import Details from '../components/details/details';
 import { setupStore } from '../store/store';
 import { renderWithProviders } from '../utils/test-utils';
-import { CharizardMockCard } from './__mocks__/Mocks';
+import { MemoryRouter } from 'react-router-dom';
+import { Charizard1MockCard } from './__mocks__/Mocks';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 
-const { id, name } = CharizardMockCard;
-const image = CharizardMockCard.images.large;
+const { id, name } = Charizard1MockCard;
+const image = Charizard1MockCard.images.large;
+
+const server = setupServer(
+  http.get(`https://api.pokemontcg.io/v2/cards/${id}`, () => {
+    return HttpResponse.json({
+      data: {
+        id: 'bw25-12',
+        name: 'Charizard',
+        hp: '150',
+        level: '12',
+        types: ['fire'],
+        rarity: 'rare',
+      },
+    });
+  })
+);
+
+beforeAll(() => {
+  server.listen({ onUnhandledRequest: 'bypass' });
+});
+
+afterEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(() => {
+  server.close();
+});
 
 const store = setupStore();
 
-const mockedUsedNavigate = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockedUsedNavigate,
-}));
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useOutletContext: () => ({
-    id: 'bw15-12',
-  }),
-}));
-
 describe('Details component', () => {
-  it('correctly displays the detailed card data', async () => {
+  beforeEach(() => {
     renderWithProviders(
-      <>
+      <MemoryRouter>
         <Card id={id} name={name} image={image} />,
         <Details />
-      </>,
+      </MemoryRouter>,
       { store }
     );
+  });
+
+  it('displays loading indicator while fetching data', async () => {
     const card = screen.getByTestId('card');
     await fireEvent.click(card);
+    expect(screen.getByTestId('loader')).toBeInTheDocument();
+  });
+
+  it('correctly displays the detailed card data', async () => {
+    const card = screen.getByTestId('card');
+    fireEvent.click(card);
     await waitFor(() => {
-      expect(screen.getByText(/charizard/i)).toBeInTheDocument();
+      expect(screen.getByText(/fire/i)).toBeInTheDocument();
     });
   });
 
   it('clicking the close button hides the component', async () => {
-    renderWithProviders(
-      <>
-        <Card id={id} name={name} image={image} />,
-        <Details />
-      </>,
-      { store }
-    );
-    const card = screen.getByTestId('card');
-    await fireEvent.click(card);
-    await waitFor(() => {
-      expect(screen.getByTestId('detailed-card')).toBeInTheDocument();
+    await fireEvent.click(screen.getByTestId('card'));
+    waitFor(() => {
+      expect(screen.getByTestId('close-button')).toBeInTheDocument();
     });
-    const closebtn = screen.getByTestId('close-button');
-    await fireEvent.click(closebtn);
+    fireEvent.click(screen.getByTestId('close-button'));
     await waitFor(() => {
-      expect(screen.queryByTestId('detailed-card')).not.toBeNull();
+      expect(screen.queryByTestId('detailed-card')).toBeInTheDocument();
     });
-  });
-
-  it('displays loading indicator while fetching data', () => {
-    renderWithProviders(<Details />, { store });
-    const loader = screen.getByTestId('loader');
-    expect(loader).toBeInTheDocument();
   });
 });

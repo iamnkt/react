@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 import { AppStore, RootState, setupStore } from '../store/store';
-import { BrowserRouter } from 'react-router-dom';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -23,11 +22,7 @@ export function renderWithProviders(
 ) {
   setupListeners(store.dispatch);
   function Wrapper({ children }: PropsWithChildren<object>): JSX.Element {
-    return (
-      <Provider store={store}>
-        <BrowserRouter>{children}</BrowserRouter>
-      </Provider>
-    );
+    return <Provider store={store}>{children}</Provider>;
   }
 
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };

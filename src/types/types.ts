@@ -20,6 +20,7 @@ export interface DetailedCardData {
 }
 
 export type DetailedCard = {
+  id: string;
   name: string;
   hp: string;
   level: string;

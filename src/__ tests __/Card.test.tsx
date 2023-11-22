@@ -4,8 +4,9 @@ import '@testing-library/jest-dom';
 import Card from '../components/card/card';
 import React from 'react';
 import { setupStore } from '../store/store';
-import { CharmanderMockCard } from './__mocks__/Mocks';
+import { Charmander1MockCard } from './__mocks__/Mocks';
 import { renderWithProviders } from '../utils/test-utils';
+import { MemoryRouter } from 'react-router-dom';
 
 const store = setupStore();
 
@@ -16,20 +17,28 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockedUsedNavigate,
 }));
 
-const { id, name } = CharmanderMockCard;
-const image = CharmanderMockCard.images.large;
+const { id, name } = Charmander1MockCard;
+const image = Charmander1MockCard.images.large;
 
 describe('Card component', () => {
   it('renders the relevant card data', () => {
-    renderWithProviders(<Card id={id} name={name} image={image} />, { store });
-    expect(screen.queryByText(CharmanderMockCard.name)).toBeInTheDocument();
+    renderWithProviders(
+      <MemoryRouter>
+        <Card id={id} name={name} image={image} />
+      </MemoryRouter>,
+      { store }
+    );
+    expect(screen.queryByText(Charmander1MockCard.name)).toBeInTheDocument();
   });
 
   it('opens a detailed card component', () => {
     async () => {
-      renderWithProviders(<Card id={id} name={name} image={image} />, {
-        store,
-      });
+      renderWithProviders(
+        <MemoryRouter>
+          <Card id={id} name={name} image={image} />
+        </MemoryRouter>,
+        { store }
+      );
       const card = screen.getByTestId('card');
       await fireEvent.click(card);
       const detailedCard = screen.getByTestId('detailed-card');

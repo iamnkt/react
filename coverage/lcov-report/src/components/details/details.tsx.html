@@ -25,7 +25,7 @@
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">20/20</span>
+            <span class="fraction">21/21</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -43,7 +43,7 @@
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">20/20</span>
+            <span class="fraction">21/21</span>
           </div>
         </div>
         <p class="quiet">
@@ -123,7 +123,8 @@
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,11 +145,12 @@
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -214,6 +216,7 @@ const Details: React.FC = () =&gt; {
 &nbsp;
   const onCloseClick = () =&gt; {
     navigate(`/?${searchParams}`);
+    console.log(document.querySelector('.card-details'));
   };
 &nbsp;
   return isFetching ? (
@@ -233,7 +236,7 @@ const Details: React.FC = () =&gt; {
   ) : (
     &lt;div data-testid="detailed-card" className="card-details"&gt;
       &lt;button
-        data-testid="button"
+        data-testid="close-button"
         className="card-details__button button"
         onClick={onCloseClick}
       &gt;
@@ -265,7 +268,7 @@ export default Details;
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2023-11-19T23:07:22.070Z
+      at 2023-11-21T14:56:40.411Z
     </div>
     <script src="../../../prettify.js"></script>
     <script>

@@ -7,4 +7,8 @@ export default {
     '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
   },
+  setupFiles: ['./jest.polyfills.js'],
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
 };

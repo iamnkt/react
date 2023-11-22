@@ -18,4 +18,6 @@ export const cardIdValueSlice = createSlice({
   },
 });
 
+export const { setCardId } = cardIdValueSlice.actions;
+
 export default cardIdValueSlice.reducer;
