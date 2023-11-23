@@ -72,9 +72,9 @@ describe('Details component', () => {
     waitFor(() => {
       expect(screen.getByTestId('close-button')).toBeInTheDocument();
     });
-    fireEvent.click(screen.getByTestId('close-button'));
+    await fireEvent.click(screen.getByTestId('close-button'));
     await waitFor(() => {
-      expect(screen.queryByTestId('detailed-card')).toBeInTheDocument();
+      expect(screen.queryByTestId('detailed-card')).not.toBeNull();
     });
   });
 });
