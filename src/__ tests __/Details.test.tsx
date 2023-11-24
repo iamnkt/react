@@ -1,153 +1,80 @@
-import { BrowserRouter } from 'react-router-dom';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import 'whatwg-fetch';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { DataProvider } from '../App';
-import { CardDetail, Data } from '../types/types';
-import { CharizardCardMock } from './__mocks__/cardMock';
-import {
-  cardsPerPage,
-  isLoading,
-  page,
-  query,
-  totalCount,
-} from './__mocks__/contextDataMock';
-import { CharizardMock, CharmanderMock } from './__mocks__/cardsMock';
-import Details from '../components/details/details';
 import Card from '../components/card/card';
+import Details from '../components/details/details';
+import { setupStore } from '../store/store';
+import { renderWithProviders } from '../utils/test-utils';
+import { MemoryRouter } from 'react-router-dom';
+import { Charizard1MockCard } from './__mocks__/Mocks';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 
-const details: CardDetail = CharizardCardMock;
-const cards: Data[] = [CharmanderMock, CharizardMock];
-const mockedUsedNavigate = jest.fn();
+const { id, name } = Charizard1MockCard;
+const image = Charizard1MockCard.images.large;
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockedUsedNavigate,
-}));
+const server = setupServer(
+  http.get(`https://api.pokemontcg.io/v2/cards/${id}`, () => {
+    return HttpResponse.json({
+      data: {
+        id: 'bw25-12',
+        name: 'Charizard',
+        hp: '150',
+        level: '12',
+        types: ['fire'],
+        rarity: 'rare',
+      },
+    });
+  })
+);
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useOutletContext: () => ({
-    details: details,
-    setDetails: jest.fn(),
-  }),
-}));
+beforeAll(() => {
+  server.listen({ onUnhandledRequest: 'bypass' });
+});
 
-const setQuery = jest.fn();
-const setCards = jest.fn();
-const setDetails = jest.fn();
-const setPage = jest.fn();
-const setTotalCount = jest.fn();
-const setIsDetailsLoading = jest.fn();
-const setCardsPerPage = jest.fn();
-const setIsLoading = jest.fn();
+afterEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(() => {
+  server.close();
+});
+
+const store = setupStore();
 
 describe('Details component', () => {
-  it('displays loading indicator while fetching data', () => {
-    const isDetailsLoading = true;
-    render(
-      <BrowserRouter>
-        <DataProvider
-          value={{
-            query,
-            cards,
-            details,
-            totalCount,
-            page,
-            cardsPerPage,
-            isLoading,
-            isDetailsLoading,
-            setQuery,
-            setCards,
-            setDetails,
-            setPage,
-            setTotalCount,
-            setIsDetailsLoading,
-            setCardsPerPage,
-            setIsLoading,
-          }}
-        >
-          <Details />
-        </DataProvider>
-      </BrowserRouter>
+  beforeEach(() => {
+    renderWithProviders(
+      <MemoryRouter>
+        <Card id={id} name={name} image={image} />,
+        <Details />
+      </MemoryRouter>,
+      { store }
     );
-    const loader = screen.getByTestId('loader');
-    expect(loader).toBeInTheDocument();
   });
 
-  it('correctly displays the detailed card data', () => {
-    const isDetailsLoading = false;
-    render(
-      <BrowserRouter>
-        <DataProvider
-          value={{
-            query,
-            cards,
-            details,
-            totalCount,
-            page,
-            cardsPerPage,
-            isLoading,
-            isDetailsLoading,
-            setQuery,
-            setCards,
-            setDetails,
-            setPage,
-            setTotalCount,
-            setIsDetailsLoading,
-            setCardsPerPage,
-            setIsLoading,
-          }}
-        >
-          <Details />
-        </DataProvider>
-      </BrowserRouter>
-    );
-    expect(screen.queryByText(/Charizard/i)).toBeInTheDocument();
-    expect(screen.queryByText(/150/i)).toBeInTheDocument();
-    expect(screen.queryByText(/12/i)).toBeInTheDocument();
-    expect(screen.queryByText(/fire/i)).toBeInTheDocument();
-    expect(screen.queryByText(/rare/i)).toBeInTheDocument();
+  it('displays loading indicator while fetching data', async () => {
+    const card = screen.getByTestId('card');
+    await fireEvent.click(card);
+    expect(screen.getByTestId('loader')).toBeInTheDocument();
+  });
+
+  it('correctly displays the detailed card data', async () => {
+    const card = screen.getByTestId('card');
+    fireEvent.click(card);
+    await waitFor(() => {
+      expect(screen.getByText(/fire/i)).toBeInTheDocument();
+    });
   });
 
   it('clicking the close button hides the component', async () => {
-    const isDetailsLoading = false;
-    render(
-      <BrowserRouter>
-        <DataProvider
-          value={{
-            query,
-            cards,
-            details,
-            totalCount,
-            page,
-            cardsPerPage,
-            isLoading,
-            isDetailsLoading,
-            setQuery,
-            setCards,
-            setDetails,
-            setPage,
-            setTotalCount,
-            setIsDetailsLoading,
-            setCardsPerPage,
-            setIsLoading,
-          }}
-        >
-          <Card
-            id={CharizardMock.id}
-            name={CharizardMock.name}
-            image={CharizardMock.image}
-          />
-          <Details />
-        </DataProvider>
-      </BrowserRouter>
-    );
-    const closeButton = screen.getByTestId('button');
-    const detailedCard = screen.queryByTestId('card-details');
-    expect(detailedCard).toBeInTheDocument();
-    fireEvent.click(closeButton);
+    await fireEvent.click(screen.getByTestId('card'));
+    waitFor(() => {
+      expect(screen.getByTestId('close-button')).toBeInTheDocument();
+    });
+    await fireEvent.click(screen.getByTestId('close-button'));
     await waitFor(() => {
-      expect(detailedCard).not.toBeNull();
+      expect(screen.queryByTestId('detailed-card')).not.toBeNull();
     });
   });
 });

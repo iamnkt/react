@@ -1,23 +1,22 @@
-import React, { useContext, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { DataContext } from '../../context/context';
+import React, { useRef } from 'react';
+import { DEFAULT_PAGE } from '../../constants/constants';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { pageValueSlice } from '../../store/reducers/pageValueSlice';
+import { searchValueSlice } from '../../store/reducers/searchValueSlice';
 import './styles.css';
 
 const Search: React.FC = () => {
-  const { query, setQuery, setPage, cardsPerPage } = useContext(DataContext);
+  const { query } = useAppSelector((state) => state.searchValueReducer);
+  const { setQuery } = searchValueSlice.actions;
+  const { setPage } = pageValueSlice.actions;
+  const dispatch = useAppDispatch();
+
   const inputText = useRef<HTMLInputElement>(null);
-  const [, setSearchParams] = useSearchParams();
 
   const buttonSearchHandler = () => {
     if (inputText.current) {
-      setQuery!(inputText.current?.value.trim());
-      localStorage.setItem('query', inputText.current?.value.trim());
-      setPage!(1);
-      setSearchParams({
-        q: `name:${inputText.current?.value.trim()}*`,
-        page: '1',
-        pageSize: cardsPerPage.toString(),
-      });
+      dispatch(setQuery(inputText.current?.value.trim()));
+      dispatch(setPage(DEFAULT_PAGE));
     }
   };
 
@@ -30,7 +29,7 @@ const Search: React.FC = () => {
           type="text"
           className="input input__search"
           placeholder="Pokemon name"
-          defaultValue={localStorage.getItem('query') || query}
+          defaultValue={query}
           ref={inputText}
         ></input>
         <button

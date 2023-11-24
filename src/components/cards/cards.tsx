@@ -1,25 +1,28 @@
-import React, { useContext } from 'react';
-import { ThreeDots } from 'react-loader-spinner';
+import React from 'react';
 import './styles.css';
+import { CardData, CardsProps } from '../../types/types';
 import Card from '../card/card';
-import { DataContext } from '../../context/context';
 import { useSearchParams } from 'react-router-dom';
+import { ThreeDots } from 'react-loader-spinner';
+import { useAppSelector } from '../../hooks/hooks';
 
-const Cards: React.FC = () => {
-  const { cards, isLoading } = useContext(DataContext);
+const Cards: React.FC<CardsProps> = ({ cards }) => {
   const [searchParams] = useSearchParams();
+  const { isLoading } = useAppSelector((state) => state.cardsFlagValueReducer);
 
   const render = (): JSX.Element => {
-    return cards?.length ? (
+    const data = cards.data;
+    return data.length ? (
       <div className="cards__container">
-        {cards.map((card) => {
+        {data.map((card: CardData) => {
           searchParams.set('id', card.id);
           return (
             <Card
+              data-testid="card"
               key={card.id}
               id={card.id}
               name={card.name}
-              image={card.image}
+              image={card.images.large}
             />
           );
         })}
@@ -33,7 +36,7 @@ const Cards: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="loading">
+      <div data-testid="loader" className="loader">
         <ThreeDots
           height="80"
           width="80"
@@ -41,7 +44,6 @@ const Cards: React.FC = () => {
           color="#FFC759"
           ariaLabel="three-dots-loading"
           wrapperStyle={{}}
-          wrapperClassName=""
           visible={true}
         />
       </div>

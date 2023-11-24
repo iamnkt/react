@@ -1,15 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { DataContext } from '../../context/context';
+import { DEFAULT_PAGE, PAGE_SIZES } from '../../constants/constants';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { pageValueSlice } from '../../store/reducers/pageValueSlice';
+import { PagesProps } from '../../types/types';
 import Dropdown from '../dropdown/dropdown';
 import './styles.css';
 
-const Pages: React.FC = () => {
+const Pages: React.FC<PagesProps> = ({ cards }) => {
   const [, setSearchParams] = useSearchParams();
-  const { totalCount, cardsPerPage, page, setPage, isLoading, query } =
-    useContext(DataContext);
-  const options = [8, 12];
-  const pagesCount = Math.ceil(totalCount / cardsPerPage);
+  const { query } = useAppSelector((state) => state.searchValueReducer);
+  const { limit } = useAppSelector((state) => state.limitValueReducer);
+  const { page } = useAppSelector((state) => state.pageValueReducer);
+  const { setPage } = pageValueSlice.actions;
+  const dispatch = useAppDispatch();
+  const { totalCount } = cards;
+  const pagesCount = Math.ceil(totalCount / limit);
+  const { isLoading } = useAppSelector((state) => state.cardsFlagValueReducer);
 
   if (isLoading) {
     return <></>;
@@ -17,20 +24,19 @@ const Pages: React.FC = () => {
 
   return (
     <div className="pages__container">
-      <div className="pages">
+      <div data-testid="page-buttons" className="pages">
         <button
           type="button"
           data-testid="firstpage-button"
           onClick={() => {
-            setPage!(1);
+            dispatch(setPage(DEFAULT_PAGE));
             setSearchParams({
               q: `name:${query}*`,
               page: '1',
-              pageSize: cardsPerPage.toString(),
+              pageSize: limit.toString(),
             });
-            localStorage.setItem('pageNumber', '1');
           }}
-          disabled={page === 1}
+          disabled={page === DEFAULT_PAGE}
         >
           &#60;&#60;
         </button>
@@ -39,16 +45,15 @@ const Pages: React.FC = () => {
           data-testid="prevpage-button"
           onClick={() => {
             if (page > 1) {
-              setPage!(page - 1);
+              dispatch(setPage(page - 1));
               setSearchParams({
                 q: `name:${query}*`,
                 page: (page - 1).toString(),
-                pageSize: cardsPerPage.toString(),
+                pageSize: limit.toString(),
               });
-              localStorage.setItem('pageNumber', String(page - 1));
             }
           }}
-          disabled={page === 1}
+          disabled={page === DEFAULT_PAGE}
         >
           &#60;
         </button>
@@ -58,13 +63,12 @@ const Pages: React.FC = () => {
           data-testid="nextpage-button"
           onClick={() => {
             if (page < pagesCount) {
-              setPage!(page + 1);
+              dispatch(setPage(page + 1));
               setSearchParams({
                 q: `name:${query}*`,
                 page: (page + 1).toString(),
-                pageSize: cardsPerPage.toString(),
+                pageSize: limit.toString(),
               });
-              localStorage.setItem('pageNumber', String(page + 1));
             }
           }}
           disabled={page === pagesCount}
@@ -75,20 +79,19 @@ const Pages: React.FC = () => {
           type="button"
           data-testid="lastpage-button"
           onClick={() => {
-            setPage!(pagesCount);
+            dispatch(setPage(pagesCount));
             setSearchParams({
               q: `name:${query}*`,
               page: pagesCount.toString(),
-              pageSize: cardsPerPage.toString(),
+              pageSize: limit.toString(),
             });
-            localStorage.setItem('pageNumber', String(pagesCount));
           }}
           disabled={page === pagesCount}
         >
           &#62;&#62;
         </button>
       </div>
-      <Dropdown options={options} />
+      <Dropdown options={[PAGE_SIZES.default, PAGE_SIZES.big]} />
     </div>
   );
 };

@@ -1,29 +1,34 @@
 import { ReactNode } from 'react';
 
-export interface Card {
+export interface CardsData {
+  count: number;
+  data: CardData[];
+  page: number;
+  pageSize: number;
+  totalCount: number;
+}
+export interface CardData {
   id: string;
   name: string;
   images: {
-    large: 'string';
+    large: string;
   };
 }
 
-export interface CardDetail {
-  image: string;
+export interface DetailedCardData {
+  data: DetailedCard;
+}
+
+export type DetailedCard = {
+  id: string;
   name: string;
   hp: string;
   level: string;
   types: string[];
   rarity: string;
-}
+};
 
-export interface Data {
-  id: string;
-  name: string;
-  image: string;
-}
-
-export type ContextCards = Data[];
+export type ContextCards = CardData[];
 
 export interface ErrorProps {
   children?: ReactNode;
@@ -33,21 +38,20 @@ export interface ErrorState {
   hasError: boolean;
 }
 
+export type ContextType = {
+  id: string;
+};
+
+export type CardsProps = {
+  cards: CardsData;
+};
+
 export type PagesProps = {
-  isLoading: boolean;
+  cards: CardsData;
 };
 
 export type DropdownProps = {
   options: number[];
-};
-
-export type ContextType = {
-  details: CardDetail | null;
-  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
-};
-
-export type CardsProps = {
-  isLoading: boolean;
 };
 
 export type CardProps = {
@@ -55,26 +59,3 @@ export type CardProps = {
   name: string;
   image: string;
 };
-
-export type TDataContext = {
-  query: string;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
-  cards: Data[];
-  setCards: React.Dispatch<React.SetStateAction<Data[]>>;
-  details: CardDetail | null;
-  setDetails: React.Dispatch<React.SetStateAction<CardDetail | null>>;
-  totalCount: number;
-  setTotalCount?: React.Dispatch<React.SetStateAction<number>>;
-  page: number;
-  cardsPerPage: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
-  setCardsPerPage: React.Dispatch<React.SetStateAction<number>>;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  isDetailsLoading: boolean;
-  setIsDetailsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export interface ContextValue {
-  value: TDataContext;
-}

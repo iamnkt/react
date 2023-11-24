@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
