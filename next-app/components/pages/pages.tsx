@@ -7,6 +7,7 @@ import Dropdown from '../dropdown/dropdown';
 const Pages = ({ data }: { data: PagesType }) => {
   const router = useRouter();
   const { query } = router;
+  const name = query.name;
   const page = Number(query.page) || DEFAULT_PAGE;
   const limit = Number(query.limit) || PAGE_SIZES.default;
   const totalCount = data.totalCount;
@@ -14,12 +15,10 @@ const Pages = ({ data }: { data: PagesType }) => {
 
   const updatePage = (newPage: number) => {
     delete query.page;
-    router.push({ query: { ...query, page: `${newPage}` } });
+    router.push({
+      query: { name: name || '', page: `${newPage}`, limit: limit },
+    });
   };
-
-  // if (isLoading) {
-  //   return <></>;
-  // }
 
   return (
     <div className="pages__container">

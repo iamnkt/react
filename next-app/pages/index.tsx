@@ -6,56 +6,48 @@ import {
   getRunningQueriesThunk,
 } from '@/services/cardsService';
 import Main from '@/components/main/main';
+import { CardsData, DetailedCardData } from '@/types/types';
 
-export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async (context) => {
-    const { name, page, limit, details } = context.query;
+export const getServerSideProps: GetServerSideProps<{
+  cardsData: CardsData;
+  detailedCardData: DetailedCardData | null;
+}> = wrapper.getServerSideProps((store) => async (context) => {
+  const { name, page, limit, details } = context.query;
 
-    if (!name) {
-      const detailsQueryString = details ? `&details=${details} ` : '';
-      return {
-        redirect: {
-          destination: `/?name=${name || ''}&page=${page || 1}&limit=${
-            limit || 8
-          }${detailsQueryString}`,
-          permanent: false,
-        },
-      };
-    }
+  store.dispatch(
+    getCards.initiate({
+      name: name?.toString() || '',
+      limit: Number(limit) || 8,
+      page: Number(page) || 1,
+    })
+  );
 
-    store.dispatch(
-      getCards.initiate({
-        name: name?.toString() || '',
-        limit: Number(limit) || 8,
-        page: Number(page) || 1,
-      })
-    );
+  if (details) {
+    store.dispatch(getDetailedCard.initiate({ id: details.toString() }));
+  }
 
-    if (details) {
-      store.dispatch(getDetailedCard.initiate({ id: details.toString() }));
-    }
+  const [cardsData, detailedCardData] = await Promise.all(
+    store.dispatch(getRunningQueriesThunk())
+  );
+  console.log(cardsData);
 
-    const [cardsData, detailedCardData] = await Promise.all(
-      store.dispatch(getRunningQueriesThunk())
-    );
-
-    return details
-      ? {
-          props: {
-            cardsData: cardsData.data,
-            detailedCardData: detailedCardData.data,
-          },
-        }
-      : {
-          props: {
-            cardsData: cardsData.data,
-          },
-        };
-  });
+  return {
+    props: {
+      cardsData: cardsData.data as CardsData,
+      detailedCardData: details
+        ? (detailedCardData.data as DetailedCardData)
+        : null,
+    },
+  };
+});
 
 export default function Home(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
+  if (!props.cardsData) {
+    return <></>;
+  }
+
   return (
     <div className="app">
       <Main
