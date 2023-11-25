@@ -48,10 +48,6 @@ export type CardsProps = {
 
 export type PagesType = Pick<CardsData, 'totalCount'>;
 
-export type PagesProps = {
-  cardsData: PagesType;
-};
-
 export type DropdownProps = {
   options: number[];
 };

@@ -1,19 +1,14 @@
 import React from 'react';
-import { CardData, CardsData, CardsProps } from '../../types/types';
+import { CardData, CardsData } from '../../types/types';
 import Card from '../card/card';
-import { ThreeDots } from 'react-loader-spinner';
-import { useRouter } from 'next/router';
 
-const Cards = ({ cardsData }: { cardsData: CardsData }) => {
-  const router = useRouter();
-  const { query, pathname } = router;
-  console.log(query);
-
+const Cards = ({ data }: { data: CardsData }) => {
   const render = (): JSX.Element => {
-    const data = cardsData.data;
-    return data.length ? (
+    const cards = data.data;
+
+    return cards.length ? (
       <div className="cards__container">
-        {data.map((card: CardData) => {
+        {cards.map((card: CardData) => {
           return (
             <Card
               data-testid="card"
@@ -31,22 +26,6 @@ const Cards = ({ cardsData }: { cardsData: CardsData }) => {
       </div>
     );
   };
-
-  // if (isLoading) {
-  //   return (
-  //     <div data-testid="loader" className="loader">
-  //       <ThreeDots
-  //         height="80"
-  //         width="80"
-  //         radius="9"
-  //         color="#FFC759"
-  //         ariaLabel="three-dots-loading"
-  //         wrapperStyle={{}}
-  //         visible={true}
-  //       />
-  //     </div>
-  //   );
-  // }
 
   return render();
 };

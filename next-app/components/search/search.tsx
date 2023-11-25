@@ -1,15 +1,13 @@
 import React, { useRef } from 'react';
-import { DEFAULT_PAGE } from '../../utils/constants';
 import { useRouter } from 'next/router';
 
 const Search = () => {
   const router = useRouter();
   const { query } = router;
   const { limit } = query;
-
   const inputText = useRef<HTMLInputElement>(null);
 
-  const buttonSearchHandler = () => {
+  const handleButtonClick = () => {
     const name = inputText.current?.value.trim() || '';
     router.push({ query: { name, page: 1, limit: limit || 8 } });
   };
@@ -29,7 +27,7 @@ const Search = () => {
         <button
           data-testid="search-button"
           className="button button__search"
-          onClick={buttonSearchHandler}
+          onClick={handleButtonClick}
         >
           Search
         </button>

@@ -4,13 +4,17 @@
   "private": true,
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
+    "prepare": "husky install",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "next": "14.0.3",
+    "next-progress": "^2.3.1",
     "next-redux-wrapper": "^8.1.0",
     "npm-force-resolutions": "^0.0.10",
     "react": "^18",

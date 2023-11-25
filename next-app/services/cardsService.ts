@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { CardsData, DetailedCardData } from '../types/types';
 import { HYDRATE } from 'next-redux-wrapper';
-import { cardsSlice } from './reducers/cardsSlice';
 
 export const cardsAPI = createApi({
   reducerPath: 'cardsAPI',
@@ -26,15 +25,6 @@ export const cardsAPI = createApi({
             pageSize: limit,
           },
         };
-      },
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        const { setCards } = cardsSlice.actions;
-        try {
-          const cardsData = await queryFulfilled;
-          dispatch(setCards(cardsData.data));
-        } catch (err) {
-          console.error(err);
-        }
       },
     }),
 

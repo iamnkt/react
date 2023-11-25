@@ -1,16 +1,15 @@
 import { DEFAULT_PAGE, PAGE_SIZES } from '@/utils/constants';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { PagesProps, PagesType } from '../../types/types';
-import cards from '../cards/cards';
+import { PagesType } from '../../types/types';
 import Dropdown from '../dropdown/dropdown';
 
-const Pages = ({ cardsData }: { cardsData: PagesType }) => {
+const Pages = ({ data }: { data: PagesType }) => {
   const router = useRouter();
   const { query } = router;
   const page = Number(query.page) || DEFAULT_PAGE;
   const limit = Number(query.limit) || PAGE_SIZES.default;
-  const totalCount = cardsData.totalCount;
+  const totalCount = data.totalCount;
   const pagesCount = Math.ceil(totalCount / limit);
 
   const updatePage = (newPage: number) => {

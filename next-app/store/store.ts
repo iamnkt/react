@@ -1,16 +1,12 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import { cardsAPI } from '../services/cardsService';
-import cardsReducer from '../services/reducers/cardsSlice';
-
-const rootReducer = combineReducers({
-  cardsReducer,
-  [cardsAPI.reducerPath]: cardsAPI.reducer,
-});
 
 export const makeStore = () =>
   configureStore({
-    reducer: rootReducer,
+    reducer: {
+      [cardsAPI.reducerPath]: cardsAPI.reducer,
+    },
     middleware: (gDM) => gDM().concat(cardsAPI.middleware),
   });
 
