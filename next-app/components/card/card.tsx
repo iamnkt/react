@@ -24,7 +24,7 @@ const Card = ({ id, name, image }: CardProps) => {
       <h4 data-testid={'card-title'} className="card__title">
         {name}
       </h4>
-      <div className="card__image">
+      <div data-testid={'card-image'} className="card__image">
         <Image
           fill={true}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"

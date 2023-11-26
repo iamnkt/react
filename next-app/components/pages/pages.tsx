@@ -14,9 +14,8 @@ const Pages = ({ data }: { data: PagesType }) => {
   const pagesCount = Math.ceil(totalCount / limit);
 
   const updatePage = (newPage: number) => {
-    delete query.page;
     router.push({
-      query: { name: name || '', page: `${newPage}`, limit: limit },
+      query: { name: name || '', page: newPage, limit: limit },
     });
   };
 

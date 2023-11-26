@@ -16,6 +16,7 @@ const Dropdown = ({ options }: DropdownProps) => {
 
   return (
     <select
+      role="select"
       className="dropdown"
       value={limit}
       onChange={(e) => {
@@ -24,7 +25,7 @@ const Dropdown = ({ options }: DropdownProps) => {
       }}
     >
       {options.map((value: number) => (
-        <option key={value} value={value}>
+        <option role="option" key={value} value={value}>
           {value}
         </option>
       ))}

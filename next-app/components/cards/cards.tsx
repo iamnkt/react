@@ -7,7 +7,7 @@ const Cards = ({ data }: { data: CardsData }) => {
     const cards = data.data;
 
     return cards.length ? (
-      <div className="cards__container">
+      <div data-testid="cards-container" className="cards__container">
         {cards.map((card: CardData) => {
           return (
             <Card

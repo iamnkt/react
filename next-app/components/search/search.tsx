@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useRouter } from 'next/router';
+import ErrorButton from '../error-boundary/errorButton';
 
 const Search = () => {
   const router = useRouter();
@@ -31,6 +32,7 @@ const Search = () => {
         >
           Search
         </button>
+        <ErrorButton />
       </div>
     </div>
   );
