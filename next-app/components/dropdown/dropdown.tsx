@@ -9,8 +9,7 @@ const Dropdown = ({ options }: DropdownProps) => {
   const limit = Number(query.limit) || PAGE_SIZES.default;
 
   const updatePage = (newLimit: number) => {
-    delete query.page;
-    delete query.limit;
+    delete query.details;
     router.push({ query: { ...query, page: DEFAULT_PAGE, limit: newLimit } });
   };
 
