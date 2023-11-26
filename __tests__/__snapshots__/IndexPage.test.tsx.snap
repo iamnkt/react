@@ -1,0 +1,647 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home page matches DOM Snapshot 1`] = `
+<div>
+  <div
+    class="app"
+  >
+    <div
+      class="main__container"
+    >
+      <div
+        class="search__container"
+      >
+        <h2
+          class="search__title"
+        >
+          Pokemon cards
+        </h2>
+        <div
+          class="searh__form"
+        >
+          <input
+            class="input input__search"
+            data-testid="search-input"
+            placeholder="Pokemon name"
+            type="text"
+            value=""
+          />
+          <button
+            class="button button__search"
+            data-testid="search-button"
+          >
+            Search
+          </button>
+          <button
+            class="button button__error"
+            data-testid="error-button"
+          >
+            Error
+          </button>
+        </div>
+      </div>
+      <div
+        class="cards__container"
+        data-testid="cards-container"
+      >
+        <div
+          class="card"
+          data-testid="card"
+          id="det1-4"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="sm75-1"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="sm115-7"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="sm9-11"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="sm9-12"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="sma-SV6"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="bw11-17"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="xy12-9"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="pages__container"
+      >
+        <div
+          class="pages"
+          data-testid="page-buttons"
+        >
+          <button
+            data-testid="firstpage-button"
+            disabled=""
+            type="button"
+          >
+            &lt;&lt;
+          </button>
+          <button
+            data-testid="prevpage-button"
+            disabled=""
+            type="button"
+          >
+            &lt;
+          </button>
+          <button
+            type="button"
+          >
+            1
+          </button>
+          <button
+            data-testid="nextpage-button"
+            type="button"
+          >
+            &gt;
+          </button>
+          <button
+            data-testid="lastpage-button"
+            type="button"
+          >
+            &gt;&gt;
+          </button>
+        </div>
+        <select
+          class="dropdown"
+          role="select"
+        >
+          <option
+            role="option"
+            value="8"
+          >
+            8
+          </option>
+          <option
+            role="option"
+            value="12"
+          >
+            12
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Jest Snapshot testing suite Matches DOM Snapshot 1`] = `
+<div>
+  <div
+    class="app"
+  >
+    <div
+      class="main__container"
+    >
+      <div
+        class="search__container"
+      >
+        <h2
+          class="search__title"
+        >
+          Pokemon cards
+        </h2>
+        <div
+          class="searh__form"
+        >
+          <input
+            class="input input__search"
+            data-testid="search-input"
+            placeholder="Pokemon name"
+            type="text"
+            value=""
+          />
+          <button
+            class="button button__search"
+            data-testid="search-button"
+          >
+            Search
+          </button>
+          <button
+            class="button button__error"
+            data-testid="error-button"
+          >
+            Error
+          </button>
+        </div>
+      </div>
+      <div
+        class="cards__container"
+        data-testid="cards-container"
+      >
+        <div
+          class="card"
+          data-testid="card"
+          id="det1-4"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fdet1%2F4_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="sm75-1"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm75%2F1_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="sm115-7"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm115%2F7_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="sm9-11"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F11_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="sm9-12"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsm9%2F12_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="sma-SV6"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fsma%2FSV6_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="bw11-17"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fbw11%2F17_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+        <div
+          class="card"
+          data-testid="card"
+          id="xy12-9"
+        >
+          <h4
+            class="card__title"
+            data-testid="card-title"
+          >
+            Charmander
+          </h4>
+          <div
+            class="card__image"
+            data-testid="card-image"
+          >
+            <img
+              alt="pokemon-card"
+              data-nimg="fill"
+              decoding="async"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 50vw"
+              src="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=3840&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=384&q=75 384w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimages.pokemontcg.io%2Fxy12%2F9_hires.png&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="pages__container"
+      >
+        <div
+          class="pages"
+          data-testid="page-buttons"
+        >
+          <button
+            data-testid="firstpage-button"
+            disabled=""
+            type="button"
+          >
+            &lt;&lt;
+          </button>
+          <button
+            data-testid="prevpage-button"
+            disabled=""
+            type="button"
+          >
+            &lt;
+          </button>
+          <button
+            type="button"
+          >
+            1
+          </button>
+          <button
+            data-testid="nextpage-button"
+            type="button"
+          >
+            &gt;
+          </button>
+          <button
+            data-testid="lastpage-button"
+            type="button"
+          >
+            &gt;&gt;
+          </button>
+        </div>
+        <select
+          class="dropdown"
+          role="select"
+        >
+          <option
+            role="option"
+            value="8"
+          >
+            8
+          </option>
+          <option
+            role="option"
+            value="12"
+          >
+            12
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+`;
