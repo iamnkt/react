@@ -7,6 +7,7 @@ import { ValidationError } from 'yup';
 import { ErrorMsg } from '../Error-msg/Error-msg';
 import { Errs, ErrsState } from '../../types/types';
 import './index.css';
+import { formsSlice } from '../../store/reducers/formsSlice';
 
 export const UncontrolledForm: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -22,6 +23,7 @@ export const UncontrolledForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const actions = dataSlice.actions;
+  const formsAction = formsSlice.actions;
 
   const countries = useAppSelector((state) => state.countriesReducer);
   const [suggestions, setSugesstions] = useState(['']);
@@ -65,14 +67,6 @@ export const UncontrolledForm: React.FC = () => {
     });
   };
 
-  const handleFileUpload = async () => {
-    const file = imageValue.current?.files![0];
-    const base64 = await convertToBase64(file!);
-    if (typeof base64 === 'string') {
-      dispatch(actions.setImage(base64));
-    }
-  };
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -90,7 +84,11 @@ export const UncontrolledForm: React.FC = () => {
 
     try {
       await schema.validate(formData, { abortEarly: false });
-      handleFileUpload();
+      const file = imageValue.current?.files![0];
+      const base64 = await convertToBase64(file!);
+      if (typeof base64 === 'string') {
+        dispatch(actions.setImage(base64));
+      }
       dispatch(actions.setName(formData.name!));
       dispatch(actions.setAge(Number(formData.age)));
       dispatch(actions.setEmail(formData.email!));
@@ -98,13 +96,25 @@ export const UncontrolledForm: React.FC = () => {
       dispatch(actions.setPassword(formData.password!));
       dispatch(actions.setPassword2(formData.password2!));
       dispatch(actions.setCountry(formData.country!));
+      dispatch(
+        formsAction.setForm({
+          image: base64 as string,
+          name: formData.name!,
+          age: Number(formData.age),
+          email: formData.email!,
+          gender: formData.gender!,
+          password: formData.password!,
+          password2: formData.password2!,
+          country: formData.country!,
+        })
+      );
       navigate('/');
     } catch (err) {
       if (err instanceof ValidationError) {
         const errs: Errs = {};
         err.inner.forEach((e) => {
           if (e.path === 'image' || e.path === 'terms') {
-            errs[`$ {e.path}`] = e.type as string;
+            errs[`${e.path}`] = e.type as string;
           } else {
             errs[`${e.path}`] = e.message;
           }

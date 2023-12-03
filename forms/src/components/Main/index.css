@@ -1,3 +1,8 @@
-.main__list > li {
+.main__container {
+  display: grid;
+
+}
+
+.form > li {
   list-style-type: none;
 }

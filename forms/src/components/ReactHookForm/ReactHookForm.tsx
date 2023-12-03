@@ -6,8 +6,9 @@ import { dataSlice } from '../../store/reducers/dataSlice';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../utils/validation';
 import { FormData } from '../../types/types';
-import './index.css';
 import { ErrorMsg } from '../Error-msg/Error-msg';
+import { formsSlice } from '../../store/reducers/formsSlice';
+import './index.css';
 
 export const ReactHookForm: React.FC = () => {
   const {
@@ -22,6 +23,7 @@ export const ReactHookForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const actions = dataSlice.actions;
+  const formsAction = formsSlice.actions;
   const countries = useAppSelector((state) => state.countriesReducer);
   const [suggestions, setSugesstions] = useState(['']);
   const [isHideSuggs, setIsHideSuggs] = useState(false);
@@ -58,15 +60,12 @@ export const ReactHookForm: React.FC = () => {
     });
   };
 
-  const handleFileUpload = async (file: File) => {
+  const onSubmit = handleSubmit(async (data) => {
+    const file = data.image![0];
     const base64 = await convertToBase64(file!);
     if (typeof base64 === 'string') {
       dispatch(actions.setImage(base64));
     }
-  };
-
-  const onSubmit = handleSubmit((data) => {
-    handleFileUpload(data.image![0]);
     dispatch(actions.setName(data.name));
     dispatch(actions.setAge(data.age));
     dispatch(actions.setEmail(data.email));
@@ -74,6 +73,18 @@ export const ReactHookForm: React.FC = () => {
     dispatch(actions.setPassword(data.password));
     dispatch(actions.setPassword2(data.password2));
     dispatch(actions.setCountry(data.country));
+    dispatch(
+      formsAction.setForm({
+        image: base64 as string,
+        name: data.name,
+        age: data.age,
+        email: data.email,
+        gender: data.gender,
+        password: data.password,
+        password2: data.password2,
+        country: data.country,
+      })
+    );
     navigate('/');
   });
 

@@ -6,11 +6,13 @@ import {
 import { persistReducer } from 'redux-persist';
 import countriesReducer from './reducers/countriesSlice';
 import dataReducer from './reducers/dataSlice';
+import formsReducer from './reducers/formsSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const rootReducer = combineReducers({
   countriesReducer,
   dataReducer,
+  formsReducer,
 });
 
 const persistConfig = {

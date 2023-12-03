@@ -29,3 +29,14 @@ export type FormData = {
   terms?: boolean | undefined;
   image?: FileList | undefined;
 };
+
+export type SliceData = {
+  image: string;
+  name: string;
+  age: number;
+  email: string;
+  gender: string;
+  password: string;
+  password2: string;
+  country: string;
+};
