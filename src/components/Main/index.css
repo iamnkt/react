@@ -1,0 +1,48 @@
+.main__container {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 80px;
+  width: fit-content;
+  max-width: 1160px;
+}
+
+.person {
+  display: flex;
+  padding: 40px;
+  border: 1px solid grey;
+  border-radius: 6px;
+}
+
+.person:first-child {
+  border-right: 1px solid #ffc759;
+  border-left: 1px solid #ffc759;
+  border-top: 1px solid #ffc759;
+  border-bottom: 1px solid #ffc759;
+}
+
+.person__image-container {
+  position: relative;
+  width: 250px;
+  height: 343.75px;
+  border-radius: 6px;
+}
+
+.person__image {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 6px;
+}
+
+.person__data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+}
+
+.person__data > li {
+  list-style-type: none;
+  text-align: left;
+}
