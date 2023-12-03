@@ -77,7 +77,7 @@ export const UncontrolledForm: React.FC = () => {
       gender: genderValue.current?.value,
       password: passwordValue.current?.value,
       password2: password2Value.current?.value,
-      country: countryValue.current?.value,
+      country: selectedVal,
       terms: termsValue.current?.checked,
       image: imageValue.current?.files,
     };
@@ -147,78 +147,91 @@ export const UncontrolledForm: React.FC = () => {
         ref={form}
       >
         <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            ref={nameValue}
-            onFocus={() => {
-              delete validationErrs.name;
-              setErrs(validationErrs);
-              forceUpdate();
-            }}
-          />
-          {validationErrs.name && <ErrorMsg msg={validationErrs.name} />}
-        </label>
-        <label>
-          Age:
-          <input
-            type="text"
-            name="age"
-            ref={ageValue}
-            onFocus={() => {
-              delete validationErrs.age;
-              setErrs(validationErrs);
-              forceUpdate();
-            }}
-          />
-          {validationErrs.age && <ErrorMsg msg={validationErrs.age} />}
-        </label>
-        <label>
-          Email:
-          <input
-            type="text"
-            name="email"
-            ref={emailValue}
-            onFocus={() => {
-              delete validationErrs.email;
-              setErrs(validationErrs);
-              forceUpdate();
-            }}
-          />
-          {validationErrs.email && <ErrorMsg msg={validationErrs.email} />}
-        </label>
-        <select
-          ref={genderValue}
-          onFocus={() => {
-            delete validationErrs.gender;
-            setErrs(validationErrs);
-            forceUpdate();
-          }}
-        >
-          <option disabled>Gender:</option>
-          <option>Male</option>
-          <option>Female</option>
-        </select>
-        <div className="sugesstion-auto">
-          <div className="form-control-auto">
-            <label htmlFor="tag-input">{'Countries:'}</label>
+          <h5 className="input__title">Name:</h5>
+          <div className="input__container">
             <input
-              placeholder={'Choose a country...'}
-              type="search"
-              value={selectedVal}
-              ref={countryValue}
-              onChange={handleChange}
-              onKeyUp={handler}
+              type="text"
+              name="name"
+              ref={nameValue}
               onFocus={() => {
-                delete validationErrs.country;
+                delete validationErrs.name;
                 setErrs(validationErrs);
                 forceUpdate();
               }}
             />
-            {validationErrs.country && (
-              <ErrorMsg msg={validationErrs.country} />
-            )}
+            {validationErrs.name && <ErrorMsg msg={validationErrs.name} />}
+          </div>
+        </label>
+        <label>
+          <h5 className="input__title">Age:</h5>
+          <div className="input__container">
+            <input
+              type="text"
+              name="age"
+              ref={ageValue}
+              onFocus={() => {
+                delete validationErrs.age;
+                setErrs(validationErrs);
+                forceUpdate();
+              }}
+            />
+            {validationErrs.age && <ErrorMsg msg={validationErrs.age} />}
+          </div>
+        </label>
+        <label>
+          <h5 className="input__title">Email:</h5>
+          <div className="input__container">
+            <input
+              type="text"
+              name="email"
+              ref={emailValue}
+              onFocus={() => {
+                delete validationErrs.email;
+                setErrs(validationErrs);
+                forceUpdate();
+              }}
+            />
+            {validationErrs.email && <ErrorMsg msg={validationErrs.email} />}
+          </div>
+        </label>
+        <div className="select__container">
+          <h5 className="select__title">Sex:</h5>
+          <select
+            className="select"
+            ref={genderValue}
+            onFocus={() => {
+              delete validationErrs.gender;
+              setErrs(validationErrs);
+              forceUpdate();
+            }}
+          >
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+        <div className="sugesstion-auto">
+          <div className="form-control-auto">
+            <label htmlFor="tag-input">
+              <h5 className="input__title">Countries:</h5>
+              <div className="input__container">
+                <input
+                  placeholder={'Choose a country...'}
+                  type="search"
+                  value={selectedVal}
+                  ref={countryValue}
+                  onChange={handleChange}
+                  onKeyUp={handler}
+                  onFocus={() => {
+                    delete validationErrs.country;
+                    setErrs(validationErrs);
+                    forceUpdate();
+                  }}
+                />
+                {validationErrs.country && (
+                  <ErrorMsg msg={validationErrs.country} />
+                )}
+              </div>
+            </label>
           </div>
           <div
             className="suggestions"
@@ -237,52 +250,64 @@ export const UncontrolledForm: React.FC = () => {
           </div>
         </div>
         <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            ref={passwordValue}
-            onFocus={() => {
-              delete validationErrs.password;
-              setErrs(validationErrs);
-              forceUpdate();
-            }}
-          />
-          {validationErrs.password && (
-            <ErrorMsg msg={validationErrs.password} />
-          )}
+          <h5 className="input__title">Password:</h5>
+          <div className="input__container">
+            <input
+              type="password"
+              name="password"
+              ref={passwordValue}
+              onFocus={() => {
+                delete validationErrs.password;
+                setErrs(validationErrs);
+                forceUpdate();
+              }}
+            />
+            {validationErrs.password && (
+              <ErrorMsg msg={validationErrs.password} />
+            )}
+          </div>
         </label>
         <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            ref={password2Value}
-            onFocus={() => {
-              delete validationErrs.password2;
-              setErrs(validationErrs);
-              forceUpdate();
-            }}
-          />
-          {validationErrs.password2 && (
-            <ErrorMsg msg={validationErrs.password2} />
-          )}
+          <h5 className="input__title">Password:</h5>
+          <div className="input__container">
+            <input
+              type="password"
+              name="password"
+              ref={password2Value}
+              onFocus={() => {
+                delete validationErrs.password2;
+                setErrs(validationErrs);
+                forceUpdate();
+              }}
+            />
+            {validationErrs.password2 && (
+              <ErrorMsg msg={validationErrs.password2} />
+            )}
+          </div>
         </label>
         <label>
-          <input
-            type="checkbox"
-            name="terms"
-            ref={termsValue}
-            onFocus={() => {
-              delete validationErrs.terms;
-              setErrs(validationErrs);
-              forceUpdate();
-            }}
-          />
-          I agree to the Terms and Conditions
-          {validationErrs.terms && <ErrorMsg msg={validationErrs.terms} />}
+          <div className="terms__wrapper">
+            <div className="terms__container">
+              <input
+                type="checkbox"
+                name="terms"
+                ref={termsValue}
+                onFocus={() => {
+                  delete validationErrs.terms;
+                  setErrs(validationErrs);
+                  forceUpdate();
+                }}
+              />
+              <h5 className="input__title">
+                I agree to the Terms and Conditions
+              </h5>
+            </div>
+            {validationErrs.terms && <ErrorMsg msg={validationErrs.terms} />}
+          </div>
         </label>
-        <button type="submit">Submit</button>
+        <button className="button__submit" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

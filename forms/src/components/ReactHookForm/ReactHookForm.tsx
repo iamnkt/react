@@ -8,7 +8,6 @@ import { schema } from '../../utils/validation';
 import { FormData } from '../../types/types';
 import { ErrorMsg } from '../Error-msg/Error-msg';
 import { formsSlice } from '../../store/reducers/formsSlice';
-import './index.css';
 
 export const ReactHookForm: React.FC = () => {
   const {
@@ -82,7 +81,7 @@ export const ReactHookForm: React.FC = () => {
         gender: data.gender,
         password: data.password,
         password2: data.password2,
-        country: data.country,
+        country: selectedVal,
       })
     );
     navigate('/');
@@ -99,45 +98,57 @@ export const ReactHookForm: React.FC = () => {
       </div>
       <form className="form" onSubmit={onSubmit}>
         <label>
-          Name:
-          <input type="text" {...register('name')} />
-          {errors.name && errors.name.message && (
-            <ErrorMsg msg={errors.name.message} />
-          )}
+          <h5 className="input__title">Name:</h5>
+          <div className="input__container">
+            <input type="text" {...register('name')} />
+            {errors.name && errors.name.message && (
+              <ErrorMsg msg={errors.name.message} />
+            )}
+          </div>
         </label>
         <label>
-          Age:
-          <input type="text" {...register('age')} />
-          {errors.age && errors.age.message && (
-            <ErrorMsg msg={errors.age.message} />
-          )}
+          <h5 className="input__title">Age:</h5>
+          <div className="input__container">
+            <input type="text" {...register('age')} />
+            {errors.age && errors.age.message && (
+              <ErrorMsg msg={errors.age.message} />
+            )}
+          </div>
         </label>
         <label>
-          Email:
-          <input type="text" {...register('email')} />
-          {errors.email && errors.email.message && (
-            <ErrorMsg msg={errors.email.message} />
-          )}
+          <h5 className="input__title">Email:</h5>
+          <div className="input__container">
+            <input type="text" {...register('email')} />
+            {errors.email && errors.email.message && (
+              <ErrorMsg msg={errors.email.message} />
+            )}
+          </div>
         </label>
-        <select {...register('gender')}>
-          <option disabled>Gender:</option>
-          <option>Male</option>
-          <option>Female</option>
-        </select>
+        <div className="select__container">
+          <h5 className="select__title">Sex:</h5>
+          <select className="select" {...register('gender')}>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
         <div className="sugesstion-auto">
           <div className="form-control-auto">
-            <label htmlFor="tag-input">{'Countries:'}</label>
-            <input
-              {...register('country')}
-              placeholder={'Choose a country...'}
-              type="search"
-              value={selectedVal}
-              onChange={handleChange}
-              onKeyUp={handler}
-            />
-            {errors.country && errors.country?.message && (
-              <ErrorMsg msg={errors.country?.message} />
-            )}
+            <label htmlFor="tag-input">
+              <h5 className="input__title">Countries:</h5>
+              <div className="input__container">
+                <input
+                  {...register('country')}
+                  placeholder={'Choose a country...'}
+                  type="search"
+                  value={selectedVal}
+                  onChange={handleChange}
+                  onKeyUp={handler}
+                />
+                {errors.country && errors.country?.message && (
+                  <ErrorMsg msg={errors.country?.message} />
+                )}
+              </div>
+            </label>
           </div>
           <div
             className="suggestions"
@@ -156,27 +167,37 @@ export const ReactHookForm: React.FC = () => {
           </div>
         </div>
         <label>
-          Password:
-          <input type="password" {...register('password')} />
-          {errors.password && errors.password.message && (
-            <ErrorMsg msg={errors.password.message} />
-          )}
+          <h5 className="input__title">Password:</h5>
+          <div className="input__container">
+            <input type="password" {...register('password')} />
+            {errors.password && errors.password.message && (
+              <ErrorMsg msg={errors.password.message} />
+            )}
+          </div>
         </label>
         <label>
-          Password:
-          <input type="password" {...register('password2')} />
-          {errors.password2 && errors.password2.message && (
-            <ErrorMsg msg={errors.password2.message} />
-          )}
+          <h5 className="input__title">Password:</h5>
+          <div className="input__container">
+            <input type="password" {...register('password2')} />
+            {errors.password2 && errors.password2.message && (
+              <ErrorMsg msg={errors.password2.message} />
+            )}
+          </div>
         </label>
         <label>
-          <input type="checkbox" {...register('terms')} />I agree to the Terms
-          and Conditions
-          {errors.terms && errors.terms.type && (
-            <ErrorMsg msg={errors.terms.type} />
-          )}
+          <div className="terms__wrapper">
+            <div className="terms__container">
+              <input type="checkbox" {...register('terms')} />
+              <h5 className="input__title">
+                I agree to the Terms and Conditions
+              </h5>
+            </div>
+            {errors.terms && errors.terms.type && (
+              <ErrorMsg msg={errors.terms.type} />
+            )}
+          </div>
         </label>
-        <button type="submit" disabled={!isValid}>
+        <button className="button__submit" type="submit" disabled={!isValid}>
           Submit
         </button>
       </form>

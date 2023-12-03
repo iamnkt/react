@@ -11,11 +11,11 @@ export const Forms: React.FC = () => {
   return (
     <>
       {data.map((form, i) => (
-        <div className="form" key={i}>
-          <div className="image__container">
-            <img src={form.image} />
+        <div className="person" key={i}>
+          <div className="person__image-container">
+            <img className="person__image" src={form.image} />
           </div>
-          <ul className="form">
+          <ul className="person__data">
             <li>Name: {form.name}</li>
             <li>Age: {form.age}</li>
             <li>Email: {form.email}</li>
