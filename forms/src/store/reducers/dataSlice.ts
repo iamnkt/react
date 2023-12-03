@@ -4,7 +4,7 @@ interface Data {
   data: {
     image: string;
     name: string;
-    age: string;
+    age: number;
     email: string;
     gender: string;
     password: string;
@@ -17,7 +17,7 @@ const initialState: Data = {
   data: {
     image: '',
     name: '',
-    age: '',
+    age: 0,
     email: '',
     gender: '',
     password: '',
@@ -36,7 +36,7 @@ export const dataSlice = createSlice({
     setName(state, action: PayloadAction<string>) {
       state.data.name = action.payload;
     },
-    setAge(state, action: PayloadAction<string>) {
+    setAge(state, action: PayloadAction<number>) {
       state.data.age = action.payload;
     },
     setEmail(state, action: PayloadAction<string>) {

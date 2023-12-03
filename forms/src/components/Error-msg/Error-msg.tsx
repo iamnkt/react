@@ -1,8 +1,5 @@
 import React from 'react';
-
-type ErrorMsgProps = {
-  msg: string;
-};
+import { ErrorMsgProps } from '../../types/types';
 
 export const ErrorMsg: React.FC<ErrorMsgProps> = ({ msg }) => {
   return <p className="error-msg">{msg}</p>;

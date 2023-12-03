@@ -4,24 +4,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { schema } from '../../utils/validation';
 import { dataSlice } from '../../store/reducers/dataSlice';
 import { ValidationError } from 'yup';
-import { ErrorMsg } from '../Error-msg/error-msg';
+import { ErrorMsg } from '../Error-msg/Error-msg';
+import { Errs, ErrsState } from '../../types/types';
 import './index.css';
-
-type Errs = {
-  [key: string]: string;
-};
-
-type ErrsState = {
-  name?: string;
-  age?: string;
-  email?: string;
-  gender?: string;
-  password?: string;
-  password2?: string;
-  country?: string;
-  terms?: string;
-  image?: string;
-};
 
 export const UncontrolledForm: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -107,7 +92,7 @@ export const UncontrolledForm: React.FC = () => {
       await schema.validate(formData, { abortEarly: false });
       handleFileUpload();
       dispatch(actions.setName(formData.name!));
-      dispatch(actions.setAge(formData.age!));
+      dispatch(actions.setAge(Number(formData.age)));
       dispatch(actions.setEmail(formData.email!));
       dispatch(actions.setGender(formData.gender!));
       dispatch(actions.setPassword(formData.password!));
@@ -119,7 +104,7 @@ export const UncontrolledForm: React.FC = () => {
         const errs: Errs = {};
         err.inner.forEach((e) => {
           if (e.path === 'image' || e.path === 'terms') {
-            errs[`${e.path}`] = e.type as string;
+            errs[`$ {e.path}`] = e.type as string;
           } else {
             errs[`${e.path}`] = e.message;
           }
