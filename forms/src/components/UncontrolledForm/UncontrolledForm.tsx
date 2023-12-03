@@ -3,7 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { schema } from '../../utils/validation';
 import { dataSlice } from '../../store/reducers/dataSlice';
+import { ValidationError } from 'yup';
+import { ErrorMsg } from '../Error-msg/error-msg';
 import './index.css';
+
+type Errs = {
+  [key: string]: string;
+};
+
+type ErrsState = {
+  name?: string;
+  age?: string;
+  email?: string;
+  gender?: string;
+  password?: string;
+  password2?: string;
+  country?: string;
+  terms?: string;
+  image?: string;
+};
 
 export const UncontrolledForm: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -24,6 +42,8 @@ export const UncontrolledForm: React.FC = () => {
   const [suggestions, setSugesstions] = useState(['']);
   const [isHideSuggs, setIsHideSuggs] = useState(false);
   const [selectedVal, setSelectedVal] = useState('');
+
+  const [validationErrs, setErrs] = useState<ErrsState>({});
 
   const handler = () => {
     setSugesstions(
@@ -81,8 +101,6 @@ export const UncontrolledForm: React.FC = () => {
       image: imageValue.current?.files,
     };
 
-    console.log(formData);
-
     try {
       await schema.validate(formData, { abortEarly: false });
       handleFileUpload();
@@ -95,7 +113,13 @@ export const UncontrolledForm: React.FC = () => {
       dispatch(actions.setCountry(formData.country!));
       navigate('/');
     } catch (err) {
-      console.log(err);
+      if (err instanceof ValidationError) {
+        const errs: Errs = {};
+        err.inner.forEach((e) => {
+          errs[`${e.path}`] = e.message;
+        });
+        setErrs(errs);
+      }
     }
   };
 
@@ -104,6 +128,7 @@ export const UncontrolledForm: React.FC = () => {
       <div className="picture">
         <h6>Upload a picture...</h6>
         <input type="file" accept="image/*" ref={imageValue} />
+        {validationErrs.image && <ErrorMsg msg={validationErrs.image} />}
       </div>
       <form
         onSubmit={handleSubmit}
@@ -114,14 +139,17 @@ export const UncontrolledForm: React.FC = () => {
         <label>
           Name:
           <input type="text" name="name" ref={nameValue} />
+          {validationErrs.name && <ErrorMsg msg={validationErrs.name} />}
         </label>
         <label>
           Age:
           <input type="number" name="age" ref={ageValue} />
+          {validationErrs.age && <ErrorMsg msg={validationErrs.age} />}
         </label>
         <label>
           Email:
           <input type="text" name="email" ref={emailValue} />
+          {validationErrs.email && <ErrorMsg msg={validationErrs.email} />}
         </label>
         <select ref={genderValue}>
           <option disabled>Gender:</option>
@@ -139,6 +167,9 @@ export const UncontrolledForm: React.FC = () => {
               onChange={handleChange}
               onKeyUp={handler}
             />
+            {validationErrs.country && (
+              <ErrorMsg msg={validationErrs.country} />
+            )}
           </div>
           <div
             className="suggestions"
@@ -159,14 +190,21 @@ export const UncontrolledForm: React.FC = () => {
         <label>
           Password:
           <input type="password" name="password" ref={passwordValue} />
+          {validationErrs.password && (
+            <ErrorMsg msg={validationErrs.password} />
+          )}
         </label>
         <label>
           Password:
           <input type="password" name="password" ref={password2Value} />
+          {validationErrs.password2 && (
+            <ErrorMsg msg={validationErrs.password2} />
+          )}
         </label>
         <label>
           <input type="checkbox" name="terms" ref={termsValue} />I agree to the
           Terms and Conditions
+          {validationErrs.terms && <ErrorMsg msg={validationErrs.terms} />}
         </label>
         <button type="submit">Submit</button>
       </form>

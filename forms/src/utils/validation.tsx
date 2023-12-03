@@ -7,7 +7,7 @@ export const schema = object({
   age: number()
     .required('Field is mandatory')
     .typeError('The field must be a number')
-    .min(0, 'The value cannot be negative')
+    .min(1, 'The value cannot be negative')
     .max(120),
   email: string()
     .required('Field is mandatory')
