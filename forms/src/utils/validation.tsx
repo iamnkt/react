@@ -55,10 +55,8 @@ export const schema = object({
         return false;
       }
       const file = fileList[0];
-
-      const allowedTypes = ['image/jpeg', 'image/png'];
-
-      return allowedTypes.includes(file.type);
+      const types = ['image/jpeg', 'image/png'];
+      return types.includes(file.type);
     })
     .test('File is required', (value) => !!value?.[0]),
 });
