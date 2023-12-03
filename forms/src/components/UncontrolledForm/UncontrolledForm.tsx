@@ -45,6 +45,27 @@ export const UncontrolledForm: React.FC = () => {
     }
   };
 
+  const convertToBase64 = (file: File) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const handleFileUpload = async () => {
+    const file = imageValue.current?.files![0];
+    const base64 = await convertToBase64(file!);
+    if (typeof base64 === 'string') {
+      dispatch(actions.setImage(base64));
+    }
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -57,12 +78,14 @@ export const UncontrolledForm: React.FC = () => {
       password2: password2Value.current?.value,
       country: countryValue.current?.value,
       terms: termsValue.current?.checked,
+      image: imageValue.current?.files,
     };
 
     console.log(formData);
 
     try {
       await schema.validate(formData, { abortEarly: false });
+      handleFileUpload();
       dispatch(actions.setName(formData.name!));
       dispatch(actions.setAge(formData.age!));
       dispatch(actions.setEmail(formData.email!));
@@ -79,9 +102,8 @@ export const UncontrolledForm: React.FC = () => {
   return (
     <div className="form__container">
       <div className="picture">
-        <img src="" className="" alt="" />
         <h6>Upload a picture...</h6>
-        <input type="file" className="form-control" ref={imageValue} />
+        <input type="file" accept="image/*" ref={imageValue} />
       </div>
       <form
         onSubmit={handleSubmit}

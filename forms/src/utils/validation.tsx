@@ -1,4 +1,4 @@
-import { boolean, number, object, ref, string } from 'yup';
+import { boolean, number, object, ref, string, mixed } from 'yup';
 
 export const schema = object({
   name: string()
@@ -38,24 +38,24 @@ export const schema = object({
     .oneOf([ref('password')], 'should match the password field'),
   country: string().required('Field is mandatory'),
   terms: boolean().test((terms) => !!terms),
-  // image: mixed<FileList>()
-  //   .required('Field is mandatory')
-  //   .test('fileRequired', 'Image required', (file) => !!file)
-  //   .test('fileSize', 'Only image up to 2MB are permitted.', (fileList) => {
-  //     if (fileList?.length !== 1) {
-  //       return false;
-  //     }
-  //     const file = fileList[0];
-  //     return !file || file.size <= 2_000_000;
-  //   })
-  //   .test('fileType', 'The image must be in png or jpeg format', (fileList) => {
-  //     if (fileList?.length !== 1) {
-  //       return false;
-  //     }
-  //     const file = fileList[0];
+  image: mixed<FileList>()
+    .required('Field is mandatory')
+    .test((file) => !!file)
+    .test('fileSize', 'Only image up to 2MB are permitted.', (fileList) => {
+      if (fileList?.length !== 1) {
+        return false;
+      }
+      const file = fileList[0];
+      return !file || file.size <= 2_000_000;
+    })
+    .test('fileType', 'The image must be in png or jpeg format', (fileList) => {
+      if (fileList?.length !== 1) {
+        return false;
+      }
+      const file = fileList[0];
 
-  //     const allowedTypes = ['image/jpeg', 'image/png'];
+      const allowedTypes = ['image/jpeg', 'image/png'];
 
-  //     return allowedTypes.includes(file.type);
-  //   }),
+      return allowedTypes.includes(file.type);
+    }),
 });
