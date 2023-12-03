@@ -29,8 +29,8 @@
 }
 
 .person__image {
-  max-width:100%;
-  max-height:100%;
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 6px;
 }
 
