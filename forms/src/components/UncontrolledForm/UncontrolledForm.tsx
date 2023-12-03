@@ -43,7 +43,9 @@ export const UncontrolledForm: React.FC = () => {
   const [isHideSuggs, setIsHideSuggs] = useState(false);
   const [selectedVal, setSelectedVal] = useState('');
 
-  const [validationErrs, setErrs] = useState<ErrsState>({});
+  const [validationErrs, setErrs] = React.useState<ErrsState>({});
+  const [, updateState] = React.useState({});
+  const forceUpdate = React.useCallback(() => updateState({}), []);
 
   const handler = () => {
     setSugesstions(
@@ -116,7 +118,11 @@ export const UncontrolledForm: React.FC = () => {
       if (err instanceof ValidationError) {
         const errs: Errs = {};
         err.inner.forEach((e) => {
-          errs[`${e.path}`] = e.message;
+          if (e.path === 'image' || e.path === 'terms') {
+            errs[`${e.path}`] = e.type as string;
+          } else {
+            errs[`${e.path}`] = e.message;
+          }
         });
         setErrs(errs);
       }
@@ -125,9 +131,18 @@ export const UncontrolledForm: React.FC = () => {
 
   return (
     <div className="form__container">
-      <div className="picture">
-        <h6>Upload a picture...</h6>
-        <input type="file" accept="image/*" ref={imageValue} />
+      <div className="picture__container">
+        <h5 className="picture__title">Upload a picture...</h5>
+        <input
+          type="file"
+          accept="image/*"
+          ref={imageValue}
+          onClick={() => {
+            delete validationErrs.image;
+            setErrs(validationErrs);
+            forceUpdate();
+          }}
+        />
         {validationErrs.image && <ErrorMsg msg={validationErrs.image} />}
       </div>
       <form
@@ -138,20 +153,54 @@ export const UncontrolledForm: React.FC = () => {
       >
         <label>
           Name:
-          <input type="text" name="name" ref={nameValue} />
+          <input
+            type="text"
+            name="name"
+            ref={nameValue}
+            onFocus={() => {
+              delete validationErrs.name;
+              setErrs(validationErrs);
+              forceUpdate();
+            }}
+          />
           {validationErrs.name && <ErrorMsg msg={validationErrs.name} />}
         </label>
         <label>
           Age:
-          <input type="number" name="age" ref={ageValue} />
+          <input
+            type="text"
+            name="age"
+            ref={ageValue}
+            onFocus={() => {
+              delete validationErrs.age;
+              setErrs(validationErrs);
+              forceUpdate();
+            }}
+          />
           {validationErrs.age && <ErrorMsg msg={validationErrs.age} />}
         </label>
         <label>
           Email:
-          <input type="text" name="email" ref={emailValue} />
+          <input
+            type="text"
+            name="email"
+            ref={emailValue}
+            onFocus={() => {
+              delete validationErrs.email;
+              setErrs(validationErrs);
+              forceUpdate();
+            }}
+          />
           {validationErrs.email && <ErrorMsg msg={validationErrs.email} />}
         </label>
-        <select ref={genderValue}>
+        <select
+          ref={genderValue}
+          onFocus={() => {
+            delete validationErrs.gender;
+            setErrs(validationErrs);
+            forceUpdate();
+          }}
+        >
           <option disabled>Gender:</option>
           <option>Male</option>
           <option>Female</option>
@@ -166,6 +215,11 @@ export const UncontrolledForm: React.FC = () => {
               ref={countryValue}
               onChange={handleChange}
               onKeyUp={handler}
+              onFocus={() => {
+                delete validationErrs.country;
+                setErrs(validationErrs);
+                forceUpdate();
+              }}
             />
             {validationErrs.country && (
               <ErrorMsg msg={validationErrs.country} />
@@ -189,21 +243,48 @@ export const UncontrolledForm: React.FC = () => {
         </div>
         <label>
           Password:
-          <input type="password" name="password" ref={passwordValue} />
+          <input
+            type="password"
+            name="password"
+            ref={passwordValue}
+            onFocus={() => {
+              delete validationErrs.password;
+              setErrs(validationErrs);
+              forceUpdate();
+            }}
+          />
           {validationErrs.password && (
             <ErrorMsg msg={validationErrs.password} />
           )}
         </label>
         <label>
           Password:
-          <input type="password" name="password" ref={password2Value} />
+          <input
+            type="password"
+            name="password"
+            ref={password2Value}
+            onFocus={() => {
+              delete validationErrs.password2;
+              setErrs(validationErrs);
+              forceUpdate();
+            }}
+          />
           {validationErrs.password2 && (
             <ErrorMsg msg={validationErrs.password2} />
           )}
         </label>
         <label>
-          <input type="checkbox" name="terms" ref={termsValue} />I agree to the
-          Terms and Conditions
+          <input
+            type="checkbox"
+            name="terms"
+            ref={termsValue}
+            onFocus={() => {
+              delete validationErrs.terms;
+              setErrs(validationErrs);
+              forceUpdate();
+            }}
+          />
+          I agree to the Terms and Conditions
           {validationErrs.terms && <ErrorMsg msg={validationErrs.terms} />}
         </label>
         <button type="submit">Submit</button>

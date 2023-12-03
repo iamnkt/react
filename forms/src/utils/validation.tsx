@@ -2,53 +2,56 @@ import { boolean, number, object, ref, string, mixed } from 'yup';
 
 export const schema = object({
   name: string()
-    .required('Field is mandatory')
-    .matches(/^[A-ZА-ЯЁ]/, 'The first letter must be uppercase'),
+    .required('Required field')
+    .matches(/^[A-ZА-ЯЁ]/, 'Must begin with the capital letter'),
   age: number()
-    .required('Field is mandatory')
-    .typeError('The field must be a number')
-    .min(1, 'The value cannot be negative')
-    .max(120),
+    .required('Required field')
+    .typeError('Must be a number')
+    .min(12, 'Please, enter the correct age')
+    .max(120, 'Please, enter the correct age'),
   email: string()
-    .required('Field is mandatory')
-    .email('Email has an invalid format')
+    .required('Required field')
+    .email('Please, enter the correct email')
     .matches(
       /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/,
-      'Email has an invalid format'
+      'Please enter the correct email'
     ),
   gender: string().required(),
   password: string()
-    .required('Field is mandatory')
-    .matches(/[A-ZА-ЯЁ]/, 'Password must contain at least one uppercase letter')
-    .matches(/[a-zа-яё]/, 'Password must contain at least one lowercase letter')
-    .matches(/[0-9]/, 'Password must contain at least one digit')
+    .required('Required field')
+    .matches(/[A-ZА-ЯЁ]/, 'Must contain at least one uppercase letter')
+    .matches(/[a-zа-яё]/, 'Must contain at least one lowercase letter')
+    .matches(/[0-9]/, 'Must contain at least one digit')
     .matches(
       /[^A-ZА-Яa-zа-я0-9Ёё\s]/,
-      'Password must contain at least one special character (e.g., !@#$%^&*)'
+      'Must contain at least one special character'
     ),
   password2: string()
-    .required('Field is mandatory')
-    .matches(/[A-ZА-ЯЁ]/, 'Password must contain at least one uppercase letter')
-    .matches(/[a-zа-яё]/, 'Password must contain at least one lowercase letter')
-    .matches(/[0-9]/, 'Confirm Password must contain at least one digit')
+    .required('Required field')
+    .matches(/[A-ZА-ЯЁ]/, 'Must contain at least one uppercase letter')
+    .matches(/[a-zа-яё]/, 'Must contain at least one lowercase letter')
+    .matches(/[0-9]/, 'Must contain at least one digit')
     .matches(
       /[^A-ZА-Яa-zа-я0-9Ёё\s]/,
-      'Password must contain at least one special character (e.g., !@#$%^&*)'
+      'Must contain at least one special character'
     )
-    .oneOf([ref('password')], 'should match the password field'),
-  country: string().required('Field is mandatory'),
-  terms: boolean().test((terms) => !!terms),
+    .oneOf([ref('password')], 'Passwords do not match'),
+  country: string().required('Required field'),
+  terms: boolean().test(
+    'You should accept terms and conditions',
+    (terms) => !!terms
+  ),
   image: mixed<FileList>()
-    .required('Field is mandatory')
+    .required('Required field')
     .test((file) => !!file)
-    .test('fileSize', 'Only image up to 2MB are permitted.', (fileList) => {
+    .test('Only image up to 2MB are permitted.', (fileList) => {
       if (fileList?.length !== 1) {
         return false;
       }
       const file = fileList[0];
       return !file || file.size <= 2_000_000;
     })
-    .test('fileType', 'The image must be in png or jpeg format', (fileList) => {
+    .test('Image must be png or jpeg', (fileList) => {
       if (fileList?.length !== 1) {
         return false;
       }
