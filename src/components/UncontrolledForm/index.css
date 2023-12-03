@@ -73,3 +73,24 @@
 .input__container {
   max-width: 147px;
 }
+
+.sugesstion-auto {
+  position: relative;
+}
+
+.suggestions {
+  font-size: 0.83em;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  z-index: 3;
+  top: 24px;
+  left: 83px;
+  min-width: 147px;
+  background-color: grey;
+  text-align: start;
+}
+
+.country-item {
+  padding-left: 5px;
+}

@@ -156,6 +156,7 @@ export const ReactHookForm: React.FC = () => {
           >
             {suggestions.map((item, idx) => (
               <div
+                className="country-item"
                 key={'' + item + idx}
                 onClick={() => {
                   hideSuggs(item);

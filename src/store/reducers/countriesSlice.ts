@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const countriesSlice = createSlice({
   name: 'countries',
-  initialState: ['UK', 'France', 'Spain', 'Germany'],
+  initialState: ['UK', 'France', 'Spain', 'Germany', 'Serbia', 'Portugal'],
   reducers: {},
 });
 
