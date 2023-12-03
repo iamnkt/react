@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks/hooks';
 
 export const Forms: React.FC = () => {
   const { data } = useAppSelector((state) => state.formsReducer);
-  console.log(data);
+
   if (!data.length) {
     return <></>;
   }

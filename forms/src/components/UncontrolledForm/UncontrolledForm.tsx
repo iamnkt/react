@@ -305,7 +305,11 @@ export const UncontrolledForm: React.FC = () => {
             {validationErrs.terms && <ErrorMsg msg={validationErrs.terms} />}
           </div>
         </label>
-        <button className="button__submit" type="submit">
+        <button
+          className="button__submit"
+          type="submit"
+          disabled={Object.keys(validationErrs).length !== 0}
+        >
           Submit
         </button>
       </form>
